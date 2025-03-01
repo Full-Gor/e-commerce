@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html" class="active">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Hero Section avec bannière -->
+    <section class="products-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Nos Produits</h1>
+                <p>Découvrez notre collection complète de produits de qualité supérieure</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Filtres et Produits -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-wrapper">
+                <!-- Barre latérale de filtres -->
+                <div class="filters-sidebar">
+                    <div class="filter-group">
+                        <h3>Catégories</h3>
+                        <ul class="filter-list">
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    Tous
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Vêtements
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Chaussures
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Accessoires
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Électronique
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Prix</h3>
+                        <div class="price-range">
+                            <div class="price-inputs">
+                                <input type="number" id="min-price" placeholder="Min" min="0">
+                                <span>-</span>
+                                <input type="number" id="max-price" placeholder="Max" min="0">
+                            </div>
+                            <button class="price-apply">Appliquer</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Évaluation</h3>
+                        <ul class="filter-list">
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <div class="stars">★★★★★</div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <div class="stars">★★★★☆</div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <div class="stars">★★★☆☆</div>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <div class="stars">★★☆☆☆</div>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Couleur</h3>
+                        <div class="color-filters">
+                            <div class="color-filter" style="background-color: #000000;" data-color="Noir"></div>
+                            <div class="color-filter" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Blanc"></div>
+                            <div class="color-filter" style="background-color: #ff0000;" data-color="Rouge"></div>
+                            <div class="color-filter" style="background-color: #0000ff;" data-color="Bleu"></div>
+                            <div class="color-filter" style="background-color: #00ff00;" data-color="Vert"></div>
+                            <div class="color-filter" style="background-color: #ffff00;" data-color="Jaune"></div>
+                            <div class="color-filter" style="background-color: #ffa500;" data-color="Orange"></div>
+                            <div class="color-filter" style="background-color: #800080;" data-color="Violet"></div>
+                        </div>
+                    </div>
+                    <button class="reset-filters">Réinitialiser les filtres</button>
+                </div>
+                
+                <!-- Liste des produits -->
+                <div class="products-content">
+                    <!-- Barre des options -->
+                    <div class="products-options">
+                        <div class="products-count">
+                            Affichage de <span>24</span> produits sur <span>120</span>
+                        </div>
+                        <div class="products-sorting">
+                            <label for="sort-by">Trier par:</label>
+                            <select id="sort-by">
+                                <option value="popular">Popularité</option>
+                                <option value="newest">Nouveautés</option>
+                                <option value="price-low">Prix croissant</option>
+                                <option value="price-high">Prix décroissant</option>
+                                <option value="rating">Évaluation</option>
+                            </select>
+                        </div>
+                        <div class="products-view">
+                            <button class="view-btn grid-view active">
+                                ☰
+                            </button>
+                            <button class="view-btn list-view">
+                                ≡
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Liste des produits -->
+                    <div class="products-grid">
+                        <!-- Produit 1 -->
+                        <div class="product-card">
+                            <span class="product-tag">-20%</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-product1.jpg" alt="T-Shirt Premium">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Vêtements</div>
+                                <h3 class="product-title">T-Shirt Premium</h3>
+                                <div class="product-price">
+                                    <span class="current-price">24,99 €</span>
+                                    <span class="old-price">29,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★☆</div>
+                                    <div class="rating-count">(42)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Produit 2 -->
+                        <div class="product-card">
+                            <span class="product-tag new">NOUVEAU</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-product2.jpg" alt="Baskets Confort">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Chaussures</div>
+                                <h3 class="product-title">Baskets Confort</h3>
+                                <div class="product-price">
+                                    <span class="current-price">79,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★★</div>
+                                    <div class="rating-count">(23)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Autres produits (ajoutez plus de produits ici) -->
+                        <!-- ... -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="pagination-prev disabled">❮</a>
+                        <a href="#" class="pagination-number active">1</a>
+                        <a href="#" class="pagination-number">2</a>
+                        <a href="#" class="pagination-number">3</a>
+                        <span class="pagination-dots">...</span>
+                        <a href="#" class="pagination-number">10</a>
+                        <a href="#" class="pagination-next">❯</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Abonnez-vous à notre newsletter</h2>
+                    <p class="newsletter-text">Recevez nos offres exclusives et les dernières actualités directement dans votre boîte mail.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Votre adresse e-mail">
+                    <button type="submit" class="newsletter-btn">S'abonner</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Étiquettes qui sortent sur le côté -->
+    <div class="side-tags">
+        <div class="side-tag">30% de RÉDUCTION</div>
+        <div class="side-tag">NOUVEAU ARRIVAGE</div>
+        <div class="side-tag">LIVRAISON GRATUITE</div>
+        <div class="side-tag">VENTE FLASH</div>
+    </div>
+    
+    <!-- Bouton Retour en Haut -->
+    <div class="back-to-top">↑</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>LuxeShop</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Aide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Commandes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Mon Compte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="#">Voir le panier</a></li>
+                        <li><a href="#">Liste de souhaits</a></li>
+                        <li><a href="#">Suivre ma commande</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <div class="footer-contact">
+                        <p><span class="footer-contact-icon">📍</span> 123 Rue du Commerce, 75001 Paris</p>
+                        <p><span class="footer-contact-icon">📞</span> +33 1 23 45 67 89</p>
+                        <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuxeShop. Tous droits réservés. <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>

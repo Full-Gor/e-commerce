@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À Propos - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html" class="active">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Notre Histoire</h1>
+                <p>Découvrez ce qui fait de LuxeShop une boutique unique et exceptionnelle</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Histoire -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Notre Parcours</h2>
+                    <p class="lead">Fondée en 2015, LuxeShop est née d'une passion pour la qualité, le design et l'excellence.</p>
+                    <p>Notre fondateur, Thomas Dupont, un passionné du commerce et du design, a commencé son voyage avec une vision simple mais puissante : créer une boutique en ligne qui allierait produits haut de gamme et expérience d'achat exceptionnelle. Ce qui a commencé comme une petite startup à Paris s'est transformé en l'une des plateformes de commerce électronique les plus respectées en France.</p>
+                    <p>Dès le début, nous nous sommes engagés à proposer une sélection soigneusement choisie de produits de qualité, un service client impeccable et une expérience d'achat en ligne transparente et agréable. Ces valeurs fondamentales restent au cœur de tout ce que nous faisons aujourd'hui.</p>
+                </div>
+                <div class="story-image">
+                    <img src="images/placeholder-about1.jpg" alt="Notre histoire">
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2015</div>
+                    <div class="timeline-content">
+                        <h3>Naissance de LuxeShop</h3>
+                        <p>Lancement de notre boutique en ligne avec une gamme de 50 produits soigneusement sélectionnés.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2017</div>
+                    <div class="timeline-content">
+                        <h3>Première Boutique Physique</h3>
+                        <p>Ouverture de notre premier magasin à Paris, permettant à nos clients de vivre l'expérience LuxeShop en personne.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2019</div>
+                    <div class="timeline-content">
+                        <h3>Expansion Européenne</h3>
+                        <p>Extension de nos services de livraison à toute l'Europe et lancement de notre application mobile.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2021</div>
+                    <div class="timeline-content">
+                        <h3>Engagement Éco-responsable</h3>
+                        <p>Lancement de notre initiative "Commerce Responsable" avec des emballages 100% recyclables et une chaîne d'approvisionnement durable.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">
+                        <h3>500 000 Clients Satisfaits</h3>
+                        <p>Célébration de notre 500 000ème client et lancement de notre programme de fidélité premium.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Mission & Vision -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Mission & Vision</h2>
+                <p>Ce qui nous guide et nous inspire chaque jour</p>
+            </div>
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Notre Mission</h3>
+                    <p>Fournir des produits exceptionnels qui enrichissent la vie quotidienne de nos clients, tout en offrant un service client incomparable et en maintenant des pratiques commerciales responsables.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="card-icon">👁️</div>
+                    <h3>Notre Vision</h3>
+                    <p>Devenir la référence du commerce en ligne en Europe, reconnue pour notre sélection de produits premium, notre innovation continue et notre engagement envers la satisfaction client et la durabilité.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="card-icon">💎</div>
+                    <h3>Nos Valeurs</h3>
+                    <p>Excellence, intégrité, innovation, durabilité et orientation client sont les valeurs fondamentales qui guident chacune de nos décisions et actions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notre Équipe -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Équipe</h2>
+                <p>Rencontrez les personnes passionnées qui font de LuxeShop ce qu'elle est aujourd'hui</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/placeholder-team1.jpg" alt="Thomas Dupont">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">in</a>
+                            <a href="#" class="social-icon">t</a>
+                        </div>
+                    </div>
+                    <h3>Thomas Dupont</h3>
+                    <p class="member-title">Fondateur & PDG</p>
+                    <p class="member-bio">Avec plus de 15 ans d'expérience dans le commerce de détail et le digital, Thomas a fondé LuxeShop avec la vision de redéfinir l'expérience d'achat en ligne.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/placeholder-team2.jpg" alt="Sophie Martin">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">in</a>
+                            <a href="#" class="social-icon">t</a>
+                        </div>
+                    </div>
+                    <h3>Sophie Martin</h3>
+                    <p class="member-title">Directrice Créative</p>
+                    <p class="member-bio">Ancienne designer de mode, Sophie apporte son œil artistique et sa passion pour l'esthétique à la sélection de produits et à l'image de marque de LuxeShop.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/placeholder-team3.jpg" alt="Antoine Bernard">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">in</a>
+                            <a href="#" class="social-icon">t</a>
+                        </div>
+                    </div>
+                    <h3>Antoine Bernard</h3>
+                    <p class="member-title">Directeur Technique</p>
+                    <p class="member-bio">Expert en technologie e-commerce, Antoine dirige notre équipe technique et veille à ce que notre plateforme offre une expérience utilisateur optimale.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/placeholder-team4.jpg" alt="Émilie Rousseau">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">in</a>
+                            <a href="#" class="social-icon">t</a>
+                        </div>
+                    </div>
+                    <h3>Émilie Rousseau</h3>
+                    <p class="member-title">Responsable Service Client</p>
+                    <p class="member-bio">Avec son approche centrée sur le client, Émilie s'assure que chaque interaction avec LuxeShop soit positive et mémorable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pourquoi Nous Choisir -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pourquoi Choisir LuxeShop</h2>
+                <p>Ce qui nous différencie et fait notre fierté</p>
+            </div>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <div class="feature-content">
+                        <h3>Livraison Rapide</h3>
+                        <p>Livraison en 24h à 48h sur tous nos produits en stock, avec suivi en temps réel de votre commande.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💯</div>
+                    <div class="feature-content">
+                        <h3>Qualité Garantie</h3>
+                        <p>Tous nos produits sont soigneusement sélectionnés et testés pour garantir une qualité et une durabilité optimales.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-content">
+                        <h3>Retours Faciles</h3>
+                        <p>Retours gratuits sous 30 jours sans condition, pour que vous puissiez acheter en toute confiance.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h3>Paiement Sécurisé</h3>
+                        <p>Vos transactions sont 100% sécurisées grâce à nos systèmes de paiement de pointe et au cryptage des données.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-content">
+                        <h3>Engagement Durable</h3>
+                        <p>Nous nous engageons pour la planète avec des emballages recyclables et des pratiques commerciales responsables.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-content">
+                        <h3>Service Client Premium</h3>
+                        <p>Notre équipe de service client est disponible 7j/7 pour répondre à toutes vos questions et résoudre vos problèmes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Témoignages -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ce que disent nos clients</h2>
+                <p>La satisfaction de nos clients est notre plus grande récompense</p>
+            </div>
+            <div class="testimonial-container" id="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="quote">"</div>
+                    <p class="testimonial-text">Je suis cliente chez LuxeShop depuis le début et je n'ai jamais été déçue. La qualité des produits est exceptionnelle et le service client est vraiment au top !</p>
+                    <div class="testimonial-user">
+                        <div class="user-img">
+                            <img src="images/placeholder-user1.jpg" alt="User">
+                        </div>
+                        <div class="user-info">
+                            <h4>Marie Dubois</h4>
+                            <p>Cliente fidèle depuis 2015</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"</div>
+                    <p class="testimonial-text">J'apprécie particulièrement leur engagement envers l'environnement. Les emballages sont magnifiques mais aussi entièrement recyclables. Bravo pour cette initiative !</p>
+                    <div class="testimonial-user">
+                        <div class="user-img">
+                            <img src="images/placeholder-user2.jpg" alt="User">
+                        </div>
+                        <div class="user-info">
+                            <h4>Pierre Moreau</h4>
+                            <p>Client depuis 2020</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"</div>
+                    <p class="testimonial-text">La livraison est toujours rapide et je n'ai jamais eu de problème avec mes commandes. De plus, leur application mobile est très pratique et bien conçue.</p>
+                    <div class="testimonial-user">
+                        <div class="user-img">
+                            <img src="images/placeholder-user3.jpg" alt="User">
+                        </div>
+                        <div class="user-info">
+                            <h4>Julie Lambert</h4>
+                            <p>Cliente satisfaite</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <div class="testimonial-nav-btn" id="testimonial-prev">←</div>
+                <div class="testimonial-nav-btn" id="testimonial-next">→</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Chiffres -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500000">0</div>
+                    <div class="stat-label">Clients Satisfaits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="5000">0</div>
+                    <div class="stat-label">Produits Disponibles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="stat-label">Années d'Excellence</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Prix et Récompenses</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Partenaires -->
+    <section class="partners-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Partenaires</h2>
+                <p>Nous collaborons avec les meilleures marques pour vous offrir des produits d'exception</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner1.jpg" alt="Partenaire 1">
+                </div>
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner2.jpg" alt="Partenaire 2">
+                </div>
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner3.jpg" alt="Partenaire 3">
+                </div>
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner4.jpg" alt="Partenaire 4">
+                </div>
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner5.jpg" alt="Partenaire 5">
+                </div>
+                <div class="partner-logo">
+                    <img src="images/placeholder-partner6.jpg" alt="Partenaire 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Rejoignez la Famille LuxeShop</h2>
+                <p>Profitez d'une réduction de 10% sur votre première commande en vous inscrivant à notre newsletter</p>
+                <form class="cta-form">
+                    <input type="email" placeholder="Votre adresse e-mail" required>
+                    <button type="submit" class="btn">S'inscrire</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Abonnez-vous à notre newsletter</h2>
+                    <p class="newsletter-text">Recevez nos offres exclusives et les dernières actualités directement dans votre boîte mail.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Votre adresse e-mail">
+                    <button type="submit" class="newsletter-btn">S'abonner</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Étiquettes qui sortent sur le côté -->
+    <div class="side-tags">
+        <div class="side-tag">30% de RÉDUCTION</div>
+        <div class="side-tag">NOUVEAU ARRIVAGE</div>
+        <div class="side-tag">LIVRAISON GRATUITE</div>
+        <div class="side-tag">VENTE FLASH</div>
+    </div>
+    
+    <!-- Bouton Retour en Haut -->
+    <div class="back-to-top">↑</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>LuxeShop</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Aide</h3>
+                    <ul class="footer-col"></ul>
+                    <div class="footer-col">
+                        <h3>Aide</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Livraison</a></li>
+                            <li><a href="#">Retours</a></li>
+                            <li><a href="#">Commandes</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Mon Compte</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Se connecter</a></li>
+                            <li><a href="#">Voir le panier</a></li>
+                            <li><a href="#">Liste de souhaits</a></li>
+                            <li><a href="#">Suivre ma commande</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Contact</h3>
+                        <div class="footer-contact">
+                            <p><span class="footer-contact-icon">📍</span> 123 Rue du Commerce, 75001 Paris</p>
+                            <p><span class="footer-contact-icon">📞</span> +33 1 23 45 67 89</p>
+                            <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon">f</a>
+                            <a href="#" class="social-icon">t</a>
+                            <a href="#" class="social-icon">in</a>
+                            <a href="#" class="social-icon">ig</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 LuxeShop. Tous droits réservés. <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+                </div>
+            </div>
+        </footer>
+    
+        <!-- Scripts JS -->
+        <script src="js/main.js"></script>
+        <script src="js/about.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/promotions.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html" class="active">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="promotions-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Offres Spéciales</h1>
+                <p>Découvrez nos promotions exclusives à durée limitée</p>
+                <div class="hero-countdown">
+                    <div class="countdown-title">Fin des offres dans :</div>
+                    <div class="countdown">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="days">07</div>
+                            <div class="countdown-text">Jours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">15</div>
+                            <div class="countdown-text">Heures</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">24</div>
+                            <div class="countdown-text">Minutes</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">33</div>
+                            <div class="countdown-text">Secondes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Offres Flash -->
+    <section class="flash-deals">
+        <div class="container">
+            <div class="section-title">
+                <h2>Offres Flash</h2>
+                <p>Promos exceptionnelles à durée limitée - Jusqu'à 70% de réduction</p>
+            </div>
+            <div class="deals-grid">
+                <div class="deal-card">
+                    <div class="deal-badge">-70%</div>
+                    <div class="deal-img">
+                        <img src="images/placeholder-deal1.jpg" alt="Deal 1">
+                        <div class="deal-actions">
+                            <a href="#" class="deal-action">🛒</a>
+                            <a href="#" class="deal-action">❤️</a>
+                        </div>
+                    </div>
+                    <div class="deal-info">
+                        <div class="deal-category">Électronique</div>
+                        <h3 class="deal-title">Écouteurs Sans Fil Premium</h3>
+                        <div class="deal-price">
+                            <span class="current-price">39,99 €</span>
+                            <span class="old-price">129,99 €</span>
+                        </div>
+                        <div class="deal-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <div class="progress-text">75% vendus</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">-50%</div>
+                    <div class="deal-img">
+                        <img src="images/placeholder-deal2.jpg" alt="Deal 2">
+                        <div class="deal-actions">
+                            <a href="#" class="deal-action">🛒</a>
+                            <a href="#" class="deal-action">❤️</a>
+                        </div>
+                    </div>
+                    <div class="deal-info">
+                        <div class="deal-category">Mode</div>
+                        <h3 class="deal-title">Sac à Main Designer</h3>
+                        <div class="deal-price">
+                            <span class="current-price">89,99 €</span>
+                            <span class="old-price">179,99 €</span>
+                        </div>
+                        <div class="deal-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <div class="progress-text">60% vendus</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">-65%</div>
+                    <div class="deal-img">
+                        <img src="images/placeholder-deal3.jpg" alt="Deal 3">
+                        <div class="deal-actions">
+                            <a href="#" class="deal-action">🛒</a>
+                            <a href="#" class="deal-action">❤️</a>
+                        </div>
+                    </div>
+                    <div class="deal-info">
+                        <div class="deal-category">Beauté</div>
+                        <h3 class="deal-title">Coffret Soins Visage</h3>
+                        <div class="deal-price">
+                            <span class="current-price">49,99 €</span>
+                            <span class="old-price">139,99 €</span>
+                        </div>
+                        <div class="deal-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <div class="progress-text">85% vendus</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <div class="deal-badge">-40%</div>
+                    <div class="deal-img">
+                        <img src="images/placeholder-deal4.jpg" alt="Deal 4">
+                        <div class="deal-actions">
+                            <a href="#" class="deal-action">🛒</a>
+                            <a href="#" class="deal-action">❤️</a>
+                        </div>
+                    </div>
+                    <div class="deal-info">
+                        <div class="deal-category">Sport</div>
+                        <h3 class="deal-title">Montre Connectée Sport</h3>
+                        <div class="deal-price">
+                            <span class="current-price">119,99 €</span>
+                            <span class="old-price">199,99 €</span>
+                        </div>
+                        <div class="deal-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <div class="progress-text">45% vendus</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Promotions par Catégorie -->
+    <section class="category-deals">
+        <div class="container">
+            <div class="section-title">
+                <h2>Promotions par Catégorie</h2>
+                <p>Découvrez toutes nos offres par catégorie</p>
+            </div>
+            
+            <div class="category-tabs">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="mode">Mode</button>
+                    <button class="tab-btn" data-tab="electronics">Électronique</button>
+                    <button class="tab-btn" data-tab="home">Maison</button>
+                    <button class="tab-btn" data-tab="beauty">Beauté</button>
+                    <button class="tab-btn" data-tab="sport">Sport</button>
+                </div>
+                
+                <div class="tab-content active" id="mode-tab">
+                    <div class="products-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <span class="product-tag">-30%</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-fashion1.jpg" alt="Product">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Vêtements</div>
+                                <h3 class="product-title">Chemise en Lin Premium</h3>
+                                <div class="product-price">
+                                    <span class="current-price">49,99 €</span>
+                                    <span class="old-price">69,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★☆</div>
+                                    <div class="rating-count">(42)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <span class="product-tag">-25%</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-fashion2.jpg" alt="Product">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Accessoires</div>
+                                <h3 class="product-title">Montre Élégante</h3>
+                                <div class="product-price">
+                                    <span class="current-price">129,99 €</span>
+                                    <span class="old-price">159,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★★</div>
+                                    <div class="rating-count">(28)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <span class="product-tag">-40%</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-fashion3.jpg" alt="Product">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Chaussures</div>
+                                <h3 class="product-title">Baskets Confort</h3>
+                                <div class="product-price">
+                                    <span class="current-price">59,99 €</span>
+                                    <span class="old-price">99,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★☆</div>
+                                    <div class="rating-count">(56)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <span class="product-tag">-35%</span>
+                            <div class="product-img">
+                                <img src="images/placeholder-fashion4.jpg" alt="Product">
+                                <div class="product-actions">
+                                    <div class="product-action-btn">👁️</div>
+                                    <div class="product-action-btn">🛒</div>
+                                    <div class="product-action-btn">❤️</div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Sacs</div>
+                                <h3 class="product-title">Sac à Dos Tendance</h3>
+                                <div class="product-price">
+                                    <span class="current-price">45,99 €</span>
+                                    <span class="old-price">69,99 €</span>
+                                </div>
+                                <div class="product-rating">
+                                    <div class="stars">★★★★☆</div>
+                                    <div class="rating-count">(37)</div>
+                                </div>
+                                <button class="add-to-cart">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-more">
+                        <a href="products.html?category=mode&promo=true" class="btn">Voir toutes les offres Mode</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="electronics-tab">
+                    <!-- Contenu pour l'électronique -->
+                    <div class="products-grid">
+                        <!-- Produits électroniques en promotion -->
+                    </div>
+                    <div class="view-more">
+                        <a href="products.html?category=electronics&promo=true" class="btn">Voir toutes les offres Électronique</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="home-tab">
+                    <!-- Contenu pour la maison -->
+                    <div class="products-grid">
+                        <!-- Produits maison en promotion -->
+                    </div>
+                    <div class="view-more">
+                        <a href="products.html?category=home&promo=true" class="btn">Voir toutes les offres Maison</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="beauty-tab">
+                    <!-- Contenu pour la beauté -->
+                    <div class="products-grid">
+                        <!-- Produits beauté en promotion -->
+                    </div>
+                    <div class="view-more">
+                        <a href="products.html?category=beauty&promo=true" class="btn">Voir toutes les offres Beauté</a>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="sport-tab">
+                    <!-- Contenu pour le sport -->
+                    <div class="products-grid">
+                        <!-- Produits sport en promotion -->
+                    </div>
+                    <div class="view-more">
+                        <a href="products.html?category=sport&promo=true" class="btn">Voir toutes les offres Sport</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Coupons -->
+    <section class="coupons-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Coupons Exclusifs</h2>
+                <p>Utilisez ces codes pour des réductions supplémentaires</p>
+            </div>
+            
+            <div class="coupons-grid">
+                <div class="coupon-card">
+                    <div class="coupon-content">
+                        <div class="coupon-discount">10%</div>
+                        <div class="coupon-details">
+                            <h3>10% de réduction</h3>
+                            <p>Sur votre première commande</p>
+                            <div class="coupon-validity">Valable jusqu'au 31/12/2025</div>
+                        </div>
+                    </div>

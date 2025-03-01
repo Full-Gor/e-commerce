@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catégories - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/categories.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html" class="active">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="categories-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Catégories</h1>
+                <p>Explorez notre sélection de produits par catégorie</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Catégories Principales -->
+    <section class="main-categories">
+        <div class="container">
+            <div class="category-grid">
+                <div class="category-card large">
+                    <img src="images/placeholder-category1.jpg" alt="Vêtements">
+                    <div class="category-content">
+                        <h2>Vêtements</h2>
+                        <p>Découvrez notre collection de vêtements tendance et confortables</p>
+                        <a href="#clothing" class="category-btn">Explorer</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="images/placeholder-category2.jpg" alt="Chaussures">
+                    <div class="category-content">
+                        <h2>Chaussures</h2>
+                        <p>Pour tous les styles et toutes les occasions</p>
+                        <a href="#shoes" class="category-btn">Explorer</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="images/placeholder-category3.jpg" alt="Accessoires">
+                    <div class="category-content">
+                        <h2>Accessoires</h2>
+                        <p>Les détails qui font toute la différence</p>
+                        <a href="#accessories" class="category-btn">Explorer</a>
+                    </div>
+                </div>
+                <div class="category-card large">
+                    <img src="images/placeholder-category4.jpg" alt="Électronique">
+                    <div class="category-content">
+                        <h2>Électronique</h2>
+                        <p>Les dernières innovations technologiques à portée de main</p>
+                        <a href="#electronics" class="category-btn">Explorer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vêtements -->
+    <section class="category-section" id="clothing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vêtements</h2>
+                <p>Styles modernes, qualité exceptionnelle</p>
+            </div>
+            <div class="subcategory-slider">
+                <button class="slider-arrow prev">❮</button>
+                <div class="subcategory-list">
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-tshirts.jpg" alt="T-shirts">
+                        </div>
+                        <h3>T-shirts</h3>
+                        <a href="products.html?category=tshirts" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-pants.jpg" alt="Pantalons">
+                        </div>
+                        <h3>Pantalons</h3>
+                        <a href="products.html?category=pants" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-dresses.jpg" alt="Robes">
+                        </div>
+                        <h3>Robes</h3>
+                        <a href="products.html?category=dresses" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-jackets.jpg" alt="Vestes">
+                        </div>
+                        <h3>Vestes</h3>
+                        <a href="products.html?category=jackets" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-sweaters.jpg" alt="Pulls">
+                        </div>
+                        <h3>Pulls</h3>
+                        <a href="products.html?category=sweaters" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-underwear.jpg" alt="Sous-vêtements">
+                        </div>
+                        <h3>Sous-vêtements</h3>
+                        <a href="products.html?category=underwear" class="subcategory-link">Voir tout</a>
+                    </div>
+                </div>
+                <button class="slider-arrow next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Chaussures -->
+    <section class="category-section alt-bg" id="shoes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Chaussures</h2>
+                <p>Confort et style à chaque pas</p>
+            </div>
+            <div class="subcategory-slider">
+                <button class="slider-arrow prev">❮</button>
+                <div class="subcategory-list">
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-sneakers.jpg" alt="Baskets">
+                        </div>
+                        <h3>Baskets</h3>
+                        <a href="products.html?category=sneakers" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-boots.jpg" alt="Bottes">
+                        </div>
+                        <h3>Bottes</h3>
+                        <a href="products.html?category=boots" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-heels.jpg" alt="Talons">
+                        </div>
+                        <h3>Talons</h3>
+                        <a href="products.html?category=heels" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-sandals.jpg" alt="Sandales">
+                        </div>
+                        <h3>Sandales</h3>
+                        <a href="products.html?category=sandals" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-formal.jpg" alt="Chaussures formelles">
+                        </div>
+                        <h3>Chaussures formelles</h3>
+                        <a href="products.html?category=formal-shoes" class="subcategory-link">Voir tout</a>
+                    </div>
+                </div>
+                <button class="slider-arrow next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Accessoires -->
+    <section class="category-section" id="accessories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Accessoires</h2>
+                <p>Complétez votre look avec nos accessoires tendance</p>
+            </div>
+            <div class="subcategory-slider">
+                <button class="slider-arrow prev">❮</button>
+                <div class="subcategory-list">
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-bags.jpg" alt="Sacs">
+                        </div>
+                        <h3>Sacs</h3>
+                        <a href="products.html?category=bags" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-jewelery.jpg" alt="Bijoux">
+                        </div>
+                        <h3>Bijoux</h3>
+                        <a href="products.html?category=jewelery" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-watches.jpg" alt="Montres">
+                        </div>
+                        <h3>Montres</h3>
+                        <a href="products.html?category=watches" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-belts.jpg" alt="Ceintures">
+                        </div>
+                        <h3>Ceintures</h3>
+                        <a href="products.html?category=belts" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-sunglasses.jpg" alt="Lunettes de soleil">
+                        </div>
+                        <h3>Lunettes de soleil</h3>
+                        <a href="products.html?category=sunglasses" class="subcategory-link">Voir tout</a>
+                    </div>
+                </div>
+                <button class="slider-arrow next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Électronique -->
+    <section class="category-section alt-bg" id="electronics">
+        <div class="container">
+            <div class="section-title">
+                <h2>Électronique</h2>
+                <p>Les dernières innovations technologiques</p>
+            </div>
+            <div class="subcategory-slider">
+                <button class="slider-arrow prev">❮</button>
+                <div class="subcategory-list">
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-smartphones.jpg" alt="Smartphones">
+                        </div>
+                        <h3>Smartphones</h3>
+                        <a href="products.html?category=smartphones" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-laptops.jpg" alt="Ordinateurs portables">
+                        </div>
+                        <h3>Ordinateurs portables</h3>
+                        <a href="products.html?category=laptops" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-tablets.jpg" alt="Tablettes">
+                        </div>
+                        <h3>Tablettes</h3>
+                        <a href="products.html?category=tablets" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-headphones.jpg" alt="Écouteurs & Casques">
+                        </div>
+                        <h3>Écouteurs & Casques</h3>
+                        <a href="products.html?category=headphones" class="subcategory-link">Voir tout</a>
+                    </div>
+                    <div class="subcategory-item">
+                        <div class="subcategory-img">
+                            <img src="images/placeholder-speakers.jpg" alt="Enceintes">
+                        </div>
+                        <h3>Enceintes</h3>
+                        <a href="products.html?category=speakers" class="subcategory-link">Voir tout</a>
+                    </div>
+                </div>
+                <button class="slider-arrow next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Populaire -->
+    <section class="trending-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tendances Actuelles</h2>
+                <p>Ce que nos clients préfèrent en ce moment</p>
+            </div>
+            <div class="trending-grid">
+                <div class="trending-card">
+                    <div class="trending-img">
+                        <img src="images/placeholder-trending1.jpg" alt="Tendance 1">
+                        <div class="trending-label">Sport</div>
+                    </div>
+                    <div class="trending-content">
+                        <h3>Collection Sport & Fitness</h3>
+                        <p>Découvrez nos vêtements techniques pour vos activités sportives</p>
+                        <a href="products.html?trend=sport" class="trending-link">Découvrir</a>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-img">
+                        <img src="images/placeholder-trending2.jpg" alt="Tendance 2">
+                        <div class="trending-label">Écologique</div>
+                    </div>
+                    <div class="trending-content">
+                        <h3>Mode Éco-responsable</h3>
+                        <p>Des vêtements conçus dans le respect de la planète</p>
+                        <a href="products.html?trend=eco" class="trending-link">Découvrir</a>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-img">
+                        <img src="images/placeholder-trending3.jpg" alt="Tendance 3">
+                        <div class="trending-label">Smart Home</div>
+                    </div>
+                    <div class="trending-content">
+                        <h3>Maison Connectée</h3>
+                        <p>Simplifiez votre quotidien avec nos appareils intelligents</p>
+                        <a href="products.html?trend=smart-home" class="trending-link">Découvrir</a>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-img">
+                        <img src="images/placeholder-trending4.jpg" alt="Tendance 4">
+                        <div class="trending-label">Rétro</div>
+                    </div>
+                    <div class="trending-content">
+                        <h3>Style Vintage Revisité</h3>
+                        <p>Le charme du passé avec une touche contemporaine</p>
+                        <a href="products.html?trend=vintage" class="trending-link">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Abonnez-vous à notre newsletter</h2>
+                    <p class="newsletter-text">Recevez nos offres exclusives et les dernières actualités directement dans votre boîte mail.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Votre adresse e-mail">
+                    <button type="submit" class="newsletter-btn">S'abonner</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Étiquettes qui sortent sur le côté -->
+    <div class="side-tags">
+        <div class="side-tag">30% de RÉDUCTION</div>
+        <div class="side-tag">NOUVEAU ARRIVAGE</div>
+        <div class="side-tag">LIVRAISON GRATUITE</div>
+        <div class="side-tag">VENTE FLASH</div>
+    </div>
+    
+    <!-- Bouton Retour en Haut -->
+    <div class="back-to-top">↑</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>LuxeShop</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Aide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Commandes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Mon Compte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="#">Voir le panier</a></li>
+                        <li><a href="#">Liste de souhaits</a></li>
+                        <li><a href="#">Suivre ma commande</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <div class="footer-contact">
+                        <p><span class="footer-contact-icon">📍</span> 123 Rue du Commerce, 75001 Paris</p>
+                        <p><span class="footer-contact-icon">📞</span> +33 1 23 45 67 89</p>
+                        <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuxeShop. Tous droits réservés. <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="js/main.js"></script>
+    <script src="js/categories.js"></script>
+</body>
+</html>
