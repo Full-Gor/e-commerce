@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Page Titre -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Votre Panier</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a> / <span>Panier</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Panier -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container">
+                <!-- Tableau des produits du panier -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <div class="cart-header-item product-col">Produit</div>
+                        <div class="cart-header-item price-col">Prix</div>
+                        <div class="cart-header-item quantity-col">Quantité</div>
+                        <div class="cart-header-item subtotal-col">Total</div>
+                        <div class="cart-header-item remove-col"></div>
+                    </div>
+                    
+                    <!-- Items du panier -->
+                    <div class="cart-item" data-id="product-1">
+                        <div class="product-col">
+                            <div class="product-image">
+                                <img src="images/placeholder-product1.jpg" alt="T-Shirt Premium">
+                            </div>
+                            <div class="product-details">
+                                <h3 class="product-title">T-Shirt Premium</h3>
+                                <div class="product-meta">
+                                    <span class="product-variant">Taille: M</span>
+                                    <span class="product-variant">Couleur: Bleu</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-col">
+                            <span class="price">29,99 €</span>
+                        </div>
+                        <div class="quantity-col">
+                            <div class="quantity-control">
+                                <button class="quantity-btn decrease">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn increase">+</button>
+                            </div>
+                        </div>
+                        <div class="subtotal-col">
+                            <span class="subtotal">29,99 €</span>
+                        </div>
+                        <div class="remove-col">
+                            <button class="remove-btn">✕</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-item" data-id="product-2">
+                        <div class="product-col">
+                            <div class="product-image">
+                                <img src="images/placeholder-product2.jpg" alt="Baskets Confort">
+                            </div>
+                            <div class="product-details">
+                                <h3 class="product-title">Baskets Confort</h3>
+                                <div class="product-meta">
+                                    <span class="product-variant">Taille: 42</span>
+                                    <span class="product-variant">Couleur: Noir</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-col">
+                            <span class="price">79,99 €</span>
+                        </div>
+                        <div class="quantity-col">
+                            <div class="quantity-control">
+                                <button class="quantity-btn decrease">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn increase">+</button>
+                            </div>
+                        </div>
+                        <div class="subtotal-col">
+                            <span class="subtotal">79,99 €</span>
+                        </div>
+                        <div class="remove-col">
+                            <button class="remove-btn">✕</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-item" data-id="product-3">
+                        <div class="product-col">
+                            <div class="product-image">
+                                <img src="images/placeholder-product3.jpg" alt="Sac à dos tendance">
+                            </div>
+                            <div class="product-details">
+                                <h3 class="product-title">Sac à dos tendance</h3>
+                                <div class="product-meta">
+                                    <span class="product-variant">Couleur: Gris</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-col">
+                            <span class="price">49,99 €</span>
+                        </div>
+                        <div class="quantity-col">
+                            <div class="quantity-control">
+                                <button class="quantity-btn decrease">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn increase">+</button>
+                            </div>
+                        </div>
+                        <div class="subtotal-col">
+                            <span class="subtotal">49,99 €</span>
+                        </div>
+                        <div class="remove-col">
+                            <button class="remove-btn">✕</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions du panier -->
+                    <div class="cart-actions">
+                        <div class="coupon">
+                            <input type="text" placeholder="Code promo" class="coupon-input">
+                            <button class="btn coupon-btn">Appliquer</button>
+                        </div>
+                        <div class="update-cart">
+                            <button class="btn update-btn">Mettre à jour le panier</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Résumé du panier -->
+                <div class="cart-summary">
+                    <h2>Résumé de la commande</h2>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Sous-total</span>
+                        <span class="summary-value" id="subtotal">159,97 €</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Réduction</span>
+                        <span class="summary-value" id="discount">0,00 €</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Livraison</span>
+                        <div class="shipping-options">
+                            <div class="shipping-option">
+                                <input type="radio" id="standard-shipping" name="shipping" checked>
+                                <label for="standard-shipping">Standard (3-5 jours) - 4,99 €</label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" id="express-shipping" name="shipping">
+                                <label for="express-shipping">Express (1-2 jours) - 9,99 €</label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" id="free-shipping" name="shipping">
+                                <label for="free-shipping">Gratuit (à partir de 200 €)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span class="summary-label">Total</span>
+                        <span class="summary-value" id="total">164,96 €</span>
+                    </div>
+                    
+                    <button class="btn checkout-btn">Passer à la caisse</button>
+                    
+                    <div class="payment-methods">
+                        <p>Moyens de paiement acceptés:</p>
+                        <div class="payment-icons">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-icon">💰</span>
+                            <span class="payment-icon">🏦</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Produits Recommandés -->
+    <section class="recommended-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vous pourriez aussi aimer</h2>
+                <p>Des produits sélectionnés pour vous</p>
+            </div>
+            
+            <div class="products-slider">
+                <button class="slider-arrow prev">❮</button>
+                <div class="products-list">
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="images/placeholder-recommend1.jpg" alt="Produit recommandé">
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">🛒</div>
+                                <div class="product-action-btn">❤️</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Accessoires</div>
+                            <h3 class="product-title">Montre Élégante</h3>
+                            <div class="product-price">
+                                <span class="current-price">129,99 €</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <div class="rating-count">(28)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="images/placeholder-recommend2.jpg" alt="Produit recommandé">
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">🛒</div>
+                                <div class="product-action-btn">❤️</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vêtements</div>
+                            <h3 class="product-title">Veste Légère</h3>
+                            <div class="product-price">
+                                <span class="current-price">89,99 €</span>
+                                <span class="old-price">119,99 €</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">★★★★☆</div>
+                                <div class="rating-count">(42)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="images/placeholder-recommend3.jpg" alt="Produit recommandé">
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">🛒</div>
+                                <div class="product-action-btn">❤️</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Tech</div>
+                            <h3 class="product-title">Écouteurs sans fil</h3>
+                            <div class="product-price">
+                                <span class="current-price">79,99 €</span>
+                                <span class="old-price">99,99 €</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">★★★★☆</div>
+                                <div class="rating-count">(56)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="images/placeholder-recommend4.jpg" alt="Produit recommandé">
+                            <div class="product-actions">
+                                <div class="product-action-btn">👁️</div>
+                                <div class="product-action-btn">🛒</div>
+                                <div class="product-action-btn">❤️</div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Accessoires</div>
+                            <h3 class="product-title">Lunettes de soleil</h3>
+                            <div class="product-price">
+                                <span class="current-price">49,99 €</span>
+                            </div>
+                            <div class="product-rating">
+                                <div class="stars">★★★★★</div>
+                                <div class="rating-count">(34)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-arrow next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">Abonnez-vous à notre newsletter</h2>
+                    <p class="newsletter-text">Recevez nos offres exclusives et les dernières actualités directement dans votre boîte mail.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Votre adresse e-mail">
+                    <button type="submit" class="newsletter-btn">S'abonner</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Étiquettes qui sortent sur le côté -->
+    <div class="side-tags">
+        <div class="side-tag">30% de RÉDUCTION</div>
+        <div class="side-tag">NOUVEAU ARRIVAGE</div>
+        <div class="side-tag">LIVRAISON GRATUITE</div>
+        <div class="side-tag">VENTE FLASH</div>
+    </div>
+    
+    <!-- Bouton Retour en Haut -->
+    <div class="back-to-top">↑</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>LuxeShop</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carrières</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Aide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Commandes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Mon Compte</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Se connecter</a></li>
+                        <li><a href="#">Voir le panier</a></li>
+                        <li><a href="#">Liste de souhaits</a></li>
+                        <li><a href="#">Suivre ma commande</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <div class="footer-contact">
+                        <p><span class="footer-contact-icon">📍</span> 123 Rue du Commerce, 75001 Paris</p>
+                        <p><span class="footer-contact-icon">📞</span> +33 1 23 45 67 89</p>
+                        <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuxeShop. Tous droits réservés. <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
