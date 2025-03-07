@@ -9,6 +9,49 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
+<style>
+
+/* Style pour la section hero avec l'image de cerisiers en fleurs */
+.hero {
+    background-image: url('vitrine.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Overlay léger pour la lisibilité */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 0;
+}
+
+/* Assurer que le contenu reste au premier plan */
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Maintenir les styles originaux des boutons */
+.hero-buttons .btn,
+.hero-buttons .btn-secondary {
+    /* Ces propriétés conservent vos styles existants */
+    transition: all 0.3s ease;
+}
+
+/* Préserver les effets hover originaux */
+.hero-buttons .btn:hover,
+.hero-buttons .btn-secondary:hover {
+    /* Ces propriétés conservent vos effets hover */
+    opacity: 0.9;
+}
+</style>
+
 <body>
     <!-- Header et Navigation -->
     <header>
