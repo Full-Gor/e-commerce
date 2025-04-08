@@ -536,6 +536,322 @@ function closeQuickView() {
     // Réactiver le défilement de la page
     document.body.style.overflow = '';
 }
+// JavaScript pour la page des produits (products.js)
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Éléments de la modal
+    const modal = document.getElementById('quick-view-modal');
+    const modalClose = modal.querySelector('.modal-close');
+    const quickViewBtns = document.querySelectorAll('.quick-view');
+    
+    // Ouverture de la modal
+    quickViewBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productId = this.getAttribute('data-product-id');
+            openQuickViewModal(productId);
+        });
+    });
+    
+    // Fermeture de la modal
+    modalClose.addEventListener('click', closeQuickViewModal);
+    
+    // Fermeture de la modal en cliquant à l'extérieur
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeQuickViewModal();
+        }
+    });
+    
+    // Fonction pour ouvrir la modal avec les informations du produit
+    function openQuickViewModal(productId) {
+        // Dans une application réelle, vous feriez une requête AJAX pour obtenir les informations du produit
+        // Pour cet exemple, nous utilisons des données statiques
+        
+        // Afficher la modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Empêcher le défilement de la page
+        
+        // Simuler le chargement des données du produit (à remplacer par une requête AJAX)
+        // Dans un environnement de production, vous récupéreriez les données du produit à partir de votre backend
+        loadProductData(productId);
+    }
+    
+    // Fonction pour fermer la modal
+    function closeQuickViewModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Fonction pour charger les données du produit (simulation)
+    function loadProductData(productId) {
+        // Données statiques pour simuler une réponse d'API
+        const productData = {
+            '1': {
+                title: 'T-Shirt Premium',
+                category: 'Vêtements',
+                price: '24,99 €',
+                oldPrice: '29,99 €',
+                description: 'T-shirt premium de haute qualité fabriqué en 100% coton biologique. Confortable et durable, parfait pour tous les jours.',
+                rating: '★★★★☆',
+                ratingCount: '(42 avis)',
+                sku: 'TS-PR-001-BLK-M',
+                availability: 'En stock',
+                categoryMeta: 'Vêtements, T-shirts',
+                mainImg: 'images/placeholder-product1.jpg'
+            },
+            '2': {
+                title: 'Baskets Confort',
+                category: 'Chaussures',
+                price: '79,99 €',
+                oldPrice: '',
+                description: 'Baskets ultra confortables avec semelle amortissante. Parfaites pour la ville ou le sport léger.',
+                rating: '★★★★★',
+                ratingCount: '(23 avis)',
+                sku: 'BS-CF-002-BLU-42',
+                availability: 'En stock',
+                categoryMeta: 'Chaussures, Baskets',
+                mainImg: 'images/placeholder-product2.jpg'
+            },
+            '3': {
+                title: 'Sac à dos tendance',
+                category: 'Accessoires',
+                price: '49,99 €',
+                oldPrice: '69,99 €',
+                description: 'Sac à dos spacieux et élégant avec de nombreux compartiments. Idéal pour l\'usage quotidien ou les petites excursions.',
+                rating: '★★★★☆',
+                ratingCount: '(56 avis)',
+                sku: 'BP-TR-003-GRY',
+                availability: 'En stock',
+                categoryMeta: 'Accessoires, Sacs',
+                mainImg: 'images/placeholder-product3.jpg'
+            },
+            '4': {
+                title: 'Écouteurs sans fil',
+                category: 'Électronique',
+                price: '89,99 €',
+                oldPrice: '119,99 €',
+                description: 'Écouteurs sans fil avec une qualité sonore exceptionnelle et une autonomie de 24 heures. Résistants à l\'eau et à la transpiration.',
+                rating: '★★★★★',
+                ratingCount: '(78 avis)',
+                sku: 'HP-WL-004-BLK',
+                availability: 'En stock',
+                categoryMeta: 'Électronique, Audio',
+                mainImg: 'images/placeholder-product4.jpg'
+            },
+            '5': {
+                title: 'Montre élégante',
+                category: 'Accessoires',
+                price: '129,99 €',
+                oldPrice: '149,99 €',
+                description: 'Montre élégante avec un design intemporel. Mouvement à quartz, bracelet en cuir véritable et boîtier en acier inoxydable.',
+                rating: '★★★★☆',
+                ratingCount: '(31 avis)',
+                sku: 'WT-EL-005-BRN',
+                availability: 'En stock',
+                categoryMeta: 'Accessoires, Montres',
+                mainImg: 'images/placeholder-product5.jpg'
+            },
+            '6': {
+                title: 'Pantalon confort',
+                category: 'Vêtements',
+                price: '59,99 €',
+                oldPrice: '',
+                description: 'Pantalon confortable et élégant, parfait pour toutes les occasions. Tissu de haute qualité avec une coupe moderne.',
+                rating: '★★★★☆',
+                ratingCount: '(19 avis)',
+                sku: 'PT-CF-006-NVY-L',
+                availability: 'En stock',
+                categoryMeta: 'Vêtements, Pantalons',
+                mainImg: 'images/placeholder-product6.jpg'
+            }
+        };
+        
+        // Récupérer les données du produit
+        const product = productData[productId];
+        
+        // Mettre à jour le contenu de la modal
+        document.getElementById('modal-title').textContent = product.title;
+        document.getElementById('modal-category').textContent = product.category;
+        document.getElementById('modal-current-price').textContent = product.price;
+        document.getElementById('modal-description').textContent = product.description;
+        document.getElementById('modal-stars').innerHTML = product.rating;
+        document.getElementById('modal-rating-count').textContent = product.ratingCount;
+        document.getElementById('modal-sku').textContent = product.sku;
+        document.getElementById('modal-availability').textContent = product.availability;
+        document.getElementById('modal-category-meta').textContent = product.categoryMeta;
+        document.getElementById('modal-main-img').src = product.mainImg;
+        
+        // Gérer l'ancien prix (s'il existe)
+        const oldPriceElement = document.getElementById('modal-old-price');
+        if (product.oldPrice) {
+            oldPriceElement.textContent = product.oldPrice;
+            oldPriceElement.style.display = '';
+        } else {
+            oldPriceElement.style.display = 'none';
+        }
+    }
+    
+    // Fonctionnalité de changement d'image lors du clic sur une miniature
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            // Retirer la classe active de toutes les miniatures
+            thumbnails.forEach(t => t.classList.remove('active'));
+            // Ajouter la classe active à la miniature cliquée
+            this.classList.add('active');
+            // Mettre à jour l'image principale
+            const mainImg = document.getElementById('modal-main-img');
+            mainImg.src = this.querySelector('img').src;
+        });
+    });
+    
+    // Fonctionnalité de sélection de couleur
+    const colorOptions = document.querySelectorAll('.color-option');
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Retirer la classe active de toutes les options de couleur
+            colorOptions.forEach(o => o.classList.remove('active'));
+            // Ajouter la classe active à l'option cliquée
+            this.classList.add('active');
+        });
+    });
+    
+    // Fonctionnalité de sélection de taille
+    const sizeOptions = document.querySelectorAll('.size-option');
+    sizeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Retirer la classe active de toutes les options de taille
+            sizeOptions.forEach(o => o.classList.remove('active'));
+            // Ajouter la classe active à l'option cliquée
+            this.classList.add('active');
+        });
+    });
+    
+    // Fonctionnalité de sélection de quantité
+    const quantityInput = document.querySelector('.quantity-input');
+    const minusBtn = document.querySelector('.quantity-btn.minus');
+    const plusBtn = document.querySelector('.quantity-btn.plus');
+    
+    minusBtn.addEventListener('click', function() {
+        const currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+    
+    plusBtn.addEventListener('click', function() {
+        const currentValue = parseInt(quantityInput.value);
+        if (currentValue < 99) {
+            quantityInput.value = currentValue + 1;
+        }
+    });
+    
+    // Fonctionnalité d'ajout au panier depuis la modal
+    const addToCartBtn = document.querySelector('.quick-view-actions .add-to-cart-btn');
+    addToCartBtn.addEventListener('click', function() {
+        const productTitle = document.getElementById('modal-title').textContent;
+        const quantity = document.querySelector('.quantity-input').value;
+        
+        // Simuler l'ajout au panier
+        alert(`${quantity} × ${productTitle} ajouté au panier!`);
+        
+        // Fermer la modal après l'ajout
+        closeQuickViewModal();
+    });
+    
+    // Fonctionnalité de changement de vue (grille/liste)
+    const gridViewBtn = document.querySelector('.grid-view');
+    const listViewBtn = document.querySelector('.list-view');
+    const productsGrid = document.querySelector('.products-grid');
+    
+    gridViewBtn.addEventListener('click', function() {
+        listViewBtn.classList.remove('active');
+        this.classList.add('active');
+        productsGrid.classList.remove('list-view');
+        productsGrid.classList.add('grid-view');
+    });
+    
+    listViewBtn.addEventListener('click', function() {
+        gridViewBtn.classList.remove('active');
+        this.classList.add('active');
+        productsGrid.classList.remove('grid-view');
+        productsGrid.classList.add('list-view');
+    });
+    
+    // Fonctionnalité de filtrage par catégorie
+    const categoryFilters = document.querySelectorAll('.filter-checkbox input[type="checkbox"]');
+    
+    categoryFilters.forEach(filter => {
+        filter.addEventListener('change', function() {
+            // Dans une application réelle, vous filtreriez les produits en fonction des catégories sélectionnées
+            console.log('Filtre modifié:', this.checked);
+        });
+    });
+    
+    // Fonctionnalité de filtrage par prix
+    const minPriceInput = document.getElementById('min-price');
+    const maxPriceInput = document.getElementById('max-price');
+    const priceApplyBtn = document.querySelector('.price-apply');
+    
+    priceApplyBtn.addEventListener('click', function() {
+        const minPrice = minPriceInput.value;
+        const maxPrice = maxPriceInput.value;
+        
+        // Dans une application réelle, vous filtreriez les produits en fonction de la plage de prix
+        console.log('Filtrage par prix:', minPrice, '-', maxPrice);
+    });
+    
+    // Fonctionnalité de réinitialisation des filtres
+    const resetFiltersBtn = document.querySelector('.reset-filters');
+    
+    resetFiltersBtn.addEventListener('click', function() {
+        // Réinitialiser les filtres de catégorie
+        categoryFilters.forEach(filter => {
+            filter.checked = filter.parentElement.textContent.trim() === 'Tous';
+        });
+        
+        // Réinitialiser les filtres de prix
+        minPriceInput.value = '';
+        maxPriceInput.value = '';
+        
+        // Réinitialiser les filtres d'évaluation
+        document.querySelectorAll('.filter-group:nth-child(3) .filter-checkbox input').forEach(filter => {
+            filter.checked = false;
+        });
+        
+        // Dans une application réelle, vous afficheriez à nouveau tous les produits
+        console.log('Filtres réinitialisés');
+    });
+    
+    // Fonctionnalité de tri
+    const sortBySelect = document.getElementById('sort-by');
+    
+    sortBySelect.addEventListener('change', function() {
+        const sortValue = this.value;
+        
+        // Dans une application réelle, vous trieriez les produits en fonction de la valeur sélectionnée
+        console.log('Tri des produits par:', sortValue);
+    });
+    
+    // Animation du bouton "Retour en haut"
+    const backToTopBtn = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
 
 // Configuration de la pagination
 function setupPagination() {
