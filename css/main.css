@@ -415,3 +415,58 @@ section {
         transform: translateY(0);
     }
 }
+
+/* Mobile only elements - Hidden on desktop */
+.mobile-only {
+    display: none !important;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 968px) {
+    .hamburger {
+        display: block;
+    }
+
+    .icons {
+        gap: 15px;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    /* Show mobile-only elements in burger menu */
+    .nav-links .mobile-only {
+        display: block !important;
+    }
+
+    .hamburger.active div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger.active div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+}
