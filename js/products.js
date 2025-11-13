@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setupProductActions();
     setupQuickView();
     setupPagination();
+
+    // Appliquer la recherche si présente dans l'URL
+    handleURLSearch();
 });
 
 // ==========================================
@@ -668,6 +671,48 @@ function showNotification(message) {
     setTimeout(() => {
         notification.classList.remove('visible');
     }, 3000);
+}
+
+// ==========================================
+// GESTION DE LA RECHERCHE DEPUIS L'URL
+// ==========================================
+
+function handleURLSearch() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
+
+    if (searchQuery) {
+        // Filtrer les produits basés sur la recherche
+        searchProducts(searchQuery);
+
+        // Afficher un message informatif
+        showNotification(`Résultats de recherche pour "${searchQuery}"`);
+
+        // Mettre à jour le titre de la page
+        const heroTitle = document.querySelector('.products-hero h1');
+        if (heroTitle) {
+            heroTitle.textContent = `Résultats pour "${searchQuery}"`;
+        }
+
+        const heroDesc = document.querySelector('.products-hero p');
+        if (heroDesc) {
+            heroDesc.textContent = `${filteredProducts.length} produit(s) trouvé(s)`;
+        }
+    }
+}
+
+function searchProducts(query) {
+    const lowerQuery = query.toLowerCase();
+
+    filteredProducts = allProducts.filter(product => {
+        // Rechercher dans le titre et la catégorie
+        return product.title.toLowerCase().includes(lowerQuery) ||
+               product.category.toLowerCase().includes(lowerQuery);
+    });
+
+    // Afficher les produits filtrés
+    renderProducts();
+    updateProductCount();
 }
 
 // Animations CSS pour les produits
