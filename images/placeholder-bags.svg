@@ -1,5 +1,17 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#06D6A0"/>
-  <path d="M 140 160 L 130 280 L 270 280 L 260 160 L 230 160 L 230 140 Q 230 120 200 120 Q 170 120 170 140 L 170 160 Z" fill="#FFF"/>
-  <rect x="130" y="160" width="140" height="8" fill="#E0E0E0"/>
+  <defs>
+    <linearGradient id="bag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D2E0F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <path d="M 130 160 L 120 310 L 280 310 L 270 160 L 235 160 L 235 140 Q 235 115 200 115 Q 165 115 165 140 L 165 160 Z"
+        fill="url(#bag-grad)" stroke="#3E1F08" stroke-width="2"/>
+  <rect x="120" y="160" width="160" height="10" fill="#654321"/>
+  <path d="M 165 140 L 165 160 L 235 160 L 235 140 Q 235 130 225 125 Q 200 120 175 125 Q 165 130 165 140" fill="#654321"/>
+  <rect x="180" y="220" width="40" height="50" fill="#5D2E0F" opacity="0.5" rx="3"/>
+  <rect x="140" y="310" width="120" height="8" fill="#3E1F08"/>
+  <path d="M 130 200 L 270 200" stroke="#3E1F08" stroke-width="1" stroke-dasharray="4,2"/>
+  <ellipse cx="200" cy="320" rx="80" ry="12" fill="#000" opacity="0.2"/>
 </svg>

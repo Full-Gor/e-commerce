@@ -1,13 +1,44 @@
 <svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#06D6A0;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#048B6B;stop-opacity:1" />
+    <linearGradient id="bg-grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E9ECEF;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="watch-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#808080;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#654321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3E2723;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="watch-face">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </radialGradient>
   </defs>
-  <rect width="800" height="500" fill="url(#grad3)"/>
-  <!-- Bag icon -->
-  <path d="M 320 200 L 310 320 L 490 320 L 480 200 L 450 200 L 450 180 Q 450 150 400 150 Q 350 150 350 180 L 350 200 Z" fill="#FFF" opacity="0.3"/>
-  <rect x="310" y="200" width="180" height="10" fill="#FFF" opacity="0.5"/>
-  <text x="400" y="380" font-family="Arial, sans-serif" font-size="48" fill="#FFF" text-anchor="middle" font-weight="bold">ACCESSOIRES</text>
+  <rect width="800" height="500" fill="url(#bg-grad3)"/>
+  
+  <!-- Watch -->
+  <rect x="150" y="200" width="35" height="100" rx="4" fill="url(#watch-metal)"/>
+  <circle cx="205" cy="250" r="55" fill="url(#watch-face)" stroke="#808080" stroke-width="3"/>
+  <circle cx="205" cy="250" r="3" fill="#333"/>
+  <line x1="205" y1="250" x2="205" y2="220" stroke="#333" stroke-width="2"/>
+  <line x1="205" y1="250" x2="225" y2="250" stroke="#C0392B" stroke-width="2"/>
+  <rect x="220" y="200" width="35" height="100" rx="4" fill="url(#watch-metal)"/>
+  <ellipse cx="205" cy="305" rx="65" ry="8" fill="#000" opacity="0.15"/>
+  
+  <!-- Bag -->
+  <path d="M 470 210 L 450 360 L 610 360 L 590 210 Z" 
+        fill="url(#bag-grad)" stroke="#2C1810" stroke-width="2"/>
+  <ellipse cx="530" cy="210" rx="60" ry="15" fill="#3E2723"/>
+  <path d="M 490 210 Q 490 180 530 180 Q 570 180 570 210" 
+        stroke="#2C1810" stroke-width="3" fill="none"/>
+  <line x1="530" y1="240" x2="530" y2="330" stroke="#2C1810" stroke-width="2"/>
+  <rect x="520" y="280" width="20" height="30" rx="3" fill="#C0A080"/>
+  <ellipse cx="530" cy="370" rx="80" ry="10" fill="#000" opacity="0.2"/>
+  
+  <!-- Label -->
+  <rect x="280" y="430" width="240" height="50" rx="8" fill="#654321" opacity="0.9"/>
+  <text x="400" y="463" font-family="Arial, sans-serif" font-size="28" fill="#FFF" text-anchor="middle" font-weight="bold">ACCESSOIRES</text>
 </svg>

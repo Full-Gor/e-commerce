@@ -1,6 +1,19 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#FFD60A"/>
-  <ellipse cx="200" cy="220" rx="70" ry="20" fill="#FFF"/>
-  <rect x="190" y="160" width="20" height="60" fill="#FFF"/>
-  <path d="M 130 220 L 270 220 L 270 230 L 130 230 Z" fill="#FFF"/>
+  <defs>
+    <linearGradient id="sandal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <ellipse cx="200" cy="250" rx="100" ry="35" fill="#654321"/>
+  <ellipse cx="200" cy="245" rx="95" ry="30" fill="url(#sandal-grad)"/>
+  <rect x="180" y="180" width="40" height="70" rx="20" fill="#A0522D"/>
+  <rect x="150" y="230" width="100" height="25" rx="12" fill="#A0522D"/>
+  <rect x="230" y="235" width="20" height="15" fill="#C0C0C0" rx="2"/>
+  <circle cx="235" cy="242" r="3" fill="#8B4513"/>
+  <path d="M 150 240 L 250 240" stroke="#654321" stroke-width="1" stroke-dasharray="3,2"/>
+  <path d="M 150 248 L 250 248" stroke="#654321" stroke-width="1" stroke-dasharray="3,2"/>
+  <ellipse cx="200" cy="248" rx="80" ry="15" fill="#543A21" opacity="0.3"/>
+  <ellipse cx="200" cy="285" rx="100" ry="15" fill="#000" opacity="0.15"/>
 </svg>

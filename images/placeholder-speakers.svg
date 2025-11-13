@@ -1,6 +1,25 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#2C2C2C"/>
-  <rect x="140" y="130" width="120" height="160" rx="10" fill="#FFF"/>
-  <circle cx="200" cy="180" r="30" fill="#3A86FF"/>
-  <circle cx="200" cy="250" r="20" fill="#3A86FF"/>
+  <defs>
+    <linearGradient id="speaker-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C2C2C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="speaker-cone">
+      <stop offset="0%" style="stop-color:#404040;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A1A;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <rect x="125" y="90" width="150" height="230" rx="12" fill="url(#speaker-grad)" stroke="#000" stroke-width="2"/>
+  <circle cx="200" cy="170" r="45" fill="url(#speaker-cone)" stroke="#606060" stroke-width="3"/>
+  <circle cx="200" cy="170" r="35" fill="#1A1A1A"/>
+  <circle cx="200" cy="170" r="20" fill="#2C2C2C"/>
+  <circle cx="200" cy="170" r="8" fill="#404040"/>
+  <circle cx="200" cy="270" r="30" fill="url(#speaker-cone)" stroke="#606060" stroke-width="3"/>
+  <circle cx="200" cy="270" r="22" fill="#1A1A1A"/>
+  <circle cx="200" cy="270" r="12" fill="#2C2C2C"/>
+  <circle cx="200" cy="270" r="5" fill="#404040"/>
+  <rect x="140" y="105" width="120" height="3" rx="1.5" fill="#1E90FF" opacity="0.7"/>
+  <rect x="140" y="112" width="120" height="3" rx="1.5" fill="#1E90FF" opacity="0.5"/>
+  <ellipse cx="200" cy="330" rx="75" ry="12" fill="#000" opacity="0.2"/>
 </svg>

@@ -1,13 +1,39 @@
 <svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3A86FF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1B4F8C;stop-opacity:1" />
+    <linearGradient id="bg-grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8F9FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E9ECEF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sneaker-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E74C3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C0392B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="boot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D2E0F;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="800" height="500" fill="url(#grad2)"/>
-  <!-- Shoe icon -->
-  <ellipse cx="400" cy="280" rx="120" ry="40" fill="#FFF" opacity="0.3"/>
-  <path d="M 280 280 Q 280 220 350 200 L 450 200 Q 520 220 520 280 L 520 290 Q 520 300 510 300 L 290 300 Q 280 300 280 290 Z" fill="#FFF" opacity="0.3"/>
-  <text x="400" y="380" font-family="Arial, sans-serif" font-size="48" fill="#FFF" text-anchor="middle" font-weight="bold">CHAUSSURES</text>
+  <rect width="800" height="500" fill="url(#bg-grad2)"/>
+  
+  <!-- Sneaker -->
+  <ellipse cx="220" cy="280" rx="95" ry="55" fill="url(#sneaker-grad)"/>
+  <path d="M 125 280 Q 125 250 150 235 L 290 235 Q 315 250 315 280" 
+        fill="url(#sneaker-grad)" stroke="#A93226" stroke-width="2"/>
+  <ellipse cx="220" cy="235" rx="70" ry="25" fill="#C0392B"/>
+  <rect x="200" y="220" width="40" height="8" rx="2" fill="#FFF"/>
+  <path d="M 130 275 Q 220 265 310 275" stroke="#FFF" stroke-width="3" fill="none"/>
+  <ellipse cx="220" cy="335" rx="95" ry="12" fill="#000" opacity="0.2"/>
+  
+  <!-- Boot -->
+  <path d="M 480 200 L 480 300 L 470 320 L 470 340 L 610 340 L 610 320 L 600 300 L 600 200 Z" 
+        fill="url(#boot-grad)" stroke="#3E1F0A" stroke-width="2"/>
+  <rect x="480" y="200" width="120" height="25" rx="3" fill="#A0522D"/>
+  <line x1="490" y1="230" x2="490" y2="290" stroke="#3E1F0A" stroke-width="2"/>
+  <line x1="500" y1="230" x2="500" y2="290" stroke="#3E1F0A" stroke-width="2"/>
+  <line x1="510" y1="230" x2="510" y2="290" stroke="#3E1F0A" stroke-width="2"/>
+  <ellipse cx="540" cy="350" rx="70" ry="10" fill="#000" opacity="0.2"/>
+  
+  <!-- Label -->
+  <rect x="280" y="430" width="240" height="50" rx="8" fill="#8B4513" opacity="0.9"/>
+  <text x="400" y="463" font-family="Arial, sans-serif" font-size="28" fill="#FFF" text-anchor="middle" font-weight="bold">CHAUSSURES</text>
 </svg>
