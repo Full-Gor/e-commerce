@@ -314,15 +314,12 @@ function setupCheckoutButton() {
 
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            // Redirection vers Stripe Checkout
-            showNotification('Redirection vers Stripe...');
+            // Redirection vers la page de paiement
+            showNotification('Redirection vers le paiement...');
 
-            // Redirection vers Stripe Checkout
-            // Remplacez cette URL par votre propre lien Stripe Checkout
+            // Redirection vers la page de paiement locale
             setTimeout(() => {
-                window.location.href = 'https://checkout.stripe.com/pay/cs_test_example';
-                // Ou pour une page de paiement personnalisée :
-                // window.location.href = 'payment.html';
+                window.location.href = 'payment.html';
             }, 500);
         });
     }

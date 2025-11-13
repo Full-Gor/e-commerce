@@ -245,33 +245,56 @@ function setupProductActions() {
 
 function addToCart(e) {
     const product = e.target.closest('.product-card');
-    const productTitle = product.querySelector('.product-title').textContent;
+
+    // Vérifier que le produit existe
+    if (!product) {
+        console.error('Produit non trouvé');
+        return;
+    }
+
+    const productTitleElement = product.querySelector('.product-title');
+    if (!productTitleElement) {
+        console.error('Titre du produit non trouvé');
+        return;
+    }
+
+    const productTitle = productTitleElement.textContent;
     const cartCount = document.querySelector('.cart-count');
-    
+
+    if (!cartCount) {
+        console.error('Compteur de panier non trouvé');
+        return;
+    }
+
     // Animation du produit
     product.style.animation = 'pulse 0.5s';
     setTimeout(() => {
         product.style.animation = '';
     }, 500);
-    
+
     // Mise à jour du compteur de panier
-    let count = parseInt(cartCount.textContent);
+    let count = parseInt(cartCount.textContent) || 0;
     cartCount.textContent = count + 1;
-    
+
     // Animation du compteur de panier
     cartCount.style.animation = 'bounce 0.5s';
     setTimeout(() => {
         cartCount.style.animation = '';
     }, 500);
-    
+
     // Notification
     const message = getNotificationElement();
-    message.textContent = `${productTitle} ajouté au panier`;
-    message.classList.add('visible');
-    
-    setTimeout(() => {
-        message.classList.remove('visible');
-    }, 3000);
+    if (message) {
+        message.textContent = `${productTitle} ajouté au panier`;
+        message.classList.add('visible');
+
+        setTimeout(() => {
+            message.classList.remove('visible');
+        }, 3000);
+    } else {
+        // Fallback si pas de système de notification
+        alert(`${productTitle} ajouté au panier`);
+    }
 }
 
 function addToWishlist(product) {
