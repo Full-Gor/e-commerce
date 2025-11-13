@@ -140,6 +140,21 @@ header.scrolled {
     transition: all 0.3s ease;
 }
 
+/* Photo de profil dans la navbar */
+.navbar-profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+}
+
+.navbar-profile-pic:hover {
+    border-color: var(--secondary);
+    transform: scale(1.1);
+}
+
 .hamburger {
     display: none;
     cursor: pointer;

@@ -248,10 +248,21 @@ function handlePhotoUpload(event) {
         userProfiles[currentUser].profilePhoto = imageData;
         localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
 
+        // Mettre à jour l'icône de profil dans la navbar
+        updateNavbarProfilePic(imageData, currentUser);
+
         showNotification('Photo de profil mise à jour avec succès !');
     };
 
     reader.readAsDataURL(file);
+}
+
+// Mettre à jour l'icône de profil dans la navbar
+function updateNavbarProfilePic(imageData, username) {
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.innerHTML = `<img src="${imageData}" alt="${username}" class="navbar-profile-pic">`;
+    }
 }
 
 // Supprimer la photo de profil
@@ -274,6 +285,12 @@ function removeProfilePhoto() {
     if (userProfiles[currentUser]) {
         userProfiles[currentUser].profilePhoto = '';
         localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
+    }
+
+    // Remettre l'icône par défaut dans la navbar
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
     }
 
     showNotification('Photo de profil supprimée');
