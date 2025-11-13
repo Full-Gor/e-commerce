@@ -907,3 +907,261 @@ function setupPagination() {
 
 // Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', init);
+// ===============================
+// SYSTÈME D'AVIS ET NOTATION
+// ===============================
+
+// Initialiser le système d'avis
+function initReviewSystem() {
+    const writeReviewBtn = document.getElementById('write-review-btn');
+    const reviewFormContainer = document.getElementById('review-form-container');
+    const reviewForm = document.getElementById('review-form');
+    const cancelReviewBtn = document.getElementById('cancel-review');
+    const starInputs = document.querySelectorAll('.star-input');
+    const ratingValueInput = document.getElementById('rating-value');
+
+    if (!writeReviewBtn) return;
+
+    // Afficher le formulaire
+    writeReviewBtn.addEventListener('click', function() {
+        const currentUser = localStorage.getItem('currentUser');
+        
+        if (!currentUser) {
+            alert('Veuillez vous connecter pour laisser un avis');
+            document.getElementById('account-button')?.click();
+            return;
+        }
+        
+        reviewFormContainer.style.display = 'block';
+        writeReviewBtn.style.display = 'none';
+        reviewFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // Masquer le formulaire
+    cancelReviewBtn.addEventListener('click', function() {
+        reviewFormContainer.style.display = 'none';
+        writeReviewBtn.style.display = 'block';
+        reviewForm.reset();
+        resetStarRating();
+    });
+
+    // Gestion des étoiles
+    starInputs.forEach((star, index) => {
+        star.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            ratingValueInput.value = value;
+            
+            // Mettre à jour l'affichage des étoiles
+            starInputs.forEach((s, i) => {
+                if (i < value) {
+                    s.textContent = '★';
+                    s.classList.add('active');
+                } else {
+                    s.textContent = '☆';
+                    s.classList.remove('active');
+                }
+            });
+        });
+
+        // Effet hover
+        star.addEventListener('mouseenter', function() {
+            const value = this.getAttribute('data-value');
+            starInputs.forEach((s, i) => {
+                if (i < value) {
+                    s.textContent = '★';
+                } else {
+                    s.textContent = '☆';
+                }
+            });
+        });
+    });
+
+    // Restaurer les étoiles au mouseleave
+    const starRatingInput = document.getElementById('star-rating-input');
+    starRatingInput.addEventListener('mouseleave', function() {
+        const currentValue = ratingValueInput.value;
+        if (currentValue) {
+            starInputs.forEach((s, i) => {
+                if (i < currentValue) {
+                    s.textContent = '★';
+                } else {
+                    s.textContent = '☆';
+                }
+            });
+        } else {
+            resetStarRating();
+        }
+    });
+
+    // Soumettre l'avis
+    reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            alert('Veuillez vous connecter pour laisser un avis');
+            return;
+        }
+
+        const rating = ratingValueInput.value;
+        const title = document.getElementById('review-title').value;
+        const text = document.getElementById('review-text').value;
+
+        if (!rating) {
+            alert('Veuillez sélectionner une note');
+            return;
+        }
+
+        const review = {
+            id: Date.now(),
+            author: currentUser,
+            rating: parseInt(rating),
+            title: title,
+            text: text,
+            date: new Date().toISOString(),
+            productId: 'current-product'
+        };
+
+        // Sauvegarder l'avis
+        saveReview(review);
+
+        // Réinitialiser le formulaire
+        reviewForm.reset();
+        resetStarRating();
+        reviewFormContainer.style.display = 'none';
+        writeReviewBtn.style.display = 'block';
+
+        // Afficher l'avis
+        addReviewToDOM(review);
+
+        // Mettre à jour la moyenne
+        updateAverageRating();
+
+        // Notification
+        const message = getNotificationElement();
+        if (message) {
+            message.textContent = 'Merci pour votre avis !';
+            message.classList.add('visible');
+            setTimeout(() => {
+                message.classList.remove('visible');
+            }, 3000);
+        }
+    });
+
+    // Charger les avis existants
+    loadReviews();
+    updateAverageRating();
+}
+
+// Réinitialiser les étoiles
+function resetStarRating() {
+    const starInputs = document.querySelectorAll('.star-input');
+    starInputs.forEach(star => {
+        star.textContent = '☆';
+        star.classList.remove('active');
+    });
+    document.getElementById('rating-value').value = '';
+}
+
+// Sauvegarder un avis
+function saveReview(review) {
+    let reviews = JSON.parse(localStorage.getItem('productReviews') || '[]');
+    reviews.unshift(review);
+    localStorage.setItem('productReviews', JSON.stringify(reviews));
+}
+
+// Charger les avis
+function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem('productReviews') || '[]');
+    reviews.forEach(review => {
+        addReviewToDOM(review);
+    });
+}
+
+// Ajouter un avis au DOM
+function addReviewToDOM(review) {
+    const reviewsList = document.getElementById('reviews-list');
+    if (!reviewsList) return;
+
+    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    const timeAgo = getTimeAgo(new Date(review.date));
+
+    const reviewHTML = '<div class="review-item" data-review-id="' + review.id + '">' +
+        '<div class="review-header">' +
+            '<div class="review-author">' +
+                '<div class="author-avatar">👤</div>' +
+                '<div class="author-info">' +
+                    '<h5>' + escapeHtml(review.author) + '</h5>' +
+                    '<div class="review-date">' + timeAgo + '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="review-rating">' + stars + '</div>' +
+        '</div>' +
+        '<div class="review-body">' +
+            '<h6>' + escapeHtml(review.title) + '</h6>' +
+            '<p>' + escapeHtml(review.text) + '</p>' +
+        '</div>' +
+    '</div>';
+
+    reviewsList.insertAdjacentHTML('afterbegin', reviewHTML);
+}
+
+// Calculer le temps écoulé
+function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    if (seconds < 60) return 'À l\'instant';
+    if (seconds < 3600) return 'Il y a ' + Math.floor(seconds / 60) + ' min';
+    if (seconds < 86400) return 'Il y a ' + Math.floor(seconds / 3600) + ' h';
+    if (seconds < 604800) return 'Il y a ' + Math.floor(seconds / 86400) + ' jours';
+    if (seconds < 2592000) return 'Il y a ' + Math.floor(seconds / 604800) + ' semaines';
+    return 'Il y a ' + Math.floor(seconds / 2592000) + ' mois';
+}
+
+// Mettre à jour la moyenne des notes
+function updateAverageRating() {
+    const reviews = JSON.parse(localStorage.getItem('productReviews') || '[]');
+    
+    if (reviews.length === 0) return;
+
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const average = totalRating / reviews.length;
+
+    // Mettre à jour l'affichage
+    const averageRatingEl = document.getElementById('average-rating');
+    const averageStarsEl = document.getElementById('average-stars');
+    const totalReviewsEl = document.getElementById('total-reviews');
+
+    if (averageRatingEl) {
+        averageRatingEl.textContent = average.toFixed(1);
+    }
+
+    if (averageStarsEl) {
+        const fullStars = Math.floor(average);
+        const hasHalfStar = average % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        
+        averageStarsEl.textContent = '★'.repeat(fullStars) + 
+                                     (hasHalfStar ? '⯨' : '') + 
+                                     '☆'.repeat(emptyStars);
+    }
+
+    if (totalReviewsEl) {
+        totalReviewsEl.textContent = reviews.length + 2;
+    }
+}
+
+// Échapper le HTML pour éviter XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Ajouter l'initialisation du système d'avis
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof init === 'function') {
+        init();
+    }
+    initReviewSystem();
+});

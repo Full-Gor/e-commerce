@@ -474,6 +474,87 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Section Avis Produit -->
+            <div class="product-reviews-section" id="product-reviews">
+                <h3>Avis clients</h3>
+                <div class="reviews-summary">
+                    <div class="average-rating">
+                        <div class="rating-number" id="average-rating">4.5</div>
+                        <div class="rating-stars" id="average-stars">★★★★★</div>
+                        <div class="rating-text"><span id="total-reviews">12</span> avis</div>
+                    </div>
+                    <button class="btn write-review-btn" id="write-review-btn">Écrire un avis</button>
+                </div>
+
+                <!-- Formulaire d'avis (caché par défaut) -->
+                <div class="review-form-container" id="review-form-container" style="display: none;">
+                    <h4>Votre avis</h4>
+                    <form id="review-form">
+                        <div class="form-group">
+                            <label>Votre note</label>
+                            <div class="star-rating-input" id="star-rating-input">
+                                <span class="star-input" data-value="1">☆</span>
+                                <span class="star-input" data-value="2">☆</span>
+                                <span class="star-input" data-value="3">☆</span>
+                                <span class="star-input" data-value="4">☆</span>
+                                <span class="star-input" data-value="5">☆</span>
+                            </div>
+                            <input type="hidden" id="rating-value" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-title">Titre de l'avis</label>
+                            <input type="text" id="review-title" required maxlength="100" placeholder="Résumez votre avis">
+                        </div>
+                        <div class="form-group">
+                            <label for="review-text">Votre commentaire</label>
+                            <textarea id="review-text" required rows="5" placeholder="Partagez votre expérience avec ce produit"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Publier l'avis</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-review">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Liste des avis -->
+                <div class="reviews-list" id="reviews-list">
+                    <!-- Avis par défaut -->
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-author">
+                                <div class="author-avatar">👤</div>
+                                <div class="author-info">
+                                    <h5>Marie Dupont</h5>
+                                    <div class="review-date">Il y a 2 jours</div>
+                                </div>
+                            </div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-body">
+                            <h6>Excellent produit!</h6>
+                            <p>Très bonne qualité, conforme à la description. Je recommande vivement!</p>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-author">
+                                <div class="author-avatar">👤</div>
+                                <div class="author-info">
+                                    <h5>Thomas Martin</h5>
+                                    <div class="review-date">Il y a 5 jours</div>
+                                </div>
+                            </div>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <div class="review-body">
+                            <h6>Très satisfait</h6>
+                            <p>Bon rapport qualité/prix. Livraison rapide. Un petit bémol sur la taille qui taille un peu grand.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
