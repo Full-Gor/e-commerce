@@ -422,8 +422,9 @@ section {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 968px) {
+@media screen and (max-width: 1024px) {
     .hamburger {
+        z-index: 1001;
         display: block;
     }
 
@@ -439,7 +440,7 @@ section {
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 20px 0;
         z-index: 1000;
