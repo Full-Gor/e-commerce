@@ -140,6 +140,21 @@ header.scrolled {
     transition: all 0.3s ease;
 }
 
+/* Photo de profil dans la navbar */
+.navbar-profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    transition: all 0.3s ease;
+}
+
+.navbar-profile-pic:hover {
+    border-color: var(--secondary);
+    transform: scale(1.1);
+}
+
 .hamburger {
     display: none;
     cursor: pointer;
@@ -422,9 +437,10 @@ section {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 968px) {
+@media screen and (max-width: 768px) {
     .hamburger {
         display: block;
+        z-index: 1001;
     }
 
     .icons {
@@ -439,7 +455,7 @@ section {
         background-color: white;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 20px 0;
         z-index: 1000;
