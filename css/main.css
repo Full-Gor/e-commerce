@@ -422,10 +422,10 @@ section {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .hamburger {
-        z-index: 1001;
         display: block;
+        z-index: 1001;
     }
 
     .icons {
