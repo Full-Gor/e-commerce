@@ -311,17 +311,19 @@ function setupUpdateCart() {
 // Gestion du bouton de passage à la caisse
 function setupCheckoutButton() {
     const checkoutBtn = document.querySelector('.checkout-btn');
-    
+
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            // Simuler le processus de paiement
-            // Dans une application réelle, cela redirigerait vers une page de paiement
-            showNotification('Redirection vers la page de paiement...');
-            
-            // Simuler une redirection
+            // Redirection vers Stripe Checkout
+            showNotification('Redirection vers Stripe...');
+
+            // Redirection vers Stripe Checkout
+            // Remplacez cette URL par votre propre lien Stripe Checkout
             setTimeout(() => {
-                alert('Cette fonctionnalité serait connectée à un véritable système de paiement dans un site e-commerce réel.');
-            }, 1000);
+                window.location.href = 'https://checkout.stripe.com/pay/cs_test_example';
+                // Ou pour une page de paiement personnalisée :
+                // window.location.href = 'payment.html';
+            }, 500);
         });
     }
 }
