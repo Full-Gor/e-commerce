@@ -1,0 +1,13 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06D6A0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#048B6B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#grad3)"/>
+  <!-- Bag icon -->
+  <path d="M 320 200 L 310 320 L 490 320 L 480 200 L 450 200 L 450 180 Q 450 150 400 150 Q 350 150 350 180 L 350 200 Z" fill="#FFF" opacity="0.3"/>
+  <rect x="310" y="200" width="180" height="10" fill="#FFF" opacity="0.5"/>
+  <text x="400" y="380" font-family="Arial, sans-serif" font-size="48" fill="#FFF" text-anchor="middle" font-weight="bold">ACCESSOIRES</text>
+</svg>
