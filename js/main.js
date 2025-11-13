@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
-        loginToReviewBtn.addEventListener('click', showAccountModal);
+        loginToReviewBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
     }
 });
 
@@ -418,8 +420,8 @@ function setupHeaderIcons() {
                 // Rediriger vers la page de profil
                 window.location.href = 'profile.html';
             } else {
-                // Afficher la modal de connexion/inscription
-                showAccountModal();
+                // Rediriger vers la page de connexion dédiée
+                window.location.href = 'login.html';
             }
         });
     }
