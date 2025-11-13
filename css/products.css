@@ -388,31 +388,6 @@
 .pagination-prev,
 .pagination-next {
     font-weight: bold;
-
-    .pagination-prev,
-    .pagination-next {
-        font-weight: bold;
-    }
-
-    /* Media Queries */
-    @media screen and (max-width: 992px) {
-        .products-wrapper {
-            flex-direction: column;
-        }
-
-        .filters-sidebar {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .products-grid.list-view .product-card {
-            flex-direction: column;
-        }
-
-        .products-grid.list-view .product-img {
-            width: 100%;
-        }
-    }
 }
 
 @media screen and (max-width: 768px) {

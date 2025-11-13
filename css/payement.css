@@ -317,3 +317,268 @@ input {
 .creditcard .cyandark {
     fill: #0097a7;
 }
+
+/* ===============================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   =============================================== */
+
+/* Tablette landscape (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .payment-container {
+        width: 95%;
+        padding: 0 15px;
+    }
+
+    .row {
+        gap: 25px;
+    }
+
+    .payment-info {
+        min-width: 400px;
+    }
+
+    .order-summary h2,
+    .payment-title h2 {
+        font-size: 22px;
+    }
+}
+
+/* Tablette portrait (max-width: 768px) */
+@media (max-width: 768px) {
+    .page-title {
+        padding: 40px 0;
+        margin-top: 60px;
+    }
+
+    .page-title h1 {
+        font-size: 30px;
+    }
+
+    .payment-section {
+        padding: 40px 0;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .payment-info {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .order-summary {
+        min-width: unset;
+        width: 100%;
+        padding: 25px;
+    }
+
+    .order-summary h2,
+    .payment-title h2 {
+        font-size: 20px;
+    }
+
+    .item-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .item-title {
+        font-size: 15px;
+    }
+
+    .item-meta {
+        font-size: 13px;
+    }
+
+    .totals-row.total {
+        font-size: 18px;
+    }
+
+    .form-container {
+        max-width: 100%;
+        padding: 15px;
+        grid-template-rows: 80px 80px 80px;
+    }
+
+    .container {
+        max-width: 100%;
+        height: 50vw;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .ccicon {
+        height: 32px;
+        width: 50px;
+    }
+}
+
+/* Mobile large (max-width: 480px) */
+@media (max-width: 480px) {
+    .page-title {
+        padding: 30px 0;
+    }
+
+    .page-title h1 {
+        font-size: 26px;
+    }
+
+    .breadcrumb {
+        font-size: 13px;
+    }
+
+    .payment-section {
+        padding: 30px 0;
+    }
+
+    .row {
+        gap: 15px;
+    }
+
+    .order-summary {
+        padding: 20px;
+    }
+
+    .order-summary h2,
+    .payment-title h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .order-items {
+        margin-bottom: 25px;
+    }
+
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+
+    .item-image {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .item-details {
+        width: 100%;
+    }
+
+    .item-title {
+        font-size: 14px;
+    }
+
+    .item-meta {
+        font-size: 12px;
+    }
+
+    .item-price {
+        font-size: 14px;
+    }
+
+    .totals-row {
+        font-size: 14px;
+    }
+
+    .totals-row.total {
+        font-size: 16px;
+    }
+
+    .payment-title {
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        padding: 15px 10px;
+        grid-column-gap: 8px;
+        grid-template-rows: 75px 75px 75px;
+    }
+
+    .container {
+        padding: 15px;
+        height: 48vw;
+    }
+
+    label {
+        font-size: 11px;
+        padding-bottom: 5px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .ccicon {
+        height: 28px;
+        width: 45px;
+        top: calc(50% - 4px);
+        right: 4px;
+    }
+
+    #ccsingle {
+        right: 10px;
+        top: 15px;
+    }
+
+    #ccsingle svg {
+        width: 80px;
+        max-height: 50px;
+    }
+
+    #generatecard {
+        font-size: 11px;
+        padding: 2px 3px;
+    }
+}
+
+/* Très petit mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .page-title h1 {
+        font-size: 24px;
+    }
+
+    .order-summary,
+    .form-container {
+        padding: 15px;
+    }
+
+    .order-summary h2,
+    .payment-title h2 {
+        font-size: 17px;
+    }
+
+    .item-image {
+        height: 180px;
+    }
+
+    .form-container {
+        grid-template-rows: 70px 70px 70px;
+    }
+
+    input {
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    label {
+        font-size: 10px;
+    }
+
+    .ccicon {
+        height: 24px;
+        width: 40px;
+    }
+}
