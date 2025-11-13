@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
-        loginToReviewBtn.addEventListener('click', showAccountModal);
+        loginToReviewBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
     }
 });
 
@@ -418,8 +420,8 @@ function setupHeaderIcons() {
                 // Rediriger vers la page de profil
                 window.location.href = 'profile.html';
             } else {
-                // Afficher la modal de connexion/inscription
-                showAccountModal();
+                // Rediriger vers la page de connexion dédiée
+                window.location.href = 'login.html';
             }
         });
     }
@@ -839,9 +841,19 @@ function updateUserInterface() {
     const accountButton = document.getElementById('account-button');
 
     if (currentUser) {
-        // L'utilisateur est connecté
-        accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
-        accountButton.title = 'Mon Profil - ' + currentUser;
+        // Charger la photo de profil
+        const userProfiles = JSON.parse(localStorage.getItem('userProfiles') || '{}');
+        const userProfile = userProfiles[currentUser];
+
+        if (userProfile && userProfile.profilePhoto) {
+            // Afficher la photo de profil
+            accountButton.innerHTML = `<img src="${userProfile.profilePhoto}" alt="${currentUser}" class="navbar-profile-pic">`;
+            accountButton.title = 'Mon Profil - ' + currentUser;
+        } else {
+            // Afficher l'icône par défaut avec le pseudo
+            accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
+            accountButton.title = 'Mon Profil - ' + currentUser;
+        }
 
         // Ajouter un lien "Mon Profil" dans le menu de navigation si pas déjà présent
         const navLinks = document.querySelector('.nav-links');

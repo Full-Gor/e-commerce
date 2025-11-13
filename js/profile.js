@@ -63,6 +63,12 @@ function loadUserProfile(username) {
 
     // Charger les statistiques
     loadUserStats(username);
+
+    // Créer des commandes exemples si nécessaire (pour la démo)
+    createSampleOrders();
+
+    // Charger l'historique des commandes
+    loadOrdersHistory();
 }
 
 // Créer un profil par défaut
@@ -242,10 +248,21 @@ function handlePhotoUpload(event) {
         userProfiles[currentUser].profilePhoto = imageData;
         localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
 
+        // Mettre à jour l'icône de profil dans la navbar
+        updateNavbarProfilePic(imageData, currentUser);
+
         showNotification('Photo de profil mise à jour avec succès !');
     };
 
     reader.readAsDataURL(file);
+}
+
+// Mettre à jour l'icône de profil dans la navbar
+function updateNavbarProfilePic(imageData, username) {
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.innerHTML = `<img src="${imageData}" alt="${username}" class="navbar-profile-pic">`;
+    }
 }
 
 // Supprimer la photo de profil
@@ -268,6 +285,12 @@ function removeProfilePhoto() {
     if (userProfiles[currentUser]) {
         userProfiles[currentUser].profilePhoto = '';
         localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
+    }
+
+    // Remettre l'icône par défaut dans la navbar
+    const accountButton = document.getElementById('account-button');
+    if (accountButton) {
+        accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
     }
 
     showNotification('Photo de profil supprimée');
@@ -454,4 +477,218 @@ function handleDeleteAccount() {
     } else if (confirmation !== null) {
         showNotification('Suppression annulée - texte de confirmation incorrect', 'error');
     }
+}
+
+// ========================================
+// HISTORIQUE DES COMMANDES
+// ========================================
+
+// Charger et afficher l'historique des commandes
+function loadOrdersHistory() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+    const userOrders = orders[currentUser] || [];
+
+    const ordersList = document.getElementById('orders-list');
+    if (!ordersList) return;
+
+    // Si aucune commande
+    if (userOrders.length === 0) {
+        ordersList.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">📦</div>
+                <p>Aucune commande pour le moment</p>
+                <a href="products.html" class="btn">Découvrir nos produits</a>
+            </div>
+        `;
+        return;
+    }
+
+    // Trier les commandes par date (plus récentes en premier)
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Afficher les commandes
+    let ordersHTML = '';
+    userOrders.forEach(order => {
+        const orderDate = new Date(order.date);
+        const formattedDate = orderDate.toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        const statusClass = order.status === 'delivered' ? 'delivered' :
+                           order.status === 'pending' ? 'pending' : 'cancelled';
+        const statusText = order.status === 'delivered' ? '✓ Livrée' :
+                          order.status === 'pending' ? '⏳ En cours' : '✗ Annulée';
+
+        ordersHTML += `
+            <div class="order-item">
+                <div class="order-header">
+                    <div>
+                        <div class="order-number">Commande #${order.id}</div>
+                        <div class="order-date">${formattedDate}</div>
+                    </div>
+                    <span class="order-status ${statusClass}">${statusText}</span>
+                </div>
+                <div class="order-items">
+                    ${order.items.map(item => `
+                        <div class="order-product">
+                            <img src="${item.image}" alt="${item.name}" class="order-product-image">
+                            <div class="order-product-details">
+                                <div class="order-product-name">${escapeHtml(item.name)}</div>
+                                <div class="order-product-quantity">Quantité: ${item.quantity}</div>
+                            </div>
+                            <div class="order-product-price">${(item.price * item.quantity).toFixed(2)} €</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="order-footer">
+                    <div class="order-total">Total: ${order.total.toFixed(2)} €</div>
+                    <div class="order-actions">
+                        ${order.status === 'delivered' ?
+                            '<button class="btn btn-small" onclick="reorderItems(' + order.id + ')">Recommander</button>' : ''}
+                        ${order.status === 'pending' ?
+                            '<button class="btn btn-secondary btn-small" onclick="cancelOrder(' + order.id + ')">Annuler</button>' : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    ordersList.innerHTML = ordersHTML;
+
+    // Mettre à jour le compteur de commandes
+    const statOrders = document.getElementById('stat-orders');
+    if (statOrders) {
+        statOrders.textContent = userOrders.length;
+    }
+}
+
+// Recommander les articles d'une commande
+function reorderItems(orderId) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+    const userOrders = orders[currentUser] || [];
+    const order = userOrders.find(o => o.id === orderId);
+
+    if (!order) return;
+
+    // Ajouter tous les articles au panier
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    order.items.forEach(item => {
+        const existingItem = cart.find(c => c.name === item.name);
+        if (existingItem) {
+            existingItem.quantity += item.quantity;
+        } else {
+            cart.push({ ...item });
+        }
+    });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showNotification('Articles ajoutés au panier !');
+
+    // Rediriger vers le panier
+    setTimeout(() => {
+        window.location.href = 'cart.html';
+    }, 1500);
+}
+
+// Annuler une commande
+function cancelOrder(orderId) {
+    if (!confirm('Voulez-vous vraiment annuler cette commande ?')) return;
+
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+    const userOrders = orders[currentUser] || [];
+    const orderIndex = userOrders.findIndex(o => o.id === orderId);
+
+    if (orderIndex === -1) return;
+
+    // Changer le statut
+    userOrders[orderIndex].status = 'cancelled';
+    orders[currentUser] = userOrders;
+    localStorage.setItem('userOrders', JSON.stringify(orders));
+
+    showNotification('Commande annulée');
+    loadOrdersHistory();
+}
+
+// Échapper le HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Créer des commandes exemples pour les tests (à supprimer en production)
+function createSampleOrders() {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+
+    // Si l'utilisateur a déjà des commandes, ne rien faire
+    if (orders[currentUser] && orders[currentUser].length > 0) return;
+
+    // Créer 3 commandes exemples
+    orders[currentUser] = [
+        {
+            id: Date.now() - 864000000,
+            date: new Date(Date.now() - 864000000).toISOString(),
+            status: 'delivered',
+            items: [
+                {
+                    name: 'T-shirt Premium',
+                    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=60&h=60&fit=crop&q=80',
+                    price: 29.99,
+                    quantity: 2
+                }
+            ],
+            total: 59.98
+        },
+        {
+            id: Date.now() - 432000000,
+            date: new Date(Date.now() - 432000000).toISOString(),
+            status: 'pending',
+            items: [
+                {
+                    name: 'Jean Slim',
+                    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=60&h=60&fit=crop&q=80',
+                    price: 79.99,
+                    quantity: 1
+                },
+                {
+                    name: 'Chemise',
+                    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=60&h=60&fit=crop&q=80',
+                    price: 49.99,
+                    quantity: 1
+                }
+            ],
+            total: 129.98
+        },
+        {
+            id: Date.now() - 172800000,
+            date: new Date(Date.now() - 172800000).toISOString(),
+            status: 'delivered',
+            items: [
+                {
+                    name: 'Sneakers',
+                    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=60&h=60&fit=crop&q=80',
+                    price: 89.99,
+                    quantity: 1
+                }
+            ],
+            total: 89.99
+        }
+    ];
+
+    localStorage.setItem('userOrders', JSON.stringify(orders));
 }
