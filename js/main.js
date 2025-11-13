@@ -43,45 +43,273 @@ function initHeader() {
     }
 }
 
-// Barre de recherche
+// Barre de recherche améliorée
 function initSearchBar() {
     const searchButton = document.getElementById('search-button');
     const searchContainer = document.getElementById('search-container');
     const searchClose = document.getElementById('search-close');
-    
+
     if (searchButton && searchContainer && searchClose) {
         // Ouvrir la barre de recherche
-        searchButton.addEventListener('click', function() {
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
             searchContainer.classList.add('active');
             setTimeout(() => {
-                document.querySelector('.search-input').focus();
+                const searchInput = document.querySelector('.search-input');
+                if (searchInput) {
+                    searchInput.focus();
+                }
             }, 300);
         });
-        
+
         // Fermer la barre de recherche
         searchClose.addEventListener('click', function() {
             searchContainer.classList.remove('active');
+            clearSearchResults();
         });
-        
+
         // Fermer en cliquant en dehors
         searchContainer.addEventListener('click', function(e) {
             if (e.target === this) {
                 searchContainer.classList.remove('active');
+                clearSearchResults();
             }
         });
-        
+
+        // Fermer avec la touche Echap
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && searchContainer.classList.contains('active')) {
+                searchContainer.classList.remove('active');
+                clearSearchResults();
+            }
+        });
+
         // Gestion du formulaire de recherche
         const searchForm = document.querySelector('.search-form');
-        if (searchForm) {
+        const searchInput = document.querySelector('.search-input');
+
+        if (searchForm && searchInput) {
+            // Recherche en temps réel
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                const query = this.value.trim();
+
+                if (query.length >= 2) {
+                    searchTimeout = setTimeout(() => {
+                        performLiveSearch(query);
+                    }, 300);
+                } else {
+                    clearSearchResults();
+                }
+            });
+
+            // Soumission du formulaire
             searchForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const searchInput = this.querySelector('.search-input');
                 if (searchInput && searchInput.value.trim()) {
-                    // Rediriger vers la page de résultats (simulation)
+                    // Rediriger vers la page de résultats
                     window.location.href = `products.html?search=${encodeURIComponent(searchInput.value.trim())}`;
                 }
             });
         }
+    }
+}
+
+// Recherche en direct
+function performLiveSearch(query) {
+    // Créer le conteneur de résultats s'il n'existe pas
+    let resultsContainer = document.querySelector('.search-results');
+
+    if (!resultsContainer) {
+        resultsContainer = document.createElement('div');
+        resultsContainer.className = 'search-results';
+        const searchForm = document.querySelector('.search-form');
+        if (searchForm) {
+            searchForm.appendChild(resultsContainer);
+        }
+
+        // Ajouter les styles
+        addSearchResultsStyles();
+    }
+
+    // Simuler des résultats de recherche (dans une vraie app, ce serait une requête API)
+    const mockResults = [
+        { title: 'T-Shirt Premium', category: 'Vêtements', price: '24,99 €', url: 'products.html?category=vetements' },
+        { title: 'Baskets Confort', category: 'Chaussures', price: '79,99 €', url: 'products.html?category=chaussures' },
+        { title: 'Sac à dos tendance', category: 'Accessoires', price: '49,99 €', url: 'products.html?category=accessoires' },
+        { title: 'Écouteurs sans fil', category: 'Électronique', price: '89,99 €', url: 'products.html?category=electronique' },
+        { title: 'Montre élégante', category: 'Accessoires', price: '129,99 €', url: 'products.html?category=accessoires' },
+        { title: 'Pantalon confort', category: 'Vêtements', price: '59,99 €', url: 'products.html?category=vetements' }
+    ];
+
+    // Filtrer les résultats selon la requête
+    const filteredResults = mockResults.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.category.toLowerCase().includes(query.toLowerCase())
+    );
+
+    // Afficher les résultats
+    if (filteredResults.length > 0) {
+        resultsContainer.innerHTML = filteredResults.slice(0, 5).map(result => `
+            <a href="${result.url}" class="search-result-item">
+                <div class="result-info">
+                    <div class="result-title">${highlightMatch(result.title, query)}</div>
+                    <div class="result-category">${result.category}</div>
+                </div>
+                <div class="result-price">${result.price}</div>
+            </a>
+        `).join('');
+
+        // Ajouter un lien "Voir tous les résultats"
+        resultsContainer.innerHTML += `
+            <a href="products.html?search=${encodeURIComponent(query)}" class="search-result-all">
+                Voir tous les résultats pour "${query}"
+            </a>
+        `;
+
+        resultsContainer.style.display = 'block';
+    } else {
+        resultsContainer.innerHTML = `
+            <div class="search-no-results">
+                <p>Aucun résultat pour "${query}"</p>
+            </div>
+        `;
+        resultsContainer.style.display = 'block';
+    }
+}
+
+// Surligner les correspondances dans les résultats
+function highlightMatch(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<strong>$1</strong>');
+}
+
+// Effacer les résultats de recherche
+function clearSearchResults() {
+    const resultsContainer = document.querySelector('.search-results');
+    if (resultsContainer) {
+        resultsContainer.style.display = 'none';
+        resultsContainer.innerHTML = '';
+    }
+}
+
+// Ajouter les styles des résultats de recherche
+function addSearchResultsStyles() {
+    if (!document.getElementById('search-results-styles')) {
+        const style = document.createElement('style');
+        style.id = 'search-results-styles';
+
+        style.textContent = `
+            .search-results {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+                max-height: 400px;
+                overflow-y: auto;
+                margin-top: 8px;
+                z-index: 10;
+                display: none;
+            }
+
+            .search-result-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                border-bottom: 1px solid #f0f0f0;
+                text-decoration: none;
+                color: var(--dark);
+                transition: all 0.3s ease;
+            }
+
+            .search-result-item:hover {
+                background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+                padding-left: 25px;
+            }
+
+            .result-info {
+                flex: 1;
+            }
+
+            .result-title {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 4px;
+                color: var(--dark);
+            }
+
+            .result-title strong {
+                color: var(--primary);
+            }
+
+            .result-category {
+                font-size: 13px;
+                color: #6c757d;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .result-price {
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--primary);
+                margin-left: 15px;
+            }
+
+            .search-result-all {
+                display: block;
+                padding: 15px 20px;
+                text-align: center;
+                background: linear-gradient(135deg, var(--primary) 0%, #5c9dff 100%);
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 0 0 12px 12px;
+                transition: all 0.3s ease;
+            }
+
+            .search-result-all:hover {
+                background: linear-gradient(135deg, #2563eb 0%, var(--primary) 100%);
+                box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+            }
+
+            .search-no-results {
+                padding: 30px 20px;
+                text-align: center;
+                color: #6c757d;
+            }
+
+            .search-no-results p {
+                margin: 0;
+                font-size: 15px;
+            }
+
+            /* Scrollbar personnalisée pour les résultats */
+            .search-results::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .search-results::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 0 0 12px 0;
+            }
+
+            .search-results::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 4px;
+            }
+
+            .search-results::-webkit-scrollbar-thumb:hover {
+                background: var(--dark);
+            }
+        `;
+
+        document.head.appendChild(style);
     }
 }
 
