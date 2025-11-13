@@ -127,7 +127,6 @@ function handleRegister(e) {
     e.preventDefault();
 
     const username = document.getElementById('register-username').value.trim();
-    const email = document.getElementById('register-email').value.trim();
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById('register-password-confirm').value;
     const acceptTerms = document.getElementById('accept-terms').checked;
@@ -166,16 +165,9 @@ function handleRegister(e) {
         return;
     }
 
-    // Créer le compte
+    // Créer le compte (pseudo + mot de passe uniquement)
     users[username] = password;
     localStorage.setItem('users', JSON.stringify(users));
-
-    // Sauvegarder l'email si fourni
-    if (email) {
-        const emails = JSON.parse(localStorage.getItem('userEmails') || '{}');
-        emails[username] = email;
-        localStorage.setItem('userEmails', JSON.stringify(emails));
-    }
 
     // Connecter automatiquement
     localStorage.setItem('currentUser', username);
