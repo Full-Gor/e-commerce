@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     initSideTags();
     initBackToTop();
     setupEventListeners();
+
+    // Charger l'état de connexion et les témoignages utilisateur
+    updateUserInterface();
+    loadUserTestimonials();
+
+    // Gérer le bouton "Se connecter" pour laisser un avis
+    const loginToReviewBtn = document.getElementById('login-to-review');
+    if (loginToReviewBtn) {
+        loginToReviewBtn.addEventListener('click', showAccountModal);
+    }
 });
 
 // Gestion du header responsive et du scroll
@@ -201,8 +211,8 @@ function showAccountModal() {
                 <div class="tab-content active" id="login-tab">
                     <form id="login-form">
                         <div class="form-group">
-                            <label for="login-email">Email</label>
-                            <input type="email" id="login-email" required>
+                            <label for="login-username">Pseudo</label>
+                            <input type="text" id="login-username" required>
                         </div>
                         <div class="form-group">
                             <label for="login-password">Mot de passe</label>
@@ -214,29 +224,21 @@ function showAccountModal() {
                             </label>
                         </div>
                         <button type="submit" class="btn">Se connecter</button>
-                        <div class="form-footer">
-                            <a href="#">Mot de passe oublié?</a>
-                        </div>
                     </form>
                 </div>
                 <div class="tab-content" id="register-tab">
                     <form id="register-form">
                         <div class="form-group">
-                            <label for="register-name">Nom complet</label>
-                            <input type="text" id="register-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="register-email">Email</label>
-                            <input type="email" id="register-email" required>
+                            <label for="register-username">Pseudo</label>
+                            <input type="text" id="register-username" required minlength="3">
                         </div>
                         <div class="form-group">
                             <label for="register-password">Mot de passe</label>
-                            <input type="password" id="register-password" required>
+                            <input type="password" id="register-password" required minlength="6">
                         </div>
-                        <div class="form-group checkbox-group">
-                            <label>
-                                <input type="checkbox" required> J'accepte les <a href="#">conditions d'utilisation</a>
-                            </label>
+                        <div class="form-group">
+                            <label for="register-password-confirm">Confirmer le mot de passe</label>
+                            <input type="password" id="register-password-confirm" required minlength="6">
                         </div>
                         <button type="submit" class="btn">S'inscrire</button>
                     </form>
@@ -271,17 +273,55 @@ function showAccountModal() {
         // Gérer les formulaires
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
-        
+
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            showNotification('Connexion réussie !');
-            modal.classList.remove('active');
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            // Récupérer les utilisateurs enregistrés
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+            // Vérifier si l'utilisateur existe et le mot de passe est correct
+            if (users[username] && users[username] === password) {
+                localStorage.setItem('currentUser', username);
+                showNotification('Connexion réussie !');
+                modal.classList.remove('active');
+                updateUserInterface();
+            } else {
+                showNotification('Pseudo ou mot de passe incorrect', 'error');
+            }
         });
-        
+
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-password-confirm').value;
+
+            // Vérifier que les mots de passe correspondent
+            if (password !== confirmPassword) {
+                showNotification('Les mots de passe ne correspondent pas', 'error');
+                return;
+            }
+
+            // Récupérer les utilisateurs existants
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+            // Vérifier si l'utilisateur existe déjà
+            if (users[username]) {
+                showNotification('Ce pseudo est déjà utilisé', 'error');
+                return;
+            }
+
+            // Enregistrer le nouvel utilisateur
+            users[username] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', username);
+
             showNotification('Inscription réussie !');
             modal.classList.remove('active');
+            updateUserInterface();
         });
         
         // Ajouter des styles pour la modal
@@ -537,17 +577,166 @@ function showNotification(message, type = 'success') {
     }, 5000);
 }
 
+// Mettre à jour l'interface utilisateur selon l'état de connexion
+function updateUserInterface() {
+    const currentUser = localStorage.getItem('currentUser');
+    const accountButton = document.getElementById('account-button');
+
+    if (currentUser) {
+        // L'utilisateur est connecté
+        accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
+        accountButton.title = currentUser;
+
+        // Afficher le formulaire de témoignage si on est sur la page d'accueil
+        const testimonialFormContainer = document.getElementById('testimonial-form-container');
+        if (testimonialFormContainer) {
+            testimonialFormContainer.innerHTML = `
+                <form id="new-testimonial-form">
+                    <div class="form-group">
+                        <label for="testimonial-text">Votre avis</label>
+                        <textarea id="testimonial-text" rows="4" placeholder="Partagez votre expérience..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Publier mon avis</button>
+                </form>
+                <button class="btn btn-secondary" id="logout-btn">Se déconnecter</button>
+            `;
+
+            // Gérer la soumission du formulaire de témoignage
+            const newTestimonialForm = document.getElementById('new-testimonial-form');
+            if (newTestimonialForm) {
+                newTestimonialForm.addEventListener('submit', handleTestimonialSubmit);
+            }
+
+            // Gérer la déconnexion
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+        }
+    } else {
+        // L'utilisateur n'est pas connecté
+        accountButton.textContent = '👤';
+        accountButton.title = 'Mon compte';
+    }
+}
+
+// Gérer la soumission d'un nouveau témoignage
+function handleTestimonialSubmit(e) {
+    e.preventDefault();
+    const currentUser = localStorage.getItem('currentUser');
+    const testimonialText = document.getElementById('testimonial-text').value;
+
+    if (!currentUser || !testimonialText) return;
+
+    // Récupérer les témoignages existants
+    const userTestimonials = JSON.parse(localStorage.getItem('userTestimonials') || '[]');
+
+    // Ajouter le nouveau témoignage
+    const newTestimonial = {
+        username: currentUser,
+        text: testimonialText,
+        date: new Date().toISOString()
+    };
+
+    userTestimonials.push(newTestimonial);
+    localStorage.setItem('userTestimonials', JSON.stringify(userTestimonials));
+
+    // Ajouter le témoignage au DOM
+    addTestimonialToDOM(newTestimonial);
+
+    // Réinitialiser le formulaire
+    document.getElementById('testimonial-text').value = '';
+    showNotification('Votre avis a été publié avec succès !');
+}
+
+// Ajouter un témoignage au DOM
+function addTestimonialToDOM(testimonial) {
+    const container = document.getElementById('testimonial-container');
+    if (!container) return;
+
+    // Choisir une couleur aléatoire pour l'avatar
+    const colors = ['#FF6B9D', '#3A86FF', '#06D6A0', '#FFD60A', '#9D4EDD', '#EF476F'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+    const testimonialCard = document.createElement('div');
+    testimonialCard.className = 'testimonial-card user-testimonial';
+    testimonialCard.innerHTML = `
+        <div class="quote">"</div>
+        <p class="testimonial-text">${testimonial.text}</p>
+        <div class="testimonial-user">
+            <div class="user-img">
+                <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="${randomColor}"/>
+                    <circle cx="50" cy="40" r="18" fill="#FFF"/>
+                    <path d="M 25 85 Q 25 65 50 65 Q 75 65 75 85 Z" fill="#FFF"/>
+                </svg>
+            </div>
+            <div class="user-info">
+                <h4>${testimonial.username}</h4>
+                <p>Client</p>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(testimonialCard);
+
+    // Faire défiler vers le nouveau témoignage
+    setTimeout(() => {
+        const allCards = container.querySelectorAll('.testimonial-card');
+        const lastIndex = allCards.length - 1;
+        if (window.initTestimonialSlider) {
+            // Réinitialiser le carousel si la fonction existe
+            const home = document.querySelector('.testimonials');
+            if (home) {
+                container.scrollTo({
+                    left: lastIndex * (allCards[0].offsetWidth + 30),
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }, 100);
+}
+
+// Déconnexion
+function logout() {
+    localStorage.removeItem('currentUser');
+    showNotification('Vous êtes déconnecté');
+    updateUserInterface();
+
+    // Recharger le formulaire de connexion
+    const testimonialFormContainer = document.getElementById('testimonial-form-container');
+    if (testimonialFormContainer) {
+        testimonialFormContainer.innerHTML = `
+            <p class="login-prompt">Connectez-vous pour laisser votre avis</p>
+            <button class="btn" id="login-to-review">Se connecter</button>
+        `;
+
+        const loginToReviewBtn = document.getElementById('login-to-review');
+        if (loginToReviewBtn) {
+            loginToReviewBtn.addEventListener('click', showAccountModal);
+        }
+    }
+}
+
+// Charger les témoignages utilisateur au chargement de la page
+function loadUserTestimonials() {
+    const userTestimonials = JSON.parse(localStorage.getItem('userTestimonials') || '[]');
+    userTestimonials.forEach(testimonial => {
+        addTestimonialToDOM(testimonial);
+    });
+}
+
 // Animation des éléments au défilement
 function setupScrollAnimations() {
     // Éléments à animer lors du défilement
     const animatedElements = document.querySelectorAll('.product-card, .category-card, .testimonial-card, .feature-item');
-    
+
     // Configuration de l'observateur d'intersection
     const options = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     // Créer l'observateur
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -557,7 +746,7 @@ function setupScrollAnimations() {
             }
         });
     }, options);
-    
+
     // Observer chaque élément
     animatedElements.forEach((element, index) => {
         // Configurer l'animation
@@ -565,23 +754,23 @@ function setupScrollAnimations() {
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         element.style.transitionDelay = `${index % 4 * 0.1}s`;
-        
+
         // Ajouter à l'observateur
         observer.observe(element);
     });
-    
+
     // Ajouter la classe d'animation
     if (!document.getElementById('scroll-animation-styles')) {
         const style = document.createElement('style');
         style.id = 'scroll-animation-styles';
-        
+
         style.textContent = `
             .animate {
                 opacity: 1 !important;
                 transform: translateY(0) !important;
             }
         `;
-        
+
         document.head.appendChild(style);
     }
 }
