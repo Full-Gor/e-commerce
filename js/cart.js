@@ -314,12 +314,20 @@ function setupCheckoutButton() {
 
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            // Redirection vers la page de paiement
-            showNotification('Redirection vers le paiement...');
+            const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
 
-            // Redirection vers la page de paiement locale
+            if (cartItems.length === 0) {
+                showNotification('Votre panier est vide', 'error');
+                return;
+            }
+
+            // Redirection vers Stripe Checkout
+            showNotification('Redirection vers Stripe Checkout...', 'success');
+
+            // Redirection vers Stripe Checkout
+            // Remplacez cette URL par votre propre lien Stripe Checkout
             setTimeout(() => {
-                window.location.href = 'payment.html';
+                window.location.href = 'https://checkout.stripe.com/pay/cs_test_example';
             }, 500);
         });
     }
