@@ -1,6 +1,20 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#FFD60A"/>
-  <circle cx="200" cy="180" r="40" fill="none" stroke="#FFF" stroke-width="8"/>
-  <polygon points="200,220 180,260 220,260" fill="#FFF"/>
-  <circle cx="200" cy="180" r="15" fill="#FFF"/>
+  <defs>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="diamond-shine">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:0.5" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <circle cx="200" cy="180" r="50" fill="none" stroke="url(#gold-grad)" stroke-width="10"/>
+  <polygon points="200,230 175,270 200,280 225,270" fill="url(#diamond-shine)" stroke="#B8B8B8" stroke-width="2"/>
+  <polygon points="200,240 185,265 200,273 215,265" fill="#FFFFFF" opacity="0.7"/>
+  <line x1="200" y1="230" x2="200" y2="240" stroke="#B8B8B8" stroke-width="1"/>
+  <line x1="185" y1="250" x2="215" y2="250" stroke="#B8B8B8" stroke-width="1"/>
+  <circle cx="200" cy="180" r="15" fill="url(#diamond-shine)"/>
+  <ellipse cx="200" cy="290" rx="60" ry="10" fill="#000" opacity="0.2"/>
 </svg>

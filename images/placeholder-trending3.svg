@@ -1,14 +1,30 @@
 <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="smart-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3A86FF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1B4F8C;stop-opacity:1" />
+    <linearGradient id="bg-trend3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="watch-trend" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="watch-face-trend">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A1A;stop-opacity:1" />
+    </radialGradient>
   </defs>
-  <rect width="600" height="400" fill="url(#smart-grad)"/>
-  <rect x="220" y="140" width="160" height="120" rx="10" fill="#FFF" opacity="0.3"/>
-  <circle cx="240" cy="180" r="8" fill="#FFD60A"/>
-  <circle cx="360" cy="180" r="8" fill="#FFD60A"/>
-  <circle cx="300" cy="220" r="8" fill="#FFD60A"/>
-  <text x="300" y="310" font-family="Arial, sans-serif" font-size="40" fill="#FFF" text-anchor="middle" font-weight="bold">SMART HOME</text>
+  <rect width="600" height="400" fill="url(#bg-trend3)"/>
+  
+  <!-- Luxury Watch -->
+  <rect x="200" y="120" width="50" height="160" rx="6" fill="url(#watch-trend)"/>
+  <circle cx="300" cy="200" r="85" fill="url(#watch-face-trend)" stroke="url(#watch-trend)" stroke-width="8"/>
+  <circle cx="300" cy="200" r="5" fill="#FFD700"/>
+  <line x1="300" y1="200" x2="300" y2="145" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+  <line x1="300" y1="200" x2="340" y2="200" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="300" cy="145" r="6" fill="#FFD700"/>
+  <circle cx="300" cy="255" r="6" fill="#FFD700"/>
+  <circle cx="355" cy="200" r="6" fill="#FFD700"/>
+  <circle cx="245" cy="200" r="6" fill="#FFD700"/>
+  <rect x="350" y="120" width="50" height="160" rx="6" fill="url(#watch-trend)"/>
+  <ellipse cx="300" cy="285" rx="100" ry="12" fill="#000" opacity="0.2"/>
 </svg>

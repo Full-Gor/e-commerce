@@ -1,8 +1,28 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#2C2C2C"/>
-  <circle cx="200" cy="200" r="60" fill="none" stroke="#FFF" stroke-width="6"/>
-  <line x1="200" y1="200" x2="200" y2="160" stroke="#FFF" stroke-width="4"/>
-  <line x1="200" y1="200" x2="230" y2="200" stroke="#FFF" stroke-width="4"/>
-  <rect x="180" y="140" width="40" height="15" fill="#FFF"/>
-  <rect x="180" y="245" width="40" height="15" fill="#FFF"/>
+  <defs>
+    <linearGradient id="watch-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#808080;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="watch-shine">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <circle cx="200" cy="200" r="75" fill="url(#watch-grad)" stroke="#404040" stroke-width="3"/>
+  <circle cx="200" cy="200" r="70" fill="#1A1A1A"/>
+  <circle cx="200" cy="200" r="65" fill="#000"/>
+  <line x1="200" y1="200" x2="200" y2="150" stroke="#C0C0C0" stroke-width="4" stroke-linecap="round"/>
+  <line x1="200" y1="200" x2="235" y2="200" stroke="#C0C0C0" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="200" cy="140" r="4" fill="#C0C0C0"/>
+  <circle cx="200" cy="260" r="4" fill="#C0C0C0"/>
+  <circle cx="140" cy="200" r="4" fill="#C0C0C0"/>
+  <circle cx="260" cy="200" r="4" fill="#C0C0C0"/>
+  <rect x="180" y="125" width="40" height="15" rx="3" fill="url(#watch-grad)"/>
+  <rect x="180" y="260" width="40" height="15" rx="3" fill="url(#watch-grad)"/>
+  <ellipse cx="180" cy="180" rx="25" ry="30" fill="url(#watch-shine)" opacity="0.3"/>
+  <rect x="170" y="95" width="60" height="30" rx="5" fill="#1A1A1A"/>
+  <rect x="170" y="275" width="60" height="30" rx="5" fill="#1A1A1A"/>
+  <ellipse cx="200" cy="315" rx="60" ry="10" fill="#000" opacity="0.2"/>
 </svg>

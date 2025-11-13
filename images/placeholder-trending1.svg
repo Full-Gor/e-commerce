@@ -1,12 +1,25 @@
 <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="sport-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FF6B9D;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#FF006E;stop-opacity:1" />
+    <linearGradient id="bg-trend1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sneaker-trend" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27AE60;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="600" height="400" fill="url(#sport-grad)"/>
-  <text x="300" y="220" font-family="Arial, sans-serif" font-size="64" fill="#FFF" text-anchor="middle" font-weight="bold">SPORT</text>
-  <polygon points="250,280 230,310 270,310" fill="#FFF" opacity="0.5"/>
-  <polygon points="350,280 330,310 370,310" fill="#FFF" opacity="0.5"/>
+  <rect width="600" height="400" fill="url(#bg-trend1)"/>
+  
+  <!-- Modern Sneaker -->
+  <ellipse cx="300" cy="240" rx="140" ry="75" fill="url(#sneaker-trend)"/>
+  <path d="M 160 240 Q 160 195 200 175 L 400 175 Q 440 195 440 240" 
+        fill="url(#sneaker-trend)" stroke="#229954" stroke-width="3"/>
+  <ellipse cx="300" cy="175" rx="100" ry="35" fill="#27AE60"/>
+  <rect x="270" y="155" width="60" height="12" rx="3" fill="#FFF"/>
+  <path d="M 170 235 Q 300 220 430 235" stroke="#FFF" stroke-width="4" fill="none"/>
+  <circle cx="220" cy="200" r="8" fill="#FFF" opacity="0.8"/>
+  <circle cx="300" cy="195" r="8" fill="#FFF" opacity="0.8"/>
+  <circle cx="380" cy="200" r="8" fill="#FFF" opacity="0.8"/>
+  <ellipse cx="300" cy="315" rx="140" ry="15" fill="#000" opacity="0.2"/>
 </svg>

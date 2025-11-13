@@ -1,4 +1,16 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#3A86FF"/>
-  <path d="M 150 120 L 150 200 L 140 280 L 160 280 L 175 200 L 175 280 L 200 280 L 200 200 L 225 280 L 260 280 L 250 200 L 250 120 Z" fill="#FFF"/>
+  <defs>
+    <linearGradient id="pants-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C3E50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A252F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <path d="M 140 100 L 135 180 L 125 320 L 165 320 L 175 180 L 175 320 L 215 320 L 215 180 L 225 320 L 265 320 L 255 180 L 250 100 Z"
+        fill="url(#pants-grad)" stroke="#0D1419" stroke-width="2"/>
+  <rect x="140" y="100" width="110" height="12" fill="#8B4513" rx="2"/>
+  <path d="M 145 140 L 145 180 L 170 180 L 170 140" fill="#1A252F" opacity="0.5"/>
+  <path d="M 220 140 L 220 180 L 245 180 L 245 140" fill="#1A252F" opacity="0.5"/>
+  <line x1="195" y1="100" x2="190" y2="320" stroke="#0D1419" stroke-width="1.5"/>
+  <ellipse cx="195" cy="330" rx="70" ry="10" fill="#000" opacity="0.1"/>
 </svg>

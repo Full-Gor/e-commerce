@@ -1,12 +1,25 @@
 <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="eco-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#06D6A0;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#048B6B;stop-opacity:1" />
+    <linearGradient id="bg-trend2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
     </linearGradient>
+    <linearGradient id="laptop-trend" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#95A5A6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7F8C8D;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="screen-trend">
+      <stop offset="0%" style="stop-color:#3498DB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980B9;stop-opacity:1" />
+    </radialGradient>
   </defs>
-  <rect width="600" height="400" fill="url(#eco-grad)"/>
-  <circle cx="300" cy="160" r="30" fill="#FFF" opacity="0.3"/>
-  <path d="M 300 190 L 300 260 M 280 210 L 300 230 L 320 210 M 270 240 L 300 260 L 330 240" stroke="#FFF" stroke-width="8" fill="none" opacity="0.3"/>
-  <text x="300" y="320" font-family="Arial, sans-serif" font-size="48" fill="#FFF" text-anchor="middle" font-weight="bold">ÉCO</text>
+  <rect width="600" height="400" fill="url(#bg-trend2)"/>
+  
+  <!-- Laptop -->
+  <rect x="150" y="140" width="300" height="180" rx="12" fill="url(#laptop-trend)" stroke="#5D6D7E" stroke-width="3"/>
+  <rect x="165" y="155" width="270" height="145" rx="5" fill="url(#screen-trend)"/>
+  <ellipse cx="300" cy="290" rx="12" ry="5" fill="#6C7A89"/>
+  <path d="M 120 320 L 480 320 L 460 340 L 140 340 Z" fill="#ABB2B9" stroke="#5D6D7E" stroke-width="3"/>
+  <rect x="285" y="328" width="30" height="8" rx="2" fill="#5D6D7E"/>
+  <ellipse cx="300" cy="350" rx="180" ry="12" fill="#000" opacity="0.2"/>
 </svg>

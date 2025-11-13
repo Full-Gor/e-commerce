@@ -1,6 +1,17 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#FF006E"/>
-  <path d="M 200 140 Q 140 140 140 180 L 140 220 L 160 220 L 160 180 Q 160 160 200 160 Q 240 160 240 180 L 240 220 L 260 220 L 260 180 Q 260 140 200 140" fill="#FFF"/>
-  <rect x="135" y="210" width="30" height="40" rx="8" fill="#FFF"/>
-  <rect x="235" y="210" width="30" height="40" rx="8" fill="#FFF"/>
+  <defs>
+    <linearGradient id="headphone-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <path d="M 200 100 Q 130 100 120 160 L 120 230 L 145 230 L 145 160 Q 145 130 200 130 Q 255 130 255 160 L 255 230 L 280 230 L 280 160 Q 270 100 200 100"
+        fill="url(#headphone-grad)" stroke="#000" stroke-width="3"/>
+  <rect x="112" y="215" width="40" height="60" rx="10" fill="url(#headphone-grad)" stroke="#000" stroke-width="2"/>
+  <rect x="248" y="215" width="40" height="60" rx="10" fill="url(#headphone-grad)" stroke="#000" stroke-width="2"/>
+  <ellipse cx="132" cy="240" rx="15" ry="20" fill="#2C2C2C"/>
+  <ellipse cx="268" cy="240" rx="15" ry="20" fill="#2C2C2C"/>
+  <rect x="190" y="95" width="20" height="10" rx="5" fill="#2C2C2C"/>
+  <ellipse cx="200" cy="285" rx="100" ry="12" fill="#000" opacity="0.15"/>
 </svg>

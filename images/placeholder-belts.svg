@@ -1,6 +1,24 @@
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="400" fill="#8B4513"/>
-  <rect x="100" y="180" width="200" height="40" rx="5" fill="#FFF"/>
-  <rect x="250" y="185" width="30" height="30" fill="none" stroke="#FFD60A" stroke-width="4"/>
-  <circle cx="265" cy="200" r="8" fill="#FFD60A"/>
+  <defs>
+    <linearGradient id="leather-belt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#654321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3E2723;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buckle-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5F5F5"/>
+  <rect x="80" y="180" width="240" height="45" rx="8" fill="url(#leather-belt-grad)" stroke="#2C1810" stroke-width="2"/>
+  <path d="M 90 190 L 310 190" stroke="#3E2723" stroke-width="1" stroke-dasharray="5,3"/>
+  <path d="M 90 215 L 310 215" stroke="#3E2723" stroke-width="1" stroke-dasharray="5,3"/>
+  <rect x="270" y="175" width="45" height="55" fill="url(#buckle-grad)" stroke="#B8860B" stroke-width="2" rx="5"/>
+  <rect x="280" y="185" width="25" height="35" fill="none" stroke="#8B6914" stroke-width="3" rx="3"/>
+  <circle cx="292" cy="202" r="5" fill="#8B6914"/>
+  <circle cx="140" cy="202" r="4" fill="#2C1810"/>
+  <circle cx="170" cy="202" r="4" fill="#2C1810"/>
+  <circle cx="200" cy="202" r="4" fill="#2C1810"/>
+  <circle cx="230" cy="202" r="4" fill="#2C1810"/>
+  <ellipse cx="200" cy="235" rx="120" ry="12" fill="#000" opacity="0.2"/>
 </svg>
