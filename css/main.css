@@ -415,3 +415,315 @@ section {
         transform: translateY(0);
     }
 }
+
+/* ===============================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   =============================================== */
+
+/* Tablette landscape et petits écrans desktop (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+    }
+
+    .nav-links li {
+        margin-left: 20px;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .icon {
+        margin-left: 15px;
+        font-size: 22px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+    }
+
+    .side-tag {
+        font-size: 12px;
+        padding: 8px 15px 8px 12px;
+    }
+}
+
+/* Tablette portrait (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Navigation mobile */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background-color: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 80px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 0;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 20px 30px;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .nav-links a.active {
+        background-color: rgba(58, 134, 255, 0.1);
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+
+    .hamburger.active div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger.active div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Header */
+    .navbar {
+        padding: 12px 0;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .icons {
+        margin-right: 50px;
+    }
+
+    .icon {
+        margin-left: 12px;
+        font-size: 20px;
+    }
+
+    .cart-count {
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Sections */
+    section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+    .section-title h2::after {
+        width: 50px;
+    }
+
+    /* Boutons */
+    .btn {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    .btn-secondary {
+        margin-left: 10px;
+    }
+
+    /* Barre de recherche */
+    .search-form {
+        width: 90%;
+    }
+
+    .search-input {
+        padding: 15px;
+        font-size: 20px;
+    }
+
+    .search-submit {
+        font-size: 20px;
+    }
+
+    .search-close {
+        top: 20px;
+        right: 20px;
+        font-size: 26px;
+    }
+
+    /* Étiquettes latérales */
+    .side-tags {
+        display: none; /* Masquer sur tablette pour éviter de bloquer le contenu */
+    }
+
+    /* Bouton retour en haut */
+    .back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* Mobile large (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Container */
+    .container {
+        width: 95%;
+    }
+
+    /* Header */
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .icons {
+        margin-right: 45px;
+    }
+
+    .icon {
+        margin-left: 10px;
+        font-size: 18px;
+    }
+
+    .cart-count {
+        font-size: 9px;
+        width: 14px;
+        height: 14px;
+        top: -6px;
+        right: -6px;
+    }
+
+    /* Navigation mobile */
+    .nav-links {
+        width: 80%;
+        max-width: 100%;
+    }
+
+    .nav-links a {
+        padding: 18px 25px;
+        font-size: 15px;
+    }
+
+    /* Sections */
+    section {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    .section-title p {
+        font-size: 14px;
+    }
+
+    /* Boutons */
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+        letter-spacing: 0.3px;
+    }
+
+    .btn-secondary {
+        margin-left: 8px;
+        margin-top: 10px;
+    }
+
+    /* Barre de recherche */
+    .search-form {
+        width: 95%;
+    }
+
+    .search-input {
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    .search-input::placeholder {
+        font-size: 16px;
+    }
+
+    .search-submit {
+        font-size: 18px;
+    }
+
+    .search-close {
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+    }
+
+    /* Bouton retour en haut */
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 18px;
+    }
+}
+
+/* Très petit mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .logo {
+        font-size: 18px;
+    }
+
+    .icon {
+        margin-left: 8px;
+        font-size: 16px;
+    }
+
+    .section-title h2 {
+        font-size: 22px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
