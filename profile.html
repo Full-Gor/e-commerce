@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - LuxeShop</title>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Section Profil -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-header">
+                <h1>Mon Profil</h1>
+                <p>Gérez vos informations personnelles et vos préférences</p>
+            </div>
+
+            <!-- Message si non connecté -->
+            <div id="not-logged-in" class="not-logged-in" style="display: none;">
+                <div class="login-prompt-card">
+                    <h2>Vous devez être connecté</h2>
+                    <p>Connectez-vous pour accéder à votre profil et gérer vos informations personnelles.</p>
+                    <button class="btn" id="login-prompt-btn">Se connecter</button>
+                </div>
+            </div>
+
+            <!-- Contenu du profil -->
+            <div id="profile-content" class="profile-content" style="display: none;">
+                <div class="profile-grid">
+                    <!-- Carte Photo de Profil -->
+                    <div class="profile-card profile-photo-card">
+                        <h2>Photo de Profil</h2>
+                        <div class="photo-container">
+                            <div class="profile-photo" id="profile-photo">
+                                <div class="default-avatar">👤</div>
+                            </div>
+                            <div class="photo-actions">
+                                <label for="photo-upload" class="btn btn-small">
+                                    📷 Choisir une photo
+                                </label>
+                                <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+                                <button class="btn btn-secondary btn-small" id="remove-photo" style="display: none;">
+                                    🗑️ Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carte Informations Personnelles -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2>Informations Personnelles</h2>
+                            <button class="btn-edit" id="edit-personal-info">✏️ Modifier</button>
+                        </div>
+                        <form id="personal-info-form" class="info-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="username">Pseudo</label>
+                                    <input type="text" id="username" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullName">Nom Complet</label>
+                                    <input type="text" id="fullName" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Téléphone</label>
+                                    <input type="tel" id="phone" disabled>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="display: none;">
+                                <button type="submit" class="btn">💾 Enregistrer</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-personal-info">❌ Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Carte Adresse -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2>Adresse</h2>
+                            <button class="btn-edit" id="edit-address">✏️ Modifier</button>
+                        </div>
+                        <form id="address-form" class="info-form">
+                            <div class="form-group">
+                                <label for="address">Adresse</label>
+                                <input type="text" id="address" disabled placeholder="Rue, numéro...">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Ville</label>
+                                    <input type="text" id="city" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode">Code Postal</label>
+                                    <input type="text" id="postalCode" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Pays</label>
+                                <input type="text" id="country" disabled>
+                            </div>
+                            <div class="form-actions" style="display: none;">
+                                <button type="submit" class="btn">💾 Enregistrer</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-address">❌ Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Carte Sécurité -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h2>Sécurité</h2>
+                            <button class="btn-edit" id="edit-password">✏️ Modifier</button>
+                        </div>
+                        <form id="password-form" class="info-form">
+                            <div class="form-group">
+                                <label for="current-password">Mot de passe actuel</label>
+                                <input type="password" id="current-password" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Nouveau mot de passe</label>
+                                <input type="password" id="new-password" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirmer le mot de passe</label>
+                                <input type="password" id="confirm-password" disabled>
+                            </div>
+                            <div class="form-actions" style="display: none;">
+                                <button type="submit" class="btn">💾 Changer le mot de passe</button>
+                                <button type="button" class="btn btn-secondary" id="cancel-password">❌ Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Carte Statistiques -->
+                    <div class="profile-card stats-card">
+                        <h2>Statistiques</h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">🛒</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="stat-orders">0</div>
+                                    <div class="stat-label">Commandes</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">❤️</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="stat-wishlist">0</div>
+                                    <div class="stat-label">Favoris</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">⭐</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="stat-reviews">0</div>
+                                    <div class="stat-label">Avis</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">📅</div>
+                                <div class="stat-info">
+                                    <div class="stat-value" id="stat-member-since">2024</div>
+                                    <div class="stat-label">Membre depuis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carte Actions -->
+                    <div class="profile-card actions-card">
+                        <h2>Actions du Compte</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="logout-btn">🚪 Se déconnecter</button>
+                            <button class="btn btn-danger" id="delete-account-btn">🗑️ Supprimer le compte</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>LuxeShop</h3>
+                    <p>Votre boutique en ligne de confiance pour des produits de qualité supérieure.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📌</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="products.html">Produits</a></li>
+                        <li><a href="categories.html">Catégories</a></li>
+                        <li><a href="promotions.html">Promotions</a></li>
+                        <li><a href="about.html">À Propos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Service Client</h3>
+                    <ul>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Inscrivez-vous pour recevoir nos offres exclusives.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Votre email">
+                        <button type="submit" class="newsletter-button">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LuxeShop. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bouton retour en haut -->
+    <div class="back-to-top">↑</div>
+
+    <!-- Étiquettes latérales promotionnelles -->
+    <div class="side-tags">
+        <div class="side-tag tag-1">-50% RÉDUCTION</div>
+        <div class="side-tag tag-2">⚡ NOUVEAU</div>
+        <div class="side-tag tag-3">🚚 LIVRAISON GRATUITE</div>
+        <div class="side-tag tag-4">🔥 VENTE FLASH</div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
