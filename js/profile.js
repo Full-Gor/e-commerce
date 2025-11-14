@@ -520,8 +520,12 @@ function loadOrdersHistory() {
         });
 
         const statusClass = order.status === 'delivered' ? 'delivered' :
+                           order.status === 'in_transit' ? 'in-transit' :
+                           order.status === 'preparing' ? 'preparing' :
                            order.status === 'pending' ? 'pending' : 'cancelled';
         const statusText = order.status === 'delivered' ? '✓ Livrée' :
+                          order.status === 'in_transit' ? '🚚 En transit' :
+                          order.status === 'preparing' ? '📦 En préparation' :
                           order.status === 'pending' ? '⏳ En cours' : '✗ Annulée';
 
         ordersHTML += `
@@ -548,6 +552,8 @@ function loadOrdersHistory() {
                 <div class="order-footer">
                     <div class="order-total">Total: ${order.total.toFixed(2)} €</div>
                     <div class="order-actions">
+                        ${order.tracking ?
+                            '<button class="btn btn-small" onclick="openTrackingModal(' + order.id + ')">🚚 Suivre ma commande</button>' : ''}
                         ${order.status === 'delivered' ?
                             '<button class="btn btn-small" onclick="reorderItems(' + order.id + ')">Recommander</button>' : ''}
                         ${order.status === 'pending' ?
@@ -652,12 +658,26 @@ function createSampleOrders() {
                     quantity: 2
                 }
             ],
-            total: 59.98
+            total: 59.98,
+            tracking: {
+                trackingNumber: 'FR' + Math.floor(Math.random() * 1000000000),
+                carrier: 'Colissimo',
+                estimatedDelivery: new Date(Date.now() - 854000000).toISOString(),
+                currentLocation: 'Paris, France',
+                timeline: [
+                    { status: 'Commande confirmée', date: new Date(Date.now() - 864000000).toISOString(), completed: true },
+                    { status: 'En préparation', date: new Date(Date.now() - 863000000).toISOString(), completed: true },
+                    { status: 'Expédiée', date: new Date(Date.now() - 861000000).toISOString(), completed: true },
+                    { status: 'En transit', date: new Date(Date.now() - 858000000).toISOString(), completed: true },
+                    { status: 'En cours de livraison', date: new Date(Date.now() - 855000000).toISOString(), completed: true },
+                    { status: 'Livrée', date: new Date(Date.now() - 854000000).toISOString(), completed: true }
+                ]
+            }
         },
         {
             id: Date.now() - 432000000,
             date: new Date(Date.now() - 432000000).toISOString(),
-            status: 'pending',
+            status: 'in_transit',
             items: [
                 {
                     name: 'Jean Slim',
@@ -672,12 +692,26 @@ function createSampleOrders() {
                     quantity: 1
                 }
             ],
-            total: 129.98
+            total: 129.98,
+            tracking: {
+                trackingNumber: 'FR' + Math.floor(Math.random() * 1000000000),
+                carrier: 'Chronopost',
+                estimatedDelivery: new Date(Date.now() + 86400000).toISOString(),
+                currentLocation: 'Lyon, France',
+                timeline: [
+                    { status: 'Commande confirmée', date: new Date(Date.now() - 432000000).toISOString(), completed: true },
+                    { status: 'En préparation', date: new Date(Date.now() - 431000000).toISOString(), completed: true },
+                    { status: 'Expédiée', date: new Date(Date.now() - 345600000).toISOString(), completed: true },
+                    { status: 'En transit', date: new Date(Date.now() - 259200000).toISOString(), completed: true },
+                    { status: 'En cours de livraison', date: null, completed: false },
+                    { status: 'Livrée', date: null, completed: false }
+                ]
+            }
         },
         {
             id: Date.now() - 172800000,
             date: new Date(Date.now() - 172800000).toISOString(),
-            status: 'delivered',
+            status: 'preparing',
             items: [
                 {
                     name: 'Sneakers',
@@ -686,9 +720,161 @@ function createSampleOrders() {
                     quantity: 1
                 }
             ],
-            total: 89.99
+            total: 89.99,
+            tracking: {
+                trackingNumber: 'FR' + Math.floor(Math.random() * 1000000000),
+                carrier: 'DHL Express',
+                estimatedDelivery: new Date(Date.now() + 259200000).toISOString(),
+                currentLocation: 'Entrepôt Paris Nord',
+                timeline: [
+                    { status: 'Commande confirmée', date: new Date(Date.now() - 172800000).toISOString(), completed: true },
+                    { status: 'En préparation', date: new Date(Date.now() - 86400000).toISOString(), completed: true },
+                    { status: 'Expédiée', date: null, completed: false },
+                    { status: 'En transit', date: null, completed: false },
+                    { status: 'En cours de livraison', date: null, completed: false },
+                    { status: 'Livrée', date: null, completed: false }
+                ]
+            }
         }
     ];
 
     localStorage.setItem('userOrders', JSON.stringify(orders));
+}
+
+// Ouvrir le modal de suivi de livraison
+function openTrackingModal(orderId) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) return;
+
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+    const userOrders = orders[currentUser] || [];
+    const order = userOrders.find(o => o.id === orderId);
+
+    if (!order || !order.tracking) {
+        showNotification('Aucune information de suivi disponible', 'error');
+        return;
+    }
+
+    // Remplir les informations de tracking
+    document.getElementById('tracking-order-id').textContent = '#' + order.id;
+    document.getElementById('tracking-number').textContent = order.tracking.trackingNumber;
+    document.getElementById('tracking-carrier').textContent = order.tracking.carrier;
+
+    const estimatedDate = new Date(order.tracking.estimatedDelivery);
+    document.getElementById('tracking-estimated-delivery').textContent = estimatedDate.toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    document.getElementById('tracking-location').textContent = order.tracking.currentLocation;
+
+    // Générer la timeline
+    generateTrackingTimeline(order.tracking.timeline);
+
+    // Afficher le modal
+    document.getElementById('tracking-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Empêcher le scroll
+}
+
+// Fermer le modal de suivi
+function closeTrackingModal() {
+    document.getElementById('tracking-modal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Réactiver le scroll
+}
+
+// Générer la timeline de tracking
+function generateTrackingTimeline(timeline) {
+    const timelineContainer = document.getElementById('tracking-timeline');
+
+    let timelineHTML = '<div class="timeline">';
+
+    timeline.forEach((step, index) => {
+        const statusClass = step.completed ? 'completed' : 'pending';
+        const dateText = step.date ? new Date(step.date).toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'short',
+            hour: '2-digit',
+            minute: '2-digit'
+        }) : 'En attente';
+
+        timelineHTML += `
+            <div class="timeline-item ${statusClass}">
+                <div class="timeline-marker">
+                    ${step.completed ? '✓' : '○'}
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-status">${step.status}</div>
+                    <div class="timeline-date">${dateText}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    timelineHTML += '</div>';
+    timelineContainer.innerHTML = timelineHTML;
+}
+
+// Fonction de notification (réutilisée depuis d'autres pages)
+function showNotification(message, type = 'success') {
+    // Supprimer toute notification existante
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+
+    // Créer la notification
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+
+    // Ajouter la notification au document
+    document.body.appendChild(notification);
+
+    // Ajouter les styles de la notification si nécessaire
+    if (!document.getElementById('notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            .notification {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 15px 25px;
+                border-radius: 4px;
+                background-color: #06d6a0;
+                color: white;
+                font-weight: 500;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .notification.error {
+                background-color: #ff006e;
+            }
+
+            .notification.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-10px);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Afficher la notification avec animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+
+    // Masquer la notification après un délai
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
 }
