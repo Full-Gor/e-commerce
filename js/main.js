@@ -1083,3 +1083,13 @@ function setupScrollAnimations() {
         document.head.appendChild(style);
     }
 }
+// ==========================================
+// FONCTION POUR METTRE À JOUR LE COMPTEUR DU PANIER
+// ==========================================
+function updateCartCount() {
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartCount.textContent = cart.length;
+    }
+}
