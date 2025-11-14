@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateUserInterface();
     loadUserTestimonials();
 
+    // Mettre à jour le compteur du panier
+    updateCartCount();
+
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
@@ -365,6 +368,17 @@ function initBackToTop() {
                 behavior: 'smooth'
             });
         });
+    }
+}
+
+// Mettre à jour le compteur du panier
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCountElement = document.querySelector('.cart-count');
+
+    if (cartCountElement) {
+        const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        cartCountElement.textContent = totalItems;
     }
 }
 
