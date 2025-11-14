@@ -1,18 +1,13 @@
-/* ==========================================
-   PROMOTIONS PAGE - CSS MODERNE ET OPTIMISÉ
-   ========================================== */
-
 /* Hero Banner */
 .promotions-hero {
-    height: 450px;
-    background: linear-gradient(135deg, rgba(255, 0, 110, 0.95) 0%, rgba(255, 102, 0, 0.95) 50%, rgba(255, 214, 10, 0.95) 100%);
+    height: 400px;
+    background-image: url('../images/placeholder-promotions-header.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
     display: flex;
     align-items: center;
     margin-top: 70px;
-    overflow: hidden;
 }
 
 .promotions-hero::before {
@@ -22,17 +17,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(58, 134, 255, 0.7), rgba(255, 0, 110, 0.7));
-    animation: gradientShift 8s ease infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% {
-        opacity: 0.7;
-    }
-    50% {
-        opacity: 0.9;
-    }
+    background: linear-gradient(45deg, rgba(58, 134, 255, 0.8), rgba(255, 0, 110, 0.8));
 }
 
 .promotions-hero .hero-content {
@@ -41,49 +26,27 @@
     color: white;
     text-align: center;
     width: 100%;
-    animation: fadeInUp 0.8s ease;
 }
 
 .promotions-hero h1 {
-    font-size: 56px;
-    margin-bottom: 20px;
-    font-weight: 800;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-    letter-spacing: 2px;
+    font-size: 48px;
+    margin-bottom: 15px;
 }
 
 .promotions-hero p {
-    font-size: 20px;
-    margin-bottom: 35px;
-    opacity: 0.95;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    margin-bottom: 30px;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Countdown Timer */
 .hero-countdown {
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
-    animation: fadeInUp 1s ease 0.3s backwards;
 }
 
 .countdown-title {
-    font-size: 20px;
-    margin-bottom: 25px;
+    font-size: 18px;
+    margin-bottom: 20px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .countdown {
@@ -93,169 +56,109 @@
 }
 
 .countdown-item {
-    width: 90px;
-    height: 90px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .countdown-item:hover {
-    transform: translateY(-8px) scale(1.05);
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .countdown-number {
-    font-size: 36px;
-    font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 32px;
+    font-weight: 700;
 }
 
 .countdown-text {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 5px;
+    letter-spacing: 1px;
 }
 
-/* ==========================================
-   FLASH DEALS SECTION
-   ========================================== */
-
+/* Section Offres Flash */
 .flash-deals {
     padding: 80px 0;
-    background: linear-gradient(180deg, white 0%, #f8f9fa 100%);
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-title h2 {
-    font-size: 42px;
-    font-weight: 800;
-    color: var(--dark);
-    margin-bottom: 15px;
-    position: relative;
-    display: inline-block;
-}
-
-.section-title h2::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-    border-radius: 2px;
-}
-
-.section-title p {
-    color: #6c757d;
-    font-size: 17px;
-    max-width: 700px;
-    margin: 0 auto;
+    background-color: white;
 }
 
 .deals-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 35px;
-    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
 
-/* Deal Card Styling */
 .deal-card {
     background-color: white;
-    border-radius: 20px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
     position: relative;
-    display: flex;
-    flex-direction: column;
 }
 
 .deal-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .deal-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #ff006e 0%, #ff5e8d 100%);
+    top: 15px;
+    right: 15px;
+    background-color: var(--secondary);
     color: white;
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 800;
-    font-size: 18px;
-    z-index: 3;
-    box-shadow: 0 6px 20px rgba(255, 0, 110, 0.5);
-    animation: pulseGlow 2s infinite;
+    font-weight: 700;
+    font-size: 16px;
+    z-index: 2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes pulseGlow {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 6px 20px rgba(255, 0, 110, 0.5);
-    }
-    50% {
-        transform: scale(1.08);
-        box-shadow: 0 8px 30px rgba(255, 0, 110, 0.7);
-    }
-}
-
-/* Deal Image Container */
 .deal-img {
     position: relative;
+    height: 220px;
     overflow: hidden;
-    aspect-ratio: 1/1;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .deal-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.5s ease;
 }
 
 .deal-card:hover .deal-img img {
-    transform: scale(1.15) rotate(3deg);
+    transform: scale(1.1);
 }
 
-/* Deal Actions Overlay */
 .deal-actions {
     position: absolute;
-    bottom: -70px;
+    bottom: -50px;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 15px;
-    padding: 20px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 100%);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    z-index: 2;
+    gap: 20px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
 }
 
 .deal-card:hover .deal-actions {
@@ -263,8 +166,8 @@
 }
 
 .deal-action {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: white;
     color: var(--dark);
@@ -273,44 +176,30 @@
     align-items: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-size: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .deal-action:hover {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background-color: var(--primary);
     color: white;
-    transform: translateY(-5px) scale(1.15);
+    transform: translateY(-5px);
 }
 
-/* Deal Info Section */
 .deal-info {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    padding: 20px;
 }
 
 .deal-category {
-    font-size: 13px;
-    color: #6c757d;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 10px;
-    font-weight: 600;
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
 }
 
 .deal-title {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--dark);
-    margin-bottom: 15px;
-    line-height: 1.4;
-    transition: color 0.3s ease;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
 }
 
 .deal-card:hover .deal-title {
@@ -320,385 +209,141 @@
 .deal-price {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .current-price {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--primary);
 }
 
 .old-price {
-    font-size: 19px;
-    color: #adb5bd;
+    font-size: 16px;
+    color: #777;
     text-decoration: line-through;
+    margin-left: 10px;
 }
 
-/* Progress Bar */
 .deal-progress {
-    margin-top: auto;
+    margin-top: 15px;
 }
 
 .progress-bar {
-    height: 8px;
-    background-color: #e9ecef;
-    border-radius: 10px;
+    height: 6px;
+    background-color: #f3f3f3;
+    border-radius: 3px;
     overflow: hidden;
-    margin-bottom: 10px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-    border-radius: 10px;
-    transition: width 0.5s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+    background-color: var(--primary);
+    border-radius: 3px;
 }
 
 .progress-text {
     font-size: 14px;
-    color: #6c757d;
+    color: #777;
     text-align: right;
-    font-weight: 600;
 }
 
-/* ==========================================
-   CATEGORY DEALS SECTION
-   ========================================== */
-
+/* Section Promotions par Catégorie */
 .category-deals {
     padding: 80px 0;
-    background-color: #f8f9fa;
+    background-color: #f9f9f9;
 }
 
 .category-tabs {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
-/* Tabs Navigation */
 .tabs-nav {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .tab-btn {
-    padding: 14px 28px;
+    padding: 12px 20px;
     background-color: white;
-    border: 2px solid #e9ecef;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
     color: var(--dark);
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    letter-spacing: 0.5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .tab-btn:hover {
-    background-color: #f8f9fa;
-    border-color: var(--primary);
+    background-color: #f0f0f0;
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, var(--primary) 0%, #5c9dff 100%);
+    background-color: var(--primary);
     color: white;
-    border-color: var(--primary);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(58, 134, 255, 0.4);
 }
 
-/* Tab Content */
 .tab-content {
     display: none;
 }
 
 .tab-content.active {
     display: block;
-    animation: fadeIn 0.6s ease;
+    animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
-/* Products Grid in Tabs */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
-/* Product Card Styling (inherited from products page but adapted) */
-.product-card {
-    background-color: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* Product Tag/Badge */
-.product-tag {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: linear-gradient(135deg, #ff006e 0%, #ff5e8d 100%);
-    color: white;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 700;
-    z-index: 3;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(255, 0, 110, 0.3);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Product Image Container */
-.product-img {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 4/5;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.product-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.product-card:hover .product-img img {
-    transform: scale(1.12) rotate(2deg);
-}
-
-/* Product Actions Overlay */
-.product-actions {
-    position: absolute;
-    bottom: -60px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    padding: 15px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    z-index: 2;
-}
-
-.product-card:hover .product-actions {
-    bottom: 0;
-}
-
-.product-action-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: white;
-    color: var(--dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 18px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.product-action-btn:hover {
-    background-color: var(--primary);
-    color: white;
-    transform: translateY(-5px) scale(1.1);
-}
-
-/* Product Info Section */
-.product-info {
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.product-category {
-    font-size: 13px;
-    color: #6c757d;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.product-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--dark);
-    margin-bottom: 12px;
-    line-height: 1.4;
-    transition: color 0.3s ease;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.product-card:hover .product-title {
-    color: var(--primary);
-}
-
-.product-price {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.product-price .current-price {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.product-price .old-price {
-    font-size: 17px;
-    color: #adb5bd;
-    text-decoration: line-through;
-}
-
-/* Product Rating */
-.product-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.product-rating .stars {
-    color: #ffc107;
-    font-size: 14px;
-}
-
-.product-rating .rating-count {
-    font-size: 13px;
-    color: #6c757d;
-}
-
-/* Add to Cart Button */
-.add-to-cart {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, var(--primary) 0%, #5c9dff 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: auto;
-    font-size: 15px;
-    letter-spacing: 0.5px;
-}
-
-.add-to-cart:hover {
-    background: linear-gradient(135deg, #2563eb 0%, var(--primary) 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(58, 134, 255, 0.4);
-}
-
-/* View More Section */
 .view-more {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
-.view-more .btn {
-    padding: 14px 40px;
-    font-size: 16px;
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(58, 134, 255, 0.3);
-}
-
-/* ==========================================
-   COUPONS SECTION
-   ========================================== */
-
+/* Section Coupons */
 .coupons-section {
     padding: 80px 0;
-    background: linear-gradient(180deg, white 0%, #f8f9fa 100%);
+    background-color: white;
 }
 
 .coupons-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
-    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
 
-/* Coupon Card Styling */
 .coupon-card {
-    background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
-    border-radius: 20px;
+    background-color: white;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 3px dashed #dee2e6;
-    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 2px dashed #ddd;
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .coupon-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     border-color: var(--primary);
 }
 
@@ -706,41 +351,37 @@
 .coupon-card::after {
     content: '';
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #f8f9fa;
+    width: 20px;
+    height: 20px;
+    background-color: #f9f9f9;
     border-radius: 50%;
-    z-index: 1;
 }
 
 .coupon-card::before {
-    top: -15px;
+    top: -10px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .coupon-card::after {
-    bottom: -15px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .coupon-content {
-    padding: 30px;
+    padding: 20px;
     display: flex;
     align-items: center;
-    gap: 25px;
 }
 
 .coupon-discount {
-    font-size: 48px;
-    font-weight: 900;
+    font-size: 36px;
+    font-weight: 700;
     color: var(--primary);
-    padding-right: 25px;
-    border-right: 2px dashed #dee2e6;
-    min-width: 120px;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(58, 134, 255, 0.2);
+    padding: 0 20px;
+    border-right: 1px dashed #ddd;
+    margin-right: 20px;
 }
 
 .coupon-details {
@@ -748,204 +389,175 @@
 }
 
 .coupon-details h3 {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--dark);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .coupon-details p {
-    font-size: 15px;
-    color: #6c757d;
-    margin-bottom: 12px;
-    line-height: 1.5;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
 }
 
 .coupon-validity {
-    font-size: 13px;
-    color: #adb5bd;
-    font-weight: 600;
+    font-size: 12px;
+    color: #777;
 }
 
 .coupon-code {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
-    align-items: stretch;
+    align-items: center;
 }
 
 .code-text {
     flex: 1;
-    padding: 12px 18px;
-    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
-    border-radius: 10px 0 0 10px;
-    font-family: 'Courier New', monospace;
-    font-size: 18px;
-    letter-spacing: 3px;
-    font-weight: 700;
+    padding: 8px 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px 0 0 4px;
+    font-family: monospace;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
     color: var(--dark);
-    border: 2px solid #dee2e6;
-    border-right: none;
 }
 
 .copy-btn {
-    padding: 12px 24px;
-    background: linear-gradient(135deg, var(--primary) 0%, #5c9dff 100%);
+    padding: 8px 15px;
+    background-color: var(--primary);
     color: white;
     border: none;
-    border-radius: 0 10px 10px 0;
-    font-weight: 700;
+    border-radius: 0 4px 4px 0;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 15px;
 }
 
 .copy-btn:hover {
-    background: linear-gradient(135deg, #2563eb 0%, var(--primary) 100%);
-    box-shadow: 0 4px 15px rgba(58, 134, 255, 0.4);
+    background-color: var(--dark);
 }
 
-/* ==========================================
-   RESPONSIVE DESIGN
-   ========================================== */
-
+/* Media Queries */
 @media screen and (max-width: 992px) {
-    .promotions-hero {
-        height: 380px;
-    }
-
-    .promotions-hero h1 {
-        font-size: 48px;
-    }
-
     .countdown {
-        gap: 15px;
+        gap: 10px;
     }
-
+    
     .countdown-item {
-        width: 75px;
-        height: 75px;
-    }
-
-    .countdown-number {
-        font-size: 28px;
-    }
-
-    .deals-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-
-    .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        width: 70px;
+        height: 70px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .promotions-hero {
-        height: 320px;
+        height: 300px;
     }
-
+    
     .promotions-hero h1 {
         font-size: 36px;
     }
-
-    .promotions-hero p {
-        font-size: 16px;
-    }
-
+    
     .countdown-item {
-        width: 65px;
-        height: 65px;
+        width: 60px;
+        height: 60px;
     }
-
+    
     .countdown-number {
         font-size: 24px;
     }
-
+    
     .countdown-text {
-        font-size: 11px;
+        font-size: 10px;
     }
-
-    .section-title h2 {
-        font-size: 32px;
-    }
-
+    
     .tabs-nav {
-        gap: 8px;
+        gap: 5px;
     }
-
+    
     .tab-btn {
-        padding: 12px 20px;
+        padding: 10px 15px;
         font-size: 14px;
     }
-
-    .deals-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
-    }
-
+    
     .coupon-content {
         flex-direction: column;
         text-align: center;
-        padding: 25px;
     }
-
+    
     .coupon-discount {
         border-right: none;
-        border-bottom: 2px dashed #dee2e6;
-        padding-right: 0;
-        padding-bottom: 20px;
+        border-bottom: 1px dashed #ddd;
+        margin-right: 0;
         margin-bottom: 15px;
-        min-width: auto;
-    }
-
-    .coupons-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
+        padding-bottom: 15px;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .promotions-hero {
-        height: 280px;
+/* Mobile large (max-width: 480px) */
+@media (max-width: 480px) {
+    .page-title {
+        padding: 30px 0;
     }
 
-    .promotions-hero h1 {
-        font-size: 28px;
+    .page-title h1 {
+        font-size: 24px;
     }
 
-    .countdown {
-        gap: 10px;
+    section {
+        padding: 30px 0;
     }
 
-    .countdown-item {
-        width: 55px;
-        height: 55px;
-    }
-
-    .countdown-number {
+    h2 {
         font-size: 20px;
     }
 
-    .countdown-text {
-        font-size: 9px;
+    h3 {
+        font-size: 18px;
     }
 
-    .section-title h2 {
-        font-size: 28px;
+    p {
+        font-size: 14px;
     }
 
-    .products-grid {
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .grid, .products-grid, .categories-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
-    .code-text {
-        font-size: 15px;
-        letter-spacing: 2px;
+    .promo-card {
+        padding: 20px;
+    }
+
+    .promo-title {
+        font-size: 18px;
+    }
+
+}
+
+/* Très petit mobile (max-width: 375px) */
+@media (max-width: 375px) {
+    .page-title h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
     }
 }

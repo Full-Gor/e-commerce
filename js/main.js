@@ -12,10 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
     updateUserInterface();
     loadUserTestimonials();
 
+    // Mettre à jour le compteur du panier
+    updateCartCount();
+
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
-        loginToReviewBtn.addEventListener('click', showAccountModal);
+        loginToReviewBtn.addEventListener('click', function() {
+            window.location.href = 'login.html';
+        });
     }
 });
 
@@ -366,6 +371,17 @@ function initBackToTop() {
     }
 }
 
+// Mettre à jour le compteur du panier
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCountElement = document.querySelector('.cart-count');
+
+    if (cartCountElement) {
+        const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        cartCountElement.textContent = totalItems;
+    }
+}
+
 // Configuration des écouteurs d'événements généraux
 function setupEventListeners() {
     // Liens de navigation
@@ -412,8 +428,15 @@ function setupHeaderIcons() {
     
     if (accountButton) {
         accountButton.addEventListener('click', function() {
-            // Simpler une modal de connexion/inscription
-            showAccountModal();
+            // Vérifier si l'utilisateur est connecté
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                // Rediriger vers la page de profil
+                window.location.href = 'profile.html';
+            } else {
+                // Rediriger vers la page de connexion dédiée
+                window.location.href = 'login.html';
+            }
         });
     }
 }
@@ -459,6 +482,10 @@ function showAccountModal() {
                         <div class="form-group">
                             <label for="register-username">Pseudo</label>
                             <input type="text" id="register-username" required minlength="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
                         </div>
                         <div class="form-group">
                             <label for="register-password">Mot de passe</label>
@@ -524,6 +551,7 @@ function showAccountModal() {
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-password-confirm').value;
 
@@ -547,7 +575,23 @@ function showAccountModal() {
             localStorage.setItem('users', JSON.stringify(users));
             localStorage.setItem('currentUser', username);
 
-            showNotification('Inscription réussie !');
+            // Créer le profil utilisateur
+            const userProfiles = JSON.parse(localStorage.getItem('userProfiles') || '{}');
+            userProfiles[username] = {
+                username: username,
+                fullName: '',
+                email: email,
+                phone: '',
+                address: '',
+                city: '',
+                postalCode: '',
+                country: '',
+                profilePhoto: '',
+                createdAt: new Date().toISOString()
+            };
+            localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
+
+            showNotification('Inscription réussie ! Bienvenue ' + username);
             modal.classList.remove('active');
             updateUserInterface();
         });
@@ -811,9 +855,40 @@ function updateUserInterface() {
     const accountButton = document.getElementById('account-button');
 
     if (currentUser) {
-        // L'utilisateur est connecté
-        accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
-        accountButton.title = currentUser;
+        // Charger la photo de profil
+        const userProfiles = JSON.parse(localStorage.getItem('userProfiles') || '{}');
+        const userProfile = userProfiles[currentUser];
+
+        if (userProfile && userProfile.profilePhoto) {
+            // Afficher la photo de profil
+            accountButton.innerHTML = `<img src="${userProfile.profilePhoto}" alt="${currentUser}" class="navbar-profile-pic">`;
+            accountButton.title = 'Mon Profil - ' + currentUser;
+        } else {
+            // Afficher l'icône par défaut avec le pseudo
+            accountButton.textContent = '👤 ' + currentUser.substring(0, 10);
+            accountButton.title = 'Mon Profil - ' + currentUser;
+        }
+
+        // Ajouter un lien "Mon Profil" dans le menu de navigation si pas déjà présent
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks && !document.getElementById('profile-nav-link')) {
+            const profileLi = document.createElement('li');
+            const profileLink = document.createElement('a');
+            profileLink.href = 'profile.html';
+            profileLink.textContent = 'Mon Profil';
+            profileLink.id = 'profile-nav-link';
+
+            // Vérifier si on est sur la page profil pour ajouter la classe active
+            if (window.location.pathname.includes('profile.html')) {
+                profileLink.classList.add('active');
+            }
+
+            profileLi.appendChild(profileLink);
+
+            // Insérer avant le dernier élément (Contact)
+            const lastNavItem = navLinks.children[navLinks.children.length - 1];
+            navLinks.insertBefore(profileLi, lastNavItem);
+        }
 
         // Afficher le formulaire de témoignage si on est sur la page d'accueil
         const testimonialFormContainer = document.getElementById('testimonial-form-container');
@@ -845,6 +920,12 @@ function updateUserInterface() {
         // L'utilisateur n'est pas connecté
         accountButton.textContent = '👤';
         accountButton.title = 'Mon compte';
+
+        // Supprimer le lien "Mon Profil" du menu s'il existe
+        const profileNavLink = document.getElementById('profile-nav-link');
+        if (profileNavLink && profileNavLink.parentElement) {
+            profileNavLink.parentElement.remove();
+        }
     }
 }
 

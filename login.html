@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion / Inscription - LuxeShop</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <!-- Header et Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">Luxe<span>Shop</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="products.html">Produits</a></li>
+                    <li><a href="categories.html">Catégories</a></li>
+                    <li><a href="promotions.html">Promotions</a></li>
+                    <li><a href="about.html">À Propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+
+                </ul>
+                <div class="icons">
+                    <div class="icon search-icon" id="search-button">🔍</div>
+                    <div class="icon account-icon" id="account-button">👤</div>
+                    <div class="icon wishlist-icon" id="wishlist-button">❤️</div>
+                    <div class="icon cart-icon" id="cart-button">🛒
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container" id="search-container">
+        <div class="search-close" id="search-close">✕</div>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Rechercher des produits...">
+            <button type="submit" class="search-submit">🔍</button>
+        </form>
+    </div>
+
+    <!-- Section Authentification -->
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-left">
+                <div class="auth-hero">
+                    <h1>Bienvenue sur LuxeShop</h1>
+                    <p>Découvrez une expérience d'achat unique avec des produits de qualité premium</p>
+                    <div class="auth-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🚚</span>
+                            <div class="benefit-text">
+                                <h4>Livraison rapide</h4>
+                                <p>Recevez vos commandes en 24-48h</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">💯</span>
+                            <div class="benefit-text">
+                                <h4>Qualité garantie</h4>
+                                <p>Produits sélectionnés avec soin</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">🔒</span>
+                            <div class="benefit-text">
+                                <h4>Paiement sécurisé</h4>
+                                <p>Transactions 100% protégées</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-right">
+                <div class="auth-box">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">Connexion</button>
+                        <button class="auth-tab" data-tab="register">Inscription</button>
+                    </div>
+
+                    <!-- Formulaire de connexion -->
+                    <div class="auth-content active" id="login-content">
+                        <h2>Bon retour !</h2>
+                        <p class="auth-subtitle">Connectez-vous pour continuer vos achats</p>
+                        
+                        <form id="login-form" class="auth-form">
+                            <div class="form-group">
+                                <label for="login-username">Pseudo</label>
+                                <input type="text" id="login-username" placeholder="Entrez votre pseudo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Mot de passe</label>
+                                <input type="password" id="login-password" placeholder="Entrez votre mot de passe" required>
+                            </div>
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="remember-me">
+                                    <span>Se souvenir de moi</span>
+                                </label>
+                                <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Se connecter</button>
+                        </form>
+
+                        <div class="auth-divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button class="social-btn google">
+                                <span class="social-icon">G</span>
+                                Continuer avec Google
+                            </button>
+                            <button class="social-btn facebook">
+                                <span class="social-icon">f</span>
+                                Continuer avec Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire d'inscription -->
+                    <div class="auth-content" id="register-content">
+                        <h2>Créer un compte</h2>
+                        <p class="auth-subtitle">Rejoignez notre communauté de passionnés</p>
+                        
+                        <form id="register-form" class="auth-form">
+                            <div class="form-group">
+                                <label for="register-username">Pseudo</label>
+                                <input type="text" id="register-username" placeholder="Choisissez un pseudo" required minlength="3">
+                                <small class="form-hint">Minimum 3 caractères</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Mot de passe</label>
+                                <input type="password" id="register-password" placeholder="Créez un mot de passe" required minlength="6">
+                                <small class="form-hint">Minimum 6 caractères</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password-confirm">Confirmer le mot de passe</label>
+                                <input type="password" id="register-password-confirm" placeholder="Confirmez votre mot de passe" required>
+                            </div>
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="accept-terms" required>
+                                    <span>J'accepte les <a href="#">conditions d'utilisation</a></span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Créer mon compte</button>
+                        </form>
+
+                        <div class="auth-divider">
+                            <span>ou</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button class="social-btn google">
+                                <span class="social-icon">G</span>
+                                S'inscrire avec Google
+                            </button>
+                            <button class="social-btn facebook">
+                                <span class="social-icon">f</span>
+                                S'inscrire avec Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="auth-footer">
+                    <p id="auth-switch-text">
+                        Pas encore de compte ? 
+                        <a href="#" id="switch-to-register">Inscrivez-vous</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>LuxeShop</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carrières</a></li>
+                </ul>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Aide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Commandes</a></li>
+                    </ul>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Mon Compte</h3>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Se connecter</a></li>
+                        <li><a href="cart.html">Voir le panier</a></li>
+                        <li><a href="wishlist.html">Liste de souhaits</a></li>
+                        <li><a href="#">Suivre ma commande</a></li>
+                    </ul>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <div class="footer-contact">
+                        <p><span class="footer-contact-icon">📍</span> 123 Rue du Commerce, 75001 Paris</p>
+                        <p><span class="footer-contact-icon">📞</span> +33 1 23 45 67 89</p>
+                        <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuxeShop. Tous droits réservés. <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
