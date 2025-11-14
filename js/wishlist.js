@@ -1,17 +1,67 @@
 // Script pour la page des favoris
 document.addEventListener('DOMContentLoaded', function() {
+    // Charger la liste de souhaits depuis localStorage
+    loadWishlistFromStorage();
+
     // Initialiser les fonctionnalités de la liste de souhaits
     initWishlistFunctionality();
-    
+
     // Initialiser le slider de produits recommandés
     initRecommendationsSlider();
-    
+
     // Configuration du partage de la liste de souhaits
     setupWishlistSharing();
-    
+
     // Animation des éléments au défilement
     setupScrollAnimations();
+
+    // Mettre à jour le compteur du panier depuis localStorage
+    updateCartCountFromStorage();
 });
+
+// Charger la liste de souhaits depuis localStorage
+function loadWishlistFromStorage() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+    // Si la wishlist est vide dans localStorage, ne rien faire (garder les exemples HTML)
+    if (wishlist.length === 0) {
+        return;
+    }
+
+    // TODO: Dans une application réelle, vous pouvez charger dynamiquement les articles depuis localStorage
+    // Pour l'instant, on garde les exemples statiques du HTML
+}
+
+// Sauvegarder un article dans la wishlist localStorage
+function saveToWishlist(productId, productData) {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+    // Vérifier si le produit existe déjà
+    const existingIndex = wishlist.findIndex(item => item.id === productId);
+
+    if (existingIndex === -1) {
+        wishlist.push(productData);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+}
+
+// Retirer un article de la wishlist localStorage
+function removeFromWishlist(productId) {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    wishlist = wishlist.filter(item => item.id !== productId);
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}
+
+// Mettre à jour le compteur du panier depuis localStorage
+function updateCartCountFromStorage() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartCountElement = document.querySelector('.cart-count');
+
+    if (cartCountElement) {
+        const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        cartCountElement.textContent = totalItems;
+    }
+}
 
 // Initialiser les fonctionnalités de la liste de souhaits
 function initWishlistFunctionality() {
@@ -37,26 +87,32 @@ function initWishlistFunctionality() {
 // Gestion des boutons de suppression
 function setupRemoveButtons() {
     const removeButtons = document.querySelectorAll('.remove-from-wishlist');
-    
+
     removeButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation(); // Empêcher la propagation au parent
-            
+
             const wishlistItem = this.closest('.wishlist-item');
-            
+            const productId = wishlistItem.getAttribute('data-id');
+
+            // Supprimer de localStorage
+            if (productId) {
+                removeFromWishlist(productId);
+            }
+
             // Simuler une animation de suppression
             wishlistItem.classList.add('removing');
-            
+
             // Attendre la fin de l'animation avant de supprimer
             setTimeout(() => {
                 wishlistItem.remove();
-                
+
                 // Mettre à jour le compteur d'articles
                 updateWishlistCounter();
-                
+
                 // Vérifier si la liste est vide après suppression
                 checkEmptyWishlist();
-                
+
                 // Afficher une notification
                 showNotification('Produit retiré de vos favoris');
             }, 500);
@@ -102,38 +158,62 @@ function checkEmptyWishlist() {
 // Gestion des boutons "Ajouter au panier"
 function setupAddToCartButtons() {
     const addToCartButtons = document.querySelectorAll('.wishlist-item .add-to-cart');
-    
+
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function() {
             const wishlistItem = this.closest('.wishlist-item');
+            const productId = wishlistItem.getAttribute('data-id');
             const productTitle = wishlistItem.querySelector('.wishlist-item-title').textContent;
-            
-            // Mettre à jour le compteur du panier dans le header
-            const cartCounter = document.querySelector('.cart-count');
-            if (cartCounter) {
-                cartCounter.textContent = parseInt(cartCounter.textContent) + 1;
-                
-                // Animation
-                cartCounter.style.animation = 'pulse 0.5s';
-                setTimeout(() => {
-                    cartCounter.style.animation = '';
-                }, 500);
-            }
-            
+            const productPrice = wishlistItem.querySelector('.current-price').textContent;
+            const productImage = wishlistItem.querySelector('.wishlist-item-image img').src;
+            const productCategory = wishlistItem.querySelector('.wishlist-item-category').textContent;
+
+            // Ajouter au panier dans localStorage
+            addToCart({
+                id: productId,
+                name: productTitle,
+                price: productPrice,
+                image: productImage,
+                category: productCategory,
+                quantity: 1
+            });
+
+            // Mettre à jour le compteur du panier depuis localStorage
+            updateCartCountFromStorage();
+
             // Animation du bouton
             this.style.transition = 'all 0.3s ease';
             this.style.backgroundColor = '#06d6a0';
             this.textContent = 'Ajouté ✓';
-            
+
             setTimeout(() => {
                 this.style.backgroundColor = '';
                 this.textContent = 'Ajouter au panier';
             }, 2000);
-            
+
             // Afficher une notification
             showNotification(`${productTitle} ajouté au panier`);
         });
     });
+}
+
+// Ajouter un article au panier dans localStorage
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Vérifier si le produit existe déjà dans le panier
+    const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+    if (existingProductIndex !== -1) {
+        // Augmenter la quantité
+        cart[existingProductIndex].quantity += 1;
+    } else {
+        // Ajouter le nouveau produit
+        cart.push(product);
+    }
+
+    // Sauvegarder dans localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 // Gestion des boutons de notification
@@ -162,11 +242,7 @@ function setupNotifyButtons() {
 function setupGlobalActions() {
     const addAllButton = document.querySelector('.add-all-to-cart');
     const clearWishlistButton = document.querySelector('.clear-wishlist');
-    // Gestion des actions globales
-function setupGlobalActions() {
-    const addAllButton = document.querySelector('.add-all-to-cart');
-    const clearWishlistButton = document.querySelector('.clear-wishlist');
-    
+
     // Ajouter tous les articles au panier
     if (addAllButton) {
         addAllButton.addEventListener('click', function() {
@@ -312,14 +388,20 @@ function setupRecommendedProducts() {
                 showNotification(`Aperçu rapide de ${productTitle}`);
             } else if (actionType === '🛒') {
                 // Ajouter au panier
-                const cartCount = document.querySelector('.cart-count');
-                if (cartCount) {
-                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
-                    cartCount.style.animation = 'pulse 0.5s';
-                    setTimeout(() => {
-                        cartCount.style.animation = '';
-                    }, 500);
-                }
+                const productPrice = product.querySelector('.current-price').textContent;
+                const productImage = product.querySelector('.product-img img').src;
+                const productCategory = product.querySelector('.product-category').textContent;
+
+                addToCart({
+                    id: 'recommend-' + Date.now(),
+                    name: productTitle,
+                    price: productPrice,
+                    image: productImage,
+                    category: productCategory,
+                    quantity: 1
+                });
+
+                updateCartCountFromStorage();
                 showNotification(`${productTitle} ajouté au panier`);
             } else if (actionType === '❤️') {
                 // Ajouter aux favoris
@@ -333,17 +415,23 @@ function setupRecommendedProducts() {
         btn.addEventListener('click', function() {
             const product = this.closest('.product-card');
             const productTitle = product.querySelector('.product-title').textContent;
-            
-            // Mettre à jour le compteur de panier
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                cartCount.textContent = parseInt(cartCount.textContent) + 1;
-                cartCount.style.animation = 'pulse 0.5s';
-                setTimeout(() => {
-                    cartCount.style.animation = '';
-                }, 500);
-            }
-            
+            const productPrice = product.querySelector('.current-price').textContent;
+            const productImage = product.querySelector('.product-img img').src;
+            const productCategory = product.querySelector('.product-category').textContent;
+
+            // Ajouter au panier dans localStorage
+            addToCart({
+                id: 'recommend-' + Date.now(),
+                name: productTitle,
+                price: productPrice,
+                image: productImage,
+                category: productCategory,
+                quantity: 1
+            });
+
+            // Mettre à jour le compteur depuis localStorage
+            updateCartCountFromStorage();
+
             // Afficher une notification
             showNotification(`${productTitle} ajouté au panier`);
         });
