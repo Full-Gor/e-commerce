@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     updateUserInterface();
     loadUserTestimonials();
 
+    // Mettre à jour le compteur du panier
+    updateCartCount();
+
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
@@ -1055,5 +1058,15 @@ function setupScrollAnimations() {
         `;
 
         document.head.appendChild(style);
+    }
+}
+// ==========================================
+// FONCTION POUR METTRE À JOUR LE COMPTEUR DU PANIER
+// ==========================================
+function updateCartCount() {
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartCount.textContent = cart.length;
     }
 }

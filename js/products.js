@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Appliquer la recherche si présente dans l'URL
     handleURLSearch();
+
+    // Mettre à jour le compteur du panier
+    updateCartCount();
 });
 
 // ==========================================
@@ -403,7 +406,37 @@ function setupProductActions() {
 
 function addToCart(product) {
     const title = product.querySelector('.product-title').textContent;
-    const cartCount = document.querySelector('.cart-count');
+    const priceElement = product.querySelector('.current-price');
+    const price = priceElement ? priceElement.textContent : '0,00 €';
+    const imgElement = product.querySelector('.product-img img');
+    const image = imgElement ? imgElement.src : '';
+    const category = product.querySelector('.product-category')?.textContent || 'Produit';
+
+    // Récupérer le panier depuis localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Générer un ID unique pour ce produit
+    const productId = 'product-' + Date.now();
+
+    // Créer l'objet produit
+    const cartItem = {
+        id: productId,
+        title: title,
+        price: price,
+        image: image,
+        category: category,
+        quantity: 1,
+        variants: {
+            size: '',
+            color: ''
+        }
+    };
+
+    // Ajouter au panier
+    cart.push(cartItem);
+
+    // Sauvegarder dans localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
 
     // Animation
     product.style.animation = 'pulse 0.5s';
@@ -412,17 +445,23 @@ function addToCart(product) {
     }, 500);
 
     // Mettre à jour le compteur
+    updateCartCount();
+
+    showNotification(`${title} ajouté au panier`);
+}
+
+// Fonction pour mettre à jour le compteur du panier
+function updateCartCount() {
+    const cartCount = document.querySelector('.cart-count');
     if (cartCount) {
-        let count = parseInt(cartCount.textContent) || 0;
-        cartCount.textContent = count + 1;
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartCount.textContent = cart.length;
 
         cartCount.style.animation = 'bounce 0.5s';
         setTimeout(() => {
             cartCount.style.animation = '';
         }, 500);
     }
-
-    showNotification(`${title} ajouté au panier`);
 }
 
 function addToWishlist(product) {
