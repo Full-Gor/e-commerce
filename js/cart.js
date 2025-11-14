@@ -321,6 +321,12 @@ function setupCheckoutButton() {
                 return;
             }
 
+            // Créer une commande dans l'historique
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                createOrder(cartItems, currentUser);
+            }
+
             // Redirection vers Stripe Checkout
             showNotification('Redirection vers Stripe Checkout...', 'success');
 
@@ -331,6 +337,57 @@ function setupCheckoutButton() {
             }, 500);
         });
     }
+}
+
+// Créer une commande dans l'historique de l'utilisateur
+function createOrder(cartItems, username) {
+    // Récupérer les commandes existantes
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+
+    // Initialiser le tableau des commandes de l'utilisateur si nécessaire
+    if (!orders[username]) {
+        orders[username] = [];
+    }
+
+    // Calculer le total
+    const subtotal = cartItems.reduce((sum, item) => {
+        return sum + ((item.price || 0) * (item.quantity || 1));
+    }, 0);
+
+    // Frais de livraison (récupérer depuis le DOM ou utiliser une valeur par défaut)
+    const shippingElement = document.querySelector('.summary-value:nth-child(2)');
+    const shippingText = shippingElement ? shippingElement.textContent : '5,00 €';
+    const shipping = parseFloat(shippingText.replace('€', '').replace(',', '.').trim()) || 5.00;
+
+    // Total
+    const total = subtotal + shipping;
+
+    // Créer la nouvelle commande
+    const newOrder = {
+        id: Date.now(),
+        date: new Date().toISOString(),
+        status: 'pending', // En cours
+        items: cartItems.map(item => ({
+            name: item.title || item.name || 'Produit',
+            image: item.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=60&h=60&fit=crop&q=80',
+            price: item.price || 0,
+            quantity: item.quantity || 1
+        })),
+        subtotal: subtotal,
+        shipping: shipping,
+        total: total
+    };
+
+    // Ajouter la commande au début du tableau (plus récente en premier)
+    orders[username].unshift(newOrder);
+
+    // Sauvegarder dans localStorage
+    localStorage.setItem('userOrders', JSON.stringify(orders));
+
+    // Vider le panier
+    localStorage.setItem('cart', JSON.stringify([]));
+
+    console.log('Commande créée:', newOrder);
 }
 
 // Gestion des options de livraison
