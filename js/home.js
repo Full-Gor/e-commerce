@@ -155,7 +155,7 @@ function animateProductsOnScroll() {
 // Animation des catégories lors du chargement de la page
 function animateCategoriesOnScroll() {
     const categories = document.querySelectorAll('.category-card');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -165,7 +165,7 @@ function animateCategoriesOnScroll() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     categories.forEach((category, index) => {
         category.style.opacity = '0';
         category.style.transform = 'translateY(30px)';
@@ -173,6 +173,150 @@ function animateCategoriesOnScroll() {
         category.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(category);
     });
+}
+
+// Gestion des boutons d'action sur les cartes produits
+function setupProductCardButtons() {
+    const productCards = document.querySelectorAll('.product-card');
+
+    productCards.forEach(card => {
+        const actionButtons = card.querySelectorAll('.product-action-btn');
+        const addToCartBtn = card.querySelector('.add-to-cart');
+
+        // Extraire les informations du produit
+        const getProductInfo = () => {
+            const title = card.querySelector('.product-title')?.textContent || 'Produit';
+            const priceText = card.querySelector('.current-price')?.textContent || '0,00 €';
+            const price = parseFloat(priceText.replace('€', '').replace(',', '.').trim());
+            const category = card.querySelector('.product-category')?.textContent || 'Général';
+            const image = card.querySelector('.product-img img')?.src || '';
+            const rating = card.querySelector('.stars')?.textContent?.length || 5;
+
+            return {
+                id: title.toLowerCase().replace(/\s+/g, '-'),
+                title,
+                price,
+                category,
+                image,
+                rating
+            };
+        };
+
+        // Boutons d'action (vue, panier, favoris)
+        actionButtons.forEach((btn, index) => {
+            btn.style.cursor = 'pointer';
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const product = getProductInfo();
+
+                switch(index) {
+                    case 0: // 👁️ Voir le produit
+                        window.location.href = `products.html?search=${encodeURIComponent(product.title)}`;
+                        break;
+
+                    case 1: // 🛒 Ajouter au panier
+                        addToCart(product);
+                        showNotification(`${product.title} ajouté au panier !`, 'success');
+                        updateCartCount();
+                        break;
+
+                    case 2: // ❤️ Ajouter aux favoris
+                        addToWishlist(product);
+                        showNotification(`${product.title} ajouté aux favoris !`, 'success');
+                        break;
+                }
+            });
+        });
+
+        // Bouton "Ajouter au panier" principal
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const product = getProductInfo();
+                addToCart(product);
+                showNotification(`${product.title} ajouté au panier !`, 'success');
+                updateCartCount();
+            });
+        }
+    });
+}
+
+// Ajouter un produit au panier
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Vérifier si le produit existe déjà
+    const existingItem = cart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Ajouter un produit aux favoris
+function addToWishlist(product) {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+    // Vérifier si le produit existe déjà
+    const existingItem = wishlist.find(item => item.id === product.id);
+
+    if (!existingItem) {
+        wishlist.push(product);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+}
+
+// Mettre à jour le compteur du panier
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const cartCountElement = document.querySelector('.cart-count');
+
+    if (cartCountElement) {
+        cartCountElement.textContent = totalItems;
+    }
+}
+
+// Afficher une notification
+function showNotification(message, type = 'success') {
+    // Vérifier si une fonction de notification existe déjà dans main.js
+    if (typeof window.showNotification === 'function') {
+        window.showNotification(message, type);
+        return;
+    }
+
+    // Sinon, créer une notification simple
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#28a745' : '#dc3545'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 // Initialisation au chargement de la page
@@ -183,4 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNewsletterForm();
     animateProductsOnScroll();
     animateCategoriesOnScroll();
+    setupProductCardButtons();
+    updateCartCount();
 });
