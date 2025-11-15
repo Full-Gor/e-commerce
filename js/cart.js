@@ -129,57 +129,84 @@ function setupQuantityControls() {
     const decreaseButtons = document.querySelectorAll('.quantity-btn.decrease');
     const increaseButtons = document.querySelectorAll('.quantity-btn.increase');
     const quantityInputs = document.querySelectorAll('.quantity-input');
-    
+
     // Diminuer la quantité
     decreaseButtons.forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.quantity-input');
+            const cartItem = this.closest('.cart-item');
             let value = parseInt(input.value);
-            
+
             if (value > 1) {
                 value--;
                 input.value = value;
-                updateItemSubtotal(this.closest('.cart-item'), value);
+                updateItemSubtotal(cartItem, value);
+                updateItemQuantityInLocalStorage(cartItem, value);
                 highlightQuantityChange(input);
             }
         });
     });
-    
+
     // Augmenter la quantité
     increaseButtons.forEach(button => {
         button.addEventListener('click', function() {
             const input = this.parentElement.querySelector('.quantity-input');
+            const cartItem = this.closest('.cart-item');
             let value = parseInt(input.value);
             const max = parseInt(input.getAttribute('max'));
-            
+
             if (value < max) {
                 value++;
                 input.value = value;
-                updateItemSubtotal(this.closest('.cart-item'), value);
+                updateItemSubtotal(cartItem, value);
+                updateItemQuantityInLocalStorage(cartItem, value);
                 highlightQuantityChange(input);
             }
         });
     });
-    
+
     // Mettre à jour lors de la saisie directe
     quantityInputs.forEach(input => {
         input.addEventListener('change', function() {
+            const cartItem = this.closest('.cart-item');
             let value = parseInt(this.value);
             const min = parseInt(this.getAttribute('min'));
             const max = parseInt(this.getAttribute('max'));
-            
+
             // Valider la valeur
             if (isNaN(value) || value < min) {
                 value = min;
             } else if (value > max) {
                 value = max;
             }
-            
+
             this.value = value;
-            updateItemSubtotal(this.closest('.cart-item'), value);
+            updateItemSubtotal(cartItem, value);
+            updateItemQuantityInLocalStorage(cartItem, value);
             highlightQuantityChange(this);
         });
     });
+}
+
+// Mettre à jour la quantité d'un article dans le localStorage
+function updateItemQuantityInLocalStorage(cartItem, newQuantity) {
+    const productTitle = cartItem.querySelector('.product-title')?.textContent || '';
+    const productId = cartItem.getAttribute('data-id');
+
+    // Récupérer le panier depuis localStorage
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Trouver et mettre à jour l'article
+    const itemIndex = cart.findIndex(item => {
+        const itemTitle = item.title || item.name || '';
+        const itemId = item.id || '';
+        return itemTitle === productTitle || itemId === productId || itemId === productTitle.toLowerCase().replace(/\s+/g, '-');
+    });
+
+    if (itemIndex !== -1) {
+        cart[itemIndex].quantity = newQuantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 }
 
 // Mettre à jour le sous-total d'un article
@@ -241,6 +268,9 @@ function setupRemoveButtons() {
 
                 // Mettre à jour le compteur du panier dans le header
                 updateCartCounter();
+
+                // Afficher une notification
+                showNotification('Article supprimé du panier', 'success');
             }, 500);
         });
     });
@@ -251,6 +281,10 @@ function checkEmptyCart() {
     const cartItems = document.querySelectorAll('.cart-item');
 
     if (cartItems.length === 0) {
+        // Vider également le localStorage
+        localStorage.setItem('cart', JSON.stringify([]));
+
+        // Afficher le message de panier vide
         showEmptyCart();
     }
 }
@@ -329,11 +363,11 @@ function getSelectedShippingCost() {
 // Animation des changements de valeur
 function animateValueChange(element) {
     if (!element) return;
-    
+
     element.style.transition = 'none';
-    element.style.color = let(--primary);
+    element.style.color = 'var(--primary)';
     element.style.fontWeight = '800';
-    
+
     setTimeout(() => {
         element.style.transition = 'all 0.5s ease';
         element.style.color = '';
