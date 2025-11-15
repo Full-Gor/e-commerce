@@ -1070,3 +1070,73 @@ function updateCartCount() {
         cartCount.textContent = cart.length;
     }
 }
+
+// ==========================================
+// FONCTION GLOBALE POUR AJOUTER AU PANIER
+// ==========================================
+function addToCart(product) {
+    const title = product.querySelector('.product-title').textContent;
+    const priceElement = product.querySelector('.current-price');
+    const price = priceElement ? priceElement.textContent : '0,00 €';
+    const imgElement = product.querySelector('.product-img img');
+    const image = imgElement ? imgElement.src : '';
+    const category = product.querySelector('.product-category')?.textContent || 'Produit';
+
+    // Récupérer le panier depuis localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Générer un ID unique pour ce produit
+    const productId = 'product-' + Date.now();
+
+    // Créer l'objet produit
+    const cartItem = {
+        id: productId,
+        title: title,
+        price: price,
+        image: image,
+        category: category,
+        quantity: 1,
+        variants: {
+            size: '',
+            color: ''
+        }
+    };
+
+    // Ajouter au panier
+    cart.push(cartItem);
+
+    // Sauvegarder dans localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Animation
+    product.style.animation = 'pulse 0.5s';
+    setTimeout(() => {
+        product.style.animation = '';
+    }, 500);
+
+    // Mettre à jour le compteur
+    updateCartCount();
+
+    // Notification
+    showNotification(`${title} ajouté au panier`);
+}
+
+// ==========================================
+// INITIALISER LES BOUTONS "AJOUTER AU PANIER"
+// ==========================================
+// S'exécute sur toutes les pages
+document.addEventListener('DOMContentLoaded', function() {
+    // Attendre un peu pour s'assurer que le DOM est complètement chargé
+    setTimeout(function() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const product = this.closest('.product-card');
+                if (product) {
+                    addToCart(product);
+                }
+            });
+        });
+    }, 100);
+});
