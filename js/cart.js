@@ -1,32 +1,125 @@
 // Script pour la page panier
 document.addEventListener('DOMContentLoaded', function() {
+    // Charger les produits depuis localStorage
+    loadCartItems();
+
     // Initialiser les fonctionnalités du panier
     initCartFunctionality();
-    
+
     // Initialiser le slider de produits recommandés
     initProductsSlider();
-    
+
     // Gérer les options de livraison
     setupShippingOptions();
-    
+
     // Animation des éléments au défilement
     setupScrollAnimations();
+
+    // Mettre à jour le compteur du panier
+    updateCartCounter();
 });
+
+// Charger les produits du panier depuis localStorage
+function loadCartItems() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cart-items-container');
+
+    if (!cartItemsContainer) return;
+
+    // Vider le conteneur
+    cartItemsContainer.innerHTML = '';
+
+    // Si le panier est vide
+    if (cart.length === 0) {
+        showEmptyCart();
+        return;
+    }
+
+    // Ajouter chaque produit
+    cart.forEach(item => {
+        const cartItemHTML = createCartItemHTML(item);
+        cartItemsContainer.insertAdjacentHTML('beforeend', cartItemHTML);
+    });
+
+    // Mettre à jour les totaux
+    updateCartTotals();
+}
+
+// Créer le HTML pour un produit du panier
+function createCartItemHTML(item) {
+    return `
+        <div class="cart-item" data-id="${item.id}">
+            <div class="product-col">
+                <div class="product-image">
+                    <img src="${item.image}" alt="${item.title}">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">${item.title}</h3>
+                    <div class="product-meta">
+                        ${item.variants.size ? `<span class="product-variant">Taille: ${item.variants.size}</span>` : ''}
+                        ${item.variants.color ? `<span class="product-variant">Couleur: ${item.variants.color}</span>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="price-col">
+                <span class="price">${item.price}</span>
+            </div>
+            <div class="quantity-col">
+                <div class="quantity-control">
+                    <button class="quantity-btn decrease">-</button>
+                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10">
+                    <button class="quantity-btn increase">+</button>
+                </div>
+            </div>
+            <div class="subtotal-col">
+                <span class="subtotal">${calculateItemSubtotal(item.price, item.quantity)}</span>
+            </div>
+            <div class="remove-col">
+                <button class="remove-btn">✕</button>
+            </div>
+        </div>
+    `;
+}
+
+// Calculer le sous-total d'un article
+function calculateItemSubtotal(price, quantity) {
+    const priceValue = parseFloat(price.replace('€', '').replace(',', '.').trim());
+    const subtotal = (priceValue * quantity).toFixed(2).replace('.', ',');
+    return subtotal + ' €';
+}
+
+// Afficher le message de panier vide
+function showEmptyCart() {
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart-message">
+                <div class="empty-cart-icon">🛒</div>
+                <h3>Votre panier est vide</h3>
+                <p>Il semble que vous n'ayez pas encore ajouté d'articles à votre panier.</p>
+                <a href="products.html" class="btn continue-shopping">Continuer vos achats</a>
+            </div>
+        `;
+    }
+}
 
 // Initialiser les fonctionnalités du panier
 function initCartFunctionality() {
     // Gestion des quantités
     setupQuantityControls();
-    
+
     // Gestion de la suppression d'articles
     setupRemoveButtons();
-    
+
     // Gestion des codes promo
     setupCouponCode();
-    
+
     // Mise à jour du panier
     setupUpdateCart();
-    
+
+    // Bouton vider le panier
+    setupClearCart();
+
     // Bouton de passage à la caisse
     setupCheckoutButton();
 }
@@ -94,9 +187,18 @@ function updateItemSubtotal(cartItem, quantity) {
     const priceText = cartItem.querySelector('.price').textContent;
     const price = parseFloat(priceText.replace('€', '').replace(',', '.'));
     const subtotal = (price * quantity).toFixed(2).replace('.', ',');
-    
+
     cartItem.querySelector('.subtotal').textContent = subtotal + ' €';
-    
+
+    // Mettre à jour dans le localStorage
+    const productId = cartItem.getAttribute('data-id');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemIndex = cart.findIndex(item => item.id === productId);
+    if (itemIndex !== -1) {
+        cart[itemIndex].quantity = quantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     // Mettre à jour le total général
     updateCartTotals();
 }
@@ -112,24 +214,31 @@ function highlightQuantityChange(input) {
 // Gestion des boutons de suppression
 function setupRemoveButtons() {
     const removeButtons = document.querySelectorAll('.remove-btn');
-    
+
     removeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const cartItem = this.closest('.cart-item');
-            
+            const productId = cartItem.getAttribute('data-id');
+
             // Animation de suppression
             cartItem.classList.add('removing');
-            
+
             // Attendre la fin de l'animation avant de supprimer
             setTimeout(() => {
+                // Supprimer du localStorage
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = cart.filter(item => item.id !== productId);
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Supprimer du DOM
                 cartItem.remove();
-                
+
                 // Mettre à jour le total
                 updateCartTotals();
-                
+
                 // Vérifier si le panier est vide
                 checkEmptyCart();
-                
+
                 // Mettre à jour le compteur du panier dans le header
                 updateCartCounter();
             }, 500);
@@ -140,29 +249,20 @@ function setupRemoveButtons() {
 // Vérifier si le panier est vide
 function checkEmptyCart() {
     const cartItems = document.querySelectorAll('.cart-item');
-    const cartContainer = document.querySelector('.cart-container');
-    
-    if (cartItems.length === 0 && cartContainer) {
-        // Remplacer le contenu par un message "panier vide"
-        cartContainer.innerHTML = `
-            <div class="empty-cart">
-                <div class="empty-cart-icon">🛒</div>
-                <h3>Votre panier est vide</h3>
-                <p>Il semble que vous n'ayez pas encore ajouté d'articles à votre panier.</p>
-                <a href="products.html" class="continue-shopping">Continuer vos achats</a>
-            </div>
-        `;
+
+    if (cartItems.length === 0) {
+        showEmptyCart();
     }
 }
 
 // Mettre à jour le compteur du panier dans le header
 function updateCartCounter() {
     const cartCounter = document.querySelector('.cart-count');
-    const cartItems = document.querySelectorAll('.cart-item');
-    
+
     if (cartCounter) {
-        cartCounter.textContent = cartItems.length;
-        
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartCounter.textContent = cart.length;
+
         // Animation
         cartCounter.style.animation = 'pulse 0.5s';
         setTimeout(() => {
@@ -296,14 +396,40 @@ function applyCouponDiscount(percentageDiscount) {
 // Gestion de la mise à jour du panier
 function setupUpdateCart() {
     const updateBtn = document.querySelector('.update-btn');
-    
+
     if (updateBtn) {
         updateBtn.addEventListener('click', function() {
             // Simuler une mise à jour
             showNotification('Panier mis à jour');
-            
+
             // Mettre à jour les totaux
             updateCartTotals();
+        });
+    }
+}
+
+// Gestion du bouton vider le panier
+function setupClearCart() {
+    const clearCartBtn = document.querySelector('.clear-cart-btn');
+
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', function() {
+            // Demander confirmation
+            const confirmation = confirm('Êtes-vous sûr de vouloir vider votre panier ?');
+
+            if (confirmation) {
+                // Vider le localStorage
+                localStorage.removeItem('cart');
+
+                // Afficher le message de panier vide
+                showEmptyCart();
+
+                // Mettre à jour le compteur
+                updateCartCounter();
+
+                // Notification
+                showNotification('Panier vidé', 'success');
+            }
         });
     }
 }
@@ -321,6 +447,12 @@ function setupCheckoutButton() {
                 return;
             }
 
+            // Créer une commande dans l'historique
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                createOrder(cartItems, currentUser);
+            }
+
             // Redirection vers Stripe Checkout
             showNotification('Redirection vers Stripe Checkout...', 'success');
 
@@ -331,6 +463,57 @@ function setupCheckoutButton() {
             }, 500);
         });
     }
+}
+
+// Créer une commande dans l'historique de l'utilisateur
+function createOrder(cartItems, username) {
+    // Récupérer les commandes existantes
+    const orders = JSON.parse(localStorage.getItem('userOrders') || '{}');
+
+    // Initialiser le tableau des commandes de l'utilisateur si nécessaire
+    if (!orders[username]) {
+        orders[username] = [];
+    }
+
+    // Calculer le total
+    const subtotal = cartItems.reduce((sum, item) => {
+        return sum + ((item.price || 0) * (item.quantity || 1));
+    }, 0);
+
+    // Frais de livraison (récupérer depuis le DOM ou utiliser une valeur par défaut)
+    const shippingElement = document.querySelector('.summary-value:nth-child(2)');
+    const shippingText = shippingElement ? shippingElement.textContent : '5,00 €';
+    const shipping = parseFloat(shippingText.replace('€', '').replace(',', '.').trim()) || 5.00;
+
+    // Total
+    const total = subtotal + shipping;
+
+    // Créer la nouvelle commande
+    const newOrder = {
+        id: Date.now(),
+        date: new Date().toISOString(),
+        status: 'pending', // En cours
+        items: cartItems.map(item => ({
+            name: item.title || item.name || 'Produit',
+            image: item.image || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=60&h=60&fit=crop&q=80',
+            price: item.price || 0,
+            quantity: item.quantity || 1
+        })),
+        subtotal: subtotal,
+        shipping: shipping,
+        total: total
+    };
+
+    // Ajouter la commande au début du tableau (plus récente en premier)
+    orders[username].unshift(newOrder);
+
+    // Sauvegarder dans localStorage
+    localStorage.setItem('userOrders', JSON.stringify(orders));
+
+    // Vider le panier
+    localStorage.setItem('cart', JSON.stringify([]));
+
+    console.log('Commande créée:', newOrder);
 }
 
 // Gestion des options de livraison

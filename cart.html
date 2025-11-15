@@ -74,108 +74,21 @@
                         <div class="cart-header-item subtotal-col">Total</div>
                         <div class="cart-header-item remove-col"></div>
                     </div>
-                    
-                    <!-- Items du panier -->
-                    <div class="cart-item" data-id="product-1">
-                        <div class="product-col">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&h=150&fit=crop&q=80" alt="T-Shirt Premium">
-                            </div>
-                            <div class="product-details">
-                                <h3 class="product-title">T-Shirt Premium</h3>
-                                <div class="product-meta">
-                                    <span class="product-variant">Taille: M</span>
-                                    <span class="product-variant">Couleur: Bleu</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price-col">
-                            <span class="price">29,99 €</span>
-                        </div>
-                        <div class="quantity-col">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease">-</button>
-                                <input type="number" class="quantity-input" value="1" min="1" max="10">
-                                <button class="quantity-btn increase">+</button>
-                            </div>
-                        </div>
-                        <div class="subtotal-col">
-                            <span class="subtotal">29,99 €</span>
-                        </div>
-                        <div class="remove-col">
-                            <button class="remove-btn">✕</button>
-                        </div>
+
+                    <!-- Items du panier (chargés dynamiquement depuis localStorage) -->
+                    <div id="cart-items-container">
+                        <!-- Les produits seront ajoutés ici par JavaScript -->
                     </div>
-                    
-                    <div class="cart-item" data-id="product-2">
-                        <div class="product-col">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=150&h=150&fit=crop&q=80" alt="Baskets Confort">
-                            </div>
-                            <div class="product-details">
-                                <h3 class="product-title">Baskets Confort</h3>
-                                <div class="product-meta">
-                                    <span class="product-variant">Taille: 42</span>
-                                    <span class="product-variant">Couleur: Noir</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price-col">
-                            <span class="price">79,99 €</span>
-                        </div>
-                        <div class="quantity-col">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease">-</button>
-                                <input type="number" class="quantity-input" value="1" min="1" max="10">
-                                <button class="quantity-btn increase">+</button>
-                            </div>
-                        </div>
-                        <div class="subtotal-col">
-                            <span class="subtotal">79,99 €</span>
-                        </div>
-                        <div class="remove-col">
-                            <button class="remove-btn">✕</button>
-                        </div>
-                    </div>
-                    
-                    <div class="cart-item" data-id="product-3">
-                        <div class="product-col">
-                            <div class="product-image">
-                                <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=150&h=150&fit=crop&q=80" alt="Sac à dos tendance">
-                            </div>
-                            <div class="product-details">
-                                <h3 class="product-title">Sac à dos tendance</h3>
-                                <div class="product-meta">
-                                    <span class="product-variant">Couleur: Gris</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price-col">
-                            <span class="price">49,99 €</span>
-                        </div>
-                        <div class="quantity-col">
-                            <div class="quantity-control">
-                                <button class="quantity-btn decrease">-</button>
-                                <input type="number" class="quantity-input" value="1" min="1" max="10">
-                                <button class="quantity-btn increase">+</button>
-                            </div>
-                        </div>
-                        <div class="subtotal-col">
-                            <span class="subtotal">49,99 €</span>
-                        </div>
-                        <div class="remove-col">
-                            <button class="remove-btn">✕</button>
-                        </div>
-                    </div>
-                    
+
                     <!-- Actions du panier -->
                     <div class="cart-actions">
                         <div class="coupon">
                             <input type="text" placeholder="Code promo" class="coupon-input">
                             <button class="btn coupon-btn">Appliquer</button>
                         </div>
-                        <div class="update-cart">
+                        <div class="cart-buttons">
                             <button class="btn update-btn">Mettre à jour le panier</button>
+                            <button class="btn clear-cart-btn">Vider le panier</button>
                         </div>
                     </div>
                 </div>
@@ -186,9 +99,9 @@
                     
                     <div class="summary-row">
                         <span class="summary-label">Sous-total</span>
-                        <span class="summary-value" id="subtotal">159,97 €</span>
+                        <span class="summary-value" id="subtotal">0,00 €</span>
                     </div>
-                    
+
                     <div class="summary-row">
                         <span class="summary-label">Réduction</span>
                         <span class="summary-value" id="discount">0,00 €</span>
@@ -214,7 +127,7 @@
                     
                     <div class="summary-row total">
                         <span class="summary-label">Total</span>
-                        <span class="summary-value" id="total">164,96 €</span>
+                        <span class="summary-value" id="total">0,00 €</span>
                     </div>
                     
                     <button class="btn checkout-btn">Passer à la caisse</button>
@@ -248,7 +161,6 @@
                             <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300&h=300&fit=crop&q=80" alt="Produit recommandé">
                             <div class="product-actions">
                                 <div class="product-action-btn">👁️</div>
-                                <div class="product-action-btn">🛒</div>
                                 <div class="product-action-btn">❤️</div>
                             </div>
                         </div>
@@ -271,7 +183,6 @@
                             <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=300&fit=crop&q=80" alt="Produit recommandé">
                             <div class="product-actions">
                                 <div class="product-action-btn">👁️</div>
-                                <div class="product-action-btn">🛒</div>
                                 <div class="product-action-btn">❤️</div>
                             </div>
                         </div>
@@ -295,7 +206,6 @@
                             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop&q=80" alt="Produit recommandé">
                             <div class="product-actions">
                                 <div class="product-action-btn">👁️</div>
-                                <div class="product-action-btn">🛒</div>
                                 <div class="product-action-btn">❤️</div>
                             </div>
                         </div>
@@ -319,7 +229,6 @@
                             <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=300&h=300&fit=crop&q=80" alt="Produit recommandé">
                             <div class="product-actions">
                                 <div class="product-action-btn">👁️</div>
-                                <div class="product-action-btn">🛒</div>
                                 <div class="product-action-btn">❤️</div>
                             </div>
                         </div>
@@ -412,10 +321,10 @@
                         <p><span class="footer-contact-icon">✉️</span> contact@luxeshop.com</p>
                     </div>
                     <div class="footer-social">
-                        <a href="#" class="social-icon">f</a>
-                        <a href="#" class="social-icon">t</a>
-                        <a href="#" class="social-icon">in</a>
-                        <a href="#" class="social-icon">ig</a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook">f</a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Twitter">t</a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">in</a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">ig</a>
                     </div>
                 </div>
             </div>
