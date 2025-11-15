@@ -17,19 +17,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mettre à jour le compteur du panier depuis localStorage
     updateCartCountFromStorage();
+
+    // Mettre à jour le compteur de wishlist
+    updateWishlistCountInHeader();
 });
 
 // Charger la liste de souhaits depuis localStorage
 function loadWishlistFromStorage() {
     const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const wishlistGrid = document.querySelector('.wishlist-grid');
 
-    // Si la wishlist est vide dans localStorage, ne rien faire (garder les exemples HTML)
+    if (!wishlistGrid) return;
+
+    // Vider le conteneur
+    wishlistGrid.innerHTML = '';
+
+    // Si la wishlist est vide
     if (wishlist.length === 0) {
+        checkEmptyWishlist();
         return;
     }
 
-    // TODO: Dans une application réelle, vous pouvez charger dynamiquement les articles depuis localStorage
-    // Pour l'instant, on garde les exemples statiques du HTML
+    // Ajouter chaque produit
+    wishlist.forEach(item => {
+        const wishlistItemHTML = createWishlistItemHTML(item);
+        wishlistGrid.insertAdjacentHTML('beforeend', wishlistItemHTML);
+    });
+
+    // Réinitialiser les event listeners après avoir chargé les items
+    setupRemoveButtons();
+    setupAddToCartButtons();
+
+    // Mettre à jour le compteur
+    updateWishlistCounter();
+}
+
+// Créer le HTML pour un produit de la wishlist
+function createWishlistItemHTML(item) {
+    return `
+        <div class="wishlist-item" data-id="${item.id}">
+            <div class="wishlist-item-image">
+                <img src="${item.image}" alt="${item.title}">
+                <button class="remove-from-wishlist">✕</button>
+            </div>
+            <div class="wishlist-item-content">
+                <div class="wishlist-item-category">${item.category || 'Général'}</div>
+                <h3 class="wishlist-item-title">${item.title}</h3>
+                <div class="wishlist-item-price">
+                    <span class="current-price">${typeof item.price === 'number' ? item.price.toFixed(2).replace('.', ',') + ' €' : item.price}</span>
+                </div>
+                <div class="wishlist-item-stock available">
+                    <span class="stock-icon">✓</span> En stock
+                </div>
+                <button class="btn add-to-cart">Ajouter au panier</button>
+            </div>
+        </div>
+    `;
 }
 
 // Sauvegarder un article dans la wishlist localStorage
@@ -60,6 +103,22 @@ function updateCartCountFromStorage() {
     if (cartCountElement) {
         const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
         cartCountElement.textContent = totalItems;
+    }
+}
+
+// Mettre à jour le compteur de wishlist dans le header
+function updateWishlistCountInHeader() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const wishlistCountElement = document.querySelector('.wishlist-count');
+
+    if (wishlistCountElement) {
+        wishlistCountElement.textContent = wishlist.length;
+
+        // Animation
+        wishlistCountElement.style.animation = 'pulse 0.5s';
+        setTimeout(() => {
+            wishlistCountElement.style.animation = '';
+        }, 500);
     }
 }
 
@@ -109,6 +168,9 @@ function setupRemoveButtons() {
 
                 // Mettre à jour le compteur d'articles
                 updateWishlistCounter();
+
+                // Mettre à jour le compteur dans le header
+                updateWishlistCountInHeader();
 
                 // Vérifier si la liste est vide après suppression
                 checkEmptyWishlist();

@@ -272,6 +272,9 @@ function addToWishlist(product) {
     if (!existingItem) {
         wishlist.push(product);
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+        // Mettre à jour le compteur de wishlist dans le header
+        updateWishlistCount();
     }
 }
 
@@ -283,6 +286,16 @@ function updateCartCount() {
 
     if (cartCountElement) {
         cartCountElement.textContent = totalItems;
+    }
+}
+
+// Mettre à jour le compteur de wishlist
+function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const wishlistCountElement = document.querySelector('.wishlist-count');
+
+    if (wishlistCountElement) {
+        wishlistCountElement.textContent = wishlist.length;
     }
 }
 
@@ -329,4 +342,5 @@ document.addEventListener('DOMContentLoaded', () => {
     animateCategoriesOnScroll();
     setupProductCardButtons();
     updateCartCount();
+    updateWishlistCount();
 });

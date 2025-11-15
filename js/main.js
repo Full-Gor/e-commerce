@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mettre à jour le compteur du panier
     updateCartCount();
 
+    // Mettre à jour le compteur de wishlist
+    updateWishlistCount();
+
     // Gérer le bouton "Se connecter" pour laisser un avis
     const loginToReviewBtn = document.getElementById('login-to-review');
     if (loginToReviewBtn) {
@@ -379,6 +382,16 @@ function updateCartCount() {
     if (cartCountElement) {
         const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
         cartCountElement.textContent = totalItems;
+    }
+}
+
+// Mettre à jour le compteur de wishlist
+function updateWishlistCount() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const wishlistCountElement = document.querySelector('.wishlist-count');
+
+    if (wishlistCountElement) {
+        wishlistCountElement.textContent = wishlist.length;
     }
 }
 
