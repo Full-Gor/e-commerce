@@ -1111,6 +1111,9 @@ function updateCartCount() {
 // FONCTION GLOBALE POUR AJOUTER AU PANIER
 // ==========================================
 function addToCart(product) {
+    console.log('🛒 addToCart appelée');
+    console.log('Product element:', product);
+
     const title = product.querySelector('.product-title').textContent;
     const priceElement = product.querySelector('.current-price');
     const price = priceElement ? priceElement.textContent : '0,00 €';
@@ -1118,8 +1121,11 @@ function addToCart(product) {
     const image = imgElement ? imgElement.src : '';
     const category = product.querySelector('.product-category')?.textContent || 'Produit';
 
+    console.log('Données extraites:', { title, price, image, category });
+
     // Récupérer le panier depuis localStorage
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log('Panier actuel:', cart);
 
     // Générer un ID unique pour ce produit
     const productId = 'product-' + Date.now();
@@ -1138,11 +1144,15 @@ function addToCart(product) {
         }
     };
 
+    console.log('Nouveau produit créé:', cartItem);
+
     // Ajouter au panier
     cart.push(cartItem);
 
     // Sauvegarder dans localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+    console.log('✅ Panier sauvegardé dans localStorage');
+    console.log('Nouveau panier:', cart);
 
     // Animation
     product.style.animation = 'pulse 0.5s';
@@ -1165,12 +1175,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Attendre un peu pour s'assurer que le DOM est complètement chargé
     setTimeout(function() {
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
-        addToCartButtons.forEach(btn => {
+        console.log('🔍 Boutons "Ajouter au panier" trouvés:', addToCartButtons.length);
+
+        addToCartButtons.forEach((btn, index) => {
+            console.log(`Bouton ${index + 1}:`, btn);
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
+                console.log('👆 Clic sur bouton "Ajouter au panier"');
                 const product = this.closest('.product-card');
+                console.log('Carte produit trouvée:', product);
                 if (product) {
                     addToCart(product);
+                } else {
+                    console.error('❌ Aucune carte produit trouvée!');
                 }
             });
         });
