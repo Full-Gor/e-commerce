@@ -741,8 +741,10 @@
         font-size: 13px;
     }
 }
+
 /* Empty Cart Styles */
-.empty-cart {
+.empty-cart,
+.empty-cart-message {
     text-align: center;
     padding: 80px 20px;
     background-color: white;
@@ -756,13 +758,15 @@
     opacity: 0.3;
 }
 
-.empty-cart h3 {
+.empty-cart h3,
+.empty-cart-message h3 {
     font-size: 24px;
     color: var(--dark);
     margin-bottom: 10px;
 }
 
-.empty-cart p {
+.empty-cart p,
+.empty-cart-message p {
     font-size: 16px;
     color: #777;
     margin-bottom: 30px;

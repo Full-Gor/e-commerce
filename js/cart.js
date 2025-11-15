@@ -90,10 +90,10 @@ function calculateItemSubtotal(price, quantity) {
 
 // Afficher le message de panier vide
 function showEmptyCart() {
-    const cartContainer = document.querySelector('.cart-container');
-    if (cartContainer) {
-        cartContainer.innerHTML = `
-            <div class="empty-cart">
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart-message">
                 <div class="empty-cart-icon">🛒</div>
                 <h3>Votre panier est vide</h3>
                 <p>Il semble que vous n'ayez pas encore ajouté d'articles à votre panier.</p>
