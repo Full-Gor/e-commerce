@@ -90,10 +90,10 @@ function calculateItemSubtotal(price, quantity) {
 
 // Afficher le message de panier vide
 function showEmptyCart() {
-    const cartContainer = document.querySelector('.cart-container');
-    if (cartContainer) {
-        cartContainer.innerHTML = `
-            <div class="empty-cart">
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    if (cartItemsContainer) {
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart-message">
                 <div class="empty-cart-icon">🛒</div>
                 <h3>Votre panier est vide</h3>
                 <p>Il semble que vous n'ayez pas encore ajouté d'articles à votre panier.</p>
@@ -116,6 +116,9 @@ function initCartFunctionality() {
 
     // Mise à jour du panier
     setupUpdateCart();
+
+    // Bouton vider le panier
+    setupClearCart();
 
     // Bouton de passage à la caisse
     setupCheckoutButton();
@@ -393,14 +396,40 @@ function applyCouponDiscount(percentageDiscount) {
 // Gestion de la mise à jour du panier
 function setupUpdateCart() {
     const updateBtn = document.querySelector('.update-btn');
-    
+
     if (updateBtn) {
         updateBtn.addEventListener('click', function() {
             // Simuler une mise à jour
             showNotification('Panier mis à jour');
-            
+
             // Mettre à jour les totaux
             updateCartTotals();
+        });
+    }
+}
+
+// Gestion du bouton vider le panier
+function setupClearCart() {
+    const clearCartBtn = document.querySelector('.clear-cart-btn');
+
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', function() {
+            // Demander confirmation
+            const confirmation = confirm('Êtes-vous sûr de vouloir vider votre panier ?');
+
+            if (confirmation) {
+                // Vider le localStorage
+                localStorage.removeItem('cart');
+
+                // Afficher le message de panier vide
+                showEmptyCart();
+
+                // Mettre à jour le compteur
+                updateCartCounter();
+
+                // Notification
+                showNotification('Panier vidé', 'success');
+            }
         });
     }
 }
